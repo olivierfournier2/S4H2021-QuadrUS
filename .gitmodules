@@ -1,0 +1,3 @@
+[submodule "ros_control"]
+	path = ros_control
+	url = https://github.com/ros-controls/ros_control.git
