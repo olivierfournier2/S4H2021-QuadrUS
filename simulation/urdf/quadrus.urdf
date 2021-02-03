@@ -1,83 +1,156 @@
 <?xml version='1.0'?>
 <robot name="quadrus">
 
-  <!-- Base Link -->
-  <link name="base_link">
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-          <box size="0.3 0.10 0.10"/>
-      </geometry>
-      <material name="blue">
-        <color rgba="0 0.5 1 1"/>
-      </material>
-    </visual>
+	<!-- Base Link -->
+	<link name="base_link">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<box size="0.3 0.10 0.10"/>
+			</geometry>
+			<material name="blue">
+				<color rgba="0 0.5 1 1"/>
+			</material>
+		</visual>
 
-  </link>
+		<!-- Back Right Hip -->	
+		<visual name="back_right_hip">
+			<origin xyz="-0.08 0.075 0" rpy="0 0 0" />
+			<geometry>
+				<box size="0.05 0.05 0.05"/>
+			</geometry>
+			<material name="red">
+				<color rgba="1 0 0 1"/>
+			</material>
+		</visual>
+
+		<!-- Back Left Hip -->	
+		<visual name="back_right_hip">
+			<origin xyz="-0.08 -0.075 0" rpy="0 0 0" />
+			<geometry>
+				<box size="0.05 0.05 0.05"/>
+			</geometry>
+			<material name="red">
+				<color rgba="1 0 0 1"/>
+			</material>
+		</visual>
+
+		<!-- Front Right Hip -->	
+		<visual name="back_right_hip">
+			<origin xyz="0.08 0.075 0" rpy="0 0 0" />
+			<geometry>
+				<box size="0.05 0.05 0.05"/>
+			</geometry>
+			<material name="red">
+				<color rgba="1 0 0 1"/>
+			</material>
+		</visual>
+
+		<!-- Front Left Hip -->	
+		<visual name="back_right_hip">
+			<origin xyz="0.08 -0.075 0" rpy="0 0 0" />
+			<geometry>
+				<box size="0.05 0.05 0.05"/>
+			</geometry>
+			<material name="red">
+				<color rgba="1 0 0 1"/>
+			</material>
+		</visual>					
+
+	</link>
   
   <!-- ____________________________________________________________ -->
-	<!-- Back Right UpperLeg -->	
-	<link name="back_right_upperleg">
-	  <visual>
-	    <origin xyz="0.05 0 0" rpy="0 0 0" />
-	    <geometry>
-	        <box size="0.15 0.05 0.05"/>
-	    </geometry>
-	    <material name="blue">
-	      <color rgba="0 0.5 1 1"/>
-	    </material>
-	  </visual>
-  </link>
 
-  <joint name="joint_back_right_upperleg" type="continuous">
-    <parent link="base_link"/>
-    <child link="back_right_upperleg"/>
-    <origin xyz="-0.08 0.075 0" rpy="0 2.5 0" /> 
-    <axis xyz="1 0 0" />
-  </joint>
-  
+	<!-- Back Right UpperLeg -->
+
+	<link name="back_right_dummy">
+	  	<origin xyz="0 0 0"/>
+  	</link>
+
+	<link name="back_right_upperleg">
+	  	<visual>
+			<origin xyz="-0.05 0 0" rpy="0 0 0" />
+			<geometry>
+				<box size="0.15 0.05 0.05"/>
+			</geometry>
+			<material name="blue">
+				<color rgba="0 0.5 1 1"/>
+			</material>
+	  	</visual>
+  	</link>
+
+	<joint name="joint_back_right_hip" type="continuous">
+		<parent link="base_link"/>
+		<child link="back_right_dummy"/>
+		<origin xyz="-0.08 -0.075 0" rpy="0 0 0" /> 
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_back_right_upperleg" type="continuous">
+		<parent link="back_right_dummy"/>
+		<child link="back_right_upperleg"/>
+		<origin xyz="-0.05 0 0" rpy="0 -0.7854 0" /> 
+		<axis xyz="0 1 0" />
+	</joint>
+	
+
   	<!-- Back Right LowerLeg -->	
 	<link name="back_right_lowerleg">
-	  <visual>
-	    <origin xyz="0.05 0 0" rpy="0 0 0" />
-	    <geometry>
-	        <box size="0.15 0.05 0.05"/>
-	    </geometry>
-	    <material name="blue">
-	      <color rgba="0 0.5 1 1"/>
-	    </material>
-	  </visual>
-  </link>
+		<visual>
+			<origin xyz="0.05 0 0" rpy="0 0 0" />
+			<geometry>
+				<box size="0.15 0.05 0.05"/>
+			</geometry>
+			<material name="blue">
+			<color rgba="0 0.5 1 1"/>
+			</material>
+		</visual>
+	</link>
 
-  <joint name="joint_back_right_lowerleg" type="continuous">
-    <parent link="back_right_upperleg"/>
-    <child link="back_right_lowerleg"/>
-    <origin xyz="0.10 0 0" rpy="0 -1.55 0" /> 
-    <axis xyz="1 0 0" />
-  </joint>
+	<joint name="joint_back_right_lowerleg" type="continuous">
+		<parent link="back_right_upperleg"/>
+		<child link="back_right_lowerleg"/>
+		<origin xyz="-0.10 0 0" rpy="0 1.5708 0" /> 
+		<axis xyz="0 1 0" />
+	</joint>
+
 
   <!-- ____________________________________________________________ -->
-	<!-- Back Left UpperLeg -->	
-	<link name="back_left_upperleg">
-	  <visual>
-	    <origin xyz="0.05 0 0" rpy="0 0 0" />
-	    <geometry>
-	        <box size="0.15 0.05 0.05"/>
-	    </geometry>
-	    <material name="blue">
-	      <color rgba="0 0.5 1 1"/>
-	    </material>
-	  </visual>
-  </link>
 
-  <joint name="joint_back_left_upperleg" type="continuous">
-    <parent link="base_link"/>
-    <child link="back_left_upperleg"/>
-    <origin xyz="-0.08 -0.075 0" rpy="0 2.5 0" /> 
-    <axis xyz="1 0 0" />
-  </joint>
-  
-  	<!-- Back Right LowerLeg -->	
+	<!-- Back Left UpperLeg -->
+
+	<link name="back_left_dummy">
+	  	<origin xyz="0 0 0"/>
+  	</link>
+
+	<link name="back_left_upperleg">
+	  	<visual>
+			<origin xyz="-0.05 0 0" rpy="0 0 0" />
+			<geometry>
+				<box size="0.15 0.05 0.05"/>
+			</geometry>
+			<material name="blue">
+				<color rgba="0 0.5 1 1"/>
+			</material>
+	  	</visual>
+  	</link>
+
+	<joint name="joint_back_left_hip" type="continuous">
+		<parent link="base_link"/>
+		<child link="back_left_dummy"/>
+		<origin xyz="-0.08 0.075 0" rpy="0 0 0" /> 
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_back_left_upperleg" type="continuous">
+		<parent link="back_left_dummy"/>
+		<child link="back_left_upperleg"/>
+		<origin xyz="-0.05 0 0" rpy="0 -0.7854 0" /> 
+		<axis xyz="0 1 0" />
+	</joint>
+	
+
+  	<!-- Back Left LowerLeg -->	
 	<link name="back_left_lowerleg">
 	  <visual>
 	    <origin xyz="0.05 0 0" rpy="0 0 0" />
@@ -88,36 +161,50 @@
 	      <color rgba="0 0.5 1 1"/>
 	    </material>
 	  </visual>
-  </link>
+  	</link>
 
-  <joint name="joint_back_left_lowerleg" type="continuous">
-    <parent link="back_left_upperleg"/>
-    <child link="back_left_lowerleg"/>
-    <origin xyz="0.10 0 0" rpy="0 -1.55 0" /> 
-    <axis xyz="1 0 0" />
-  </joint>  
-  
+	<joint name="joint_back_left_lowerleg" type="continuous">
+		<parent link="back_left_upperleg"/>
+		<child link="back_left_lowerleg"/>
+		<origin xyz="-0.10 0 0" rpy="0 1.5708 0" /> 
+		<axis xyz="0 1 0" />
+	</joint>
+
   <!-- ____________________________________________________________ -->
-	<!-- Front Right UpperLeg -->	
-	<link name="front_right_upperleg">
-	  <visual>
-	    <origin xyz="0.05 0 0" rpy="0 0 0" />
-	    <geometry>
-	        <box size="0.15 0.05 0.05"/>
-	    </geometry>
-	    <material name="blue">
-	      <color rgba="0 0.5 1 1"/>
-	    </material>
-	  </visual>
-  </link>
 
-  <joint name="joint_front_right_upperleg" type="continuous">
-    <parent link="base_link"/>
-    <child link="front_right_upperleg"/>
-    <origin xyz="0.08 0.075 0" rpy="0 2.5 0" /> 
-    <axis xyz="1 0 0" />
-  </joint>
-  
+	<!-- Front Right UpperLeg -->
+
+	<link name="front_right_dummy">
+	  	<origin xyz="0 0 0"/>
+  	</link>
+
+	<link name="front_right_upperleg">
+	  	<visual>
+			<origin xyz="-0.05 0 0" rpy="0 0 0" />
+			<geometry>
+				<box size="0.15 0.05 0.05"/>
+			</geometry>
+			<material name="blue">
+				<color rgba="0 0.5 1 1"/>
+			</material>
+	  	</visual>
+  	</link>
+
+	<joint name="joint_front_right_hip" type="continuous">
+		<parent link="base_link"/>
+		<child link="front_right_dummy"/>
+		<origin xyz="0.08 -0.075 0" rpy="0 0 0" /> 
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_front_right_upperleg" type="continuous">
+		<parent link="front_right_dummy"/>
+		<child link="front_right_upperleg"/>
+		<origin xyz="-0.05 0 0" rpy="0 -0.7854 0" /> 
+		<axis xyz="0 1 0" />
+	</joint>
+	
+
   	<!-- Front Right LowerLeg -->	
 	<link name="front_right_lowerleg">
 	  <visual>
@@ -129,37 +216,51 @@
 	      <color rgba="0 0.5 1 1"/>
 	    </material>
 	  </visual>
-  </link>
+  	</link>
 
-  <joint name="joint_front_right_lowerleg" type="continuous">
-    <parent link="front_right_upperleg"/>
-    <child link="front_right_lowerleg"/>
-    <origin xyz="0.10 0 0" rpy="0 -1.55 0" /> 
-    <axis xyz="1 0 0" />
-  </joint>
+	<joint name="joint_front_right_lowerleg" type="continuous">
+		<parent link="front_right_upperleg"/>
+		<child link="front_right_lowerleg"/>
+		<origin xyz="-0.10 0 0" rpy="0 1.5708 0" /> 
+		<axis xyz="0 1 0" />
+	</joint>
 
-  <!-- ____________________________________________________________ -->
-	<!-- Front Left UpperLeg -->	
+    <!-- ____________________________________________________________ -->
+
+	<!-- Front Left UpperLeg -->
+
+	<link name="front_left_dummy">
+	  	<origin xyz="0 0 0"/>
+  	</link>
+
 	<link name="front_left_upperleg">
-	  <visual>
-	    <origin xyz="0.05 0 0" rpy="0 0 0" />
-	    <geometry>
-	        <box size="0.15 0.05 0.05"/>
-	    </geometry>
-	    <material name="blue">
-	      <color rgba="0 0.5 1 1"/>
-	    </material>
-	  </visual>
-  </link>
+	  	<visual>
+			<origin xyz="-0.05 0 0" rpy="0 0 0" />
+			<geometry>
+				<box size="0.15 0.05 0.05"/>
+			</geometry>
+			<material name="blue">
+				<color rgba="0 0.5 1 1"/>
+			</material>
+	  	</visual>
+  	</link>
 
-  <joint name="joint_front_left_upperleg" type="continuous">
-    <parent link="base_link"/>
-    <child link="front_left_upperleg"/>
-    <origin xyz="0.08 -0.075 0" rpy="0 2.5 0" /> 
-    <axis xyz="1 0 0" />
-  </joint>
-  
-  	<!-- Front Right LowerLeg -->	
+	<joint name="joint_front_left_hip" type="continuous">
+		<parent link="base_link"/>
+		<child link="front_left_dummy"/>
+		<origin xyz="0.08 0.075 0" rpy="0 0 0" /> 
+		<axis xyz="1 0 0" />
+	</joint>
+
+	<joint name="joint_front_left_upperleg" type="continuous">
+		<parent link="front_left_dummy"/>
+		<child link="front_left_upperleg"/>
+		<origin xyz="-0.05 0 0" rpy="0 -0.7854 0" /> 
+		<axis xyz="0 1 0" />
+	</joint>
+
+
+  	<!-- Front Left LowerLeg -->	
 	<link name="front_left_lowerleg">
 	  <visual>
 	    <origin xyz="0.05 0 0" rpy="0 0 0" />
@@ -170,14 +271,14 @@
 	      <color rgba="0 0.5 1 1"/>
 	    </material>
 	  </visual>
-  </link>
+  	</link>
 
-  <joint name="joint_front_left_lowerleg" type="continuous">
-    <parent link="front_left_upperleg"/>
-    <child link="front_left_lowerleg"/>
-    <origin xyz="0.10 0 0" rpy="0 -1.55 0" /> 
-    <axis xyz="1 0 0" />
-  </joint>
-  
+	<joint name="joint_front_left_lowerleg" type="continuous">
+		<parent link="front_left_upperleg"/>
+		<child link="front_left_lowerleg"/>
+		<origin xyz="-0.10 0 0" rpy="0 1.5708 0" /> 
+		<axis xyz="0 1 0" />
+	</joint>
+
 </robot>
 

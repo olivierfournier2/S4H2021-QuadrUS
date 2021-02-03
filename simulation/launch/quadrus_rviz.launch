@@ -4,7 +4,7 @@
    <arg name="gui" default="True" />
 
    <!-- set these parameters on Parameter Server -->
-   <param name="robot_description" textfile="$(find simulation)/urdf/$(arg model).urdf" />
+   <param name="robot_description" textfile="$(find simulation)/gazebo/$(arg model).gazebo" />
    
    <!-- Start 3 nodes : joint_state_publisher, robot_state_publisher and rviz -->
 

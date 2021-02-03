@@ -1,0 +1,17 @@
+<launch>
+   <include file="$(find gazebo_ros)/launch/empty_world.launch">
+   
+      <arg name="world_name" value="$(find simulation)/worlds/quadrus.world" />
+
+      <arg name="paused" default="true" />
+      <arg name="use_sim_time" default="true" />
+      <arg name="gui" default="true" />
+      <arg name="headless" default="false" />
+      arg name="debug" default="false" />
+
+   </include>
+
+   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen" args="-file $(find simulation)/gazebo/quadrus.gazebo -urdf -model quadrus" />
+
+</launch>
+   
