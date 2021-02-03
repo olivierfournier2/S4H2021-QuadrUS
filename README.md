@@ -24,7 +24,7 @@
 - Clone the git repository into the src folder
 
     ```
-    git clone https://github.com/olivierfournier2/S4H2021-QuadrUS.git
+    git clone --recurse-submodules https://github.com/olivierfournier2/S4H2021-QuadrUS.git
     ```
 
 - Build the ROS workspace
