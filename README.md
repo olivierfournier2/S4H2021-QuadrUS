@@ -36,9 +36,18 @@
     catkin_make
     ```
 
+    ```
+    . ~/quadrus_ws/devel/setup.bash
+    ```
+
 At this point, the ROS environment should be set up and ready to work with.
 
 ## Launching 2D and 3D simulations
+- Start by launching roscore, the main ros node
+    ```
+    roscore 
+    ```
+    
 - To view the robot model in Rviz, execute the following command : 
     ```
     roslaunch simulation quadrus_rviz.launch
