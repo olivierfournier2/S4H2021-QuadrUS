@@ -1,0 +1,40 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/ubuntu-dev/quadrus_ws/devel/include/**",
+        "/home/ubuntu-dev/catkin_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_controllers/ackermann_steering_controller/include/**",
+        "/home/ubuntu-dev/catkin_ws/src/beginner_tutorials/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_control/combined_robot_hw/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_control/combined_robot_hw_tests/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_control/controller_interface/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_control/controller_manager/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_control/controller_manager_tests/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_controllers/diff_drive_controller/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_controllers/effort_controllers/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_controllers/force_torque_sensor_controller/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_controllers/forward_command_controller/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_controllers/four_wheel_steering_controller/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_controllers/gripper_action_controller/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_control/hardware_interface/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_controllers/imu_sensor_controller/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_control/joint_limits_interface/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_controllers/joint_state_controller/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_controllers/joint_trajectory_controller/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_controllers/position_controllers/include/**",
+        "/home/ubuntu-dev/catkin_ws/src/Chapter6_ROS_programming/pkg_raspicam_node/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_control/transmission_interface/include/**",
+        "/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/ros_controllers/velocity_controllers/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ],
+  "version": 4
+}

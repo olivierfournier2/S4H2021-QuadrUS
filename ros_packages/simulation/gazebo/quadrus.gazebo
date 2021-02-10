@@ -1,648 +1,787 @@
 <?xml version='1.0'?>
 <robot name="quadrus">
 
-	<!-- Base Link -->
-	<link name="base_link">
-		<visual>
-			<origin xyz="0 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.30 0.10 0.07"/>
-			</geometry>
-			<material name="blue">
-				<color rgba="0 0.5 1 1"/>
-			</material>
-		</visual>
-		
-		<collision>
-			<origin xyz="0 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.30 0.10 0.10"/>
-			</geometry>
-		</collision>
+	<gazebo>
+		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+			<robotNamespace>/quadrus</robotNamespace>
+		</plugin>
+	</gazebo>
 
-		<inertial>
-			<mass value="2"/>
-			<inertia ixx="0.13" ixy="0.0" ixz="0.0" iyy="0.21" iyz="0.0" izz="0.13"/>
-		</inertial>
+	<!-- Body -->
+		<!-- Base Link -->
+		<link name="base_link">
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<box size="0.30 0.10 0.07"/>
+				</geometry>
+				<material name="blue">
+					<color rgba="0 0.5 1 1"/>
+				</material>
+			</visual>
+
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<box size="0.2 0.18 0.07"/>
+				</geometry>
+				<material name="blue">
+					<color rgba="0 0.5 1 1"/>
+				</material>
+			</visual>
+			
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<box size="0.30 0.10 0.07"/>
+				</geometry>
+			</collision>
+
+			<inertial>
+				<mass value="2"/>
+				<inertia ixx="0.13" ixy="0.0" ixz="0.0" iyy="0.21" iyz="0.0" izz="0.13"/>
+			</inertial>			
+
+		</link>
+
+		<gazebo reference="base_link">
+			<material>Gazebo/Blue</material>
+			<pose>0 0 0.242 0 0 0 </pose>
+		</gazebo>
+
+	<!-- Back Right Leg -->
+		<!-- Back Right Hip -->		
+			<link name="back_right_hip">
+
+				<visual>
+					<origin xyz="0 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.03 0.05 0.03"/>
+					</geometry>
+					<material name="red">
+						<color rgba="1 0 0 1"/>
+					</material>
+				</visual>
+
+				<collision>
+					<origin xyz="0 0.01 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.03 0.05 0.03"/>
+					</geometry>
+				</collision>
+
+				<inertial>
+					<mass value="0.1"/>
+					<inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+				</inertial>	
+
+			</link>
+
+			<gazebo reference="back_right_hip">
+				<material>Gazebo/Blue</material>
+			</gazebo>
+
+			<joint name="joint_back_right_hip" type="continuous">
+				<parent link="base_link"/>
+				<child link="back_right_hip"/>
+				<origin xyz="-0.12 -0.075 0" rpy="0 0 0" /> 
+				<axis xyz="1 0 0" />
+			</joint>
+
+			<transmission name="transmission_back_right_hip">
+				<type>transmission_interface/SimpleTransmission</type>
+				<joint name="joint_back_right_hip">
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</joint>
+				<actuator name="motor_back_right_hip">
+					<mechanicalReduction>1</mechanicalReduction>
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</actuator>
+			</transmission>
 
 
-		<!-- Back Right Hip -->	
-		<visual name="back_right_hip">
-			<origin xyz="-0.12 0.075 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.05 0.05 0.05"/>
-			</geometry>
-			<material name="red">
-				<color rgba="1 0 0 1"/>
-			</material>
-		</visual>
+		<!-- Back Right UpperLeg -->
+			<link name="back_right_upperleg">
+				<visual>
+					<origin xyz="-0.075 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.18 0.03 0.03"/>
+					</geometry>
+					<material name="blue">
+						<color rgba="0 0.5 1 1"/>
+					</material>
+				</visual>
+				
+				<collision>
+					<origin xyz="-0.06 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.18 0.03 0.03"/>
+					</geometry>
+				</collision>
 
-		<collision>
-			<origin xyz="-0.12 0.075 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.05 0.05 0.05"/>
-			</geometry>
-		</collision>
+				<inertial>
+					<mass value="0.1"/>
+					<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+				</inertial>
 
-		<inertial>
-			<mass value="0.1"/>
-			<inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
-		</inertial>
+			</link>
 
+			<gazebo reference="back_right_upperleg">
+				<material>Gazebo/Blue</material>
+			</gazebo>
+
+			<joint name="joint_back_right_upperleg" type="continuous">
+				<parent link="back_right_hip"/>
+				<child link="back_right_upperleg"/>
+				<origin xyz="0 -0.04 0" rpy="0 -0.7854 0" /> 
+				<axis xyz="0 1 0" />
+			</joint>
+
+			<transmission name="transmission_back_right_upperleg">
+				<type>transmission_interface/SimpleTransmission</type>
+				<joint name="joint_back_right_upperleg">
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</joint>
+				<actuator name="motor_back_right_upperleg">
+					<mechanicalReduction>1</mechanicalReduction>
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</actuator>
+			</transmission>
+
+		<!-- Back Right LowerLeg -->	
+			<link name="back_right_lowerleg">
+				<visual>
+					<origin xyz="0.075 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.18 0.03 0.03"/>
+					</geometry>
+					<material name="blue">
+					<color rgba="0 0.5 1 1"/>
+					</material>
+				</visual>
+				
+				<collision>
+					<origin xyz="0.075 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.18 0.03 0.03"/>
+					</geometry>
+				</collision>
+
+				<inertial>
+					<mass value="0.1"/>
+					<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+				</inertial>
+
+			</link>
+
+			<gazebo reference="back_right_lowerleg">
+				<material>Gazebo/Blue</material>
+			</gazebo>
+
+			<joint name="joint_back_right_lowerleg" type="continuous">
+				<parent link="back_right_upperleg"/>
+				<child link="back_right_lowerleg"/>
+				<origin xyz="-0.15 0 0" rpy="0 1.5708 0" /> 
+				<axis xyz="0 1 0" />
+			</joint>
+
+			<transmission name="transmission_back_right_lowerleg">
+				<type>transmission_interface/SimpleTransmission</type>
+				<joint name="joint_back_right_lowerleg">
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</joint>
+				<actuator name="motor_back_right_lowerleg">
+					<mechanicalReduction>1</mechanicalReduction>
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</actuator>
+			</transmission>
+
+			
+
+		<!-- Back Right paw -->	
+			<link name="back_right_paw">
+				<visual>
+					<origin xyz="0 0 0" rpy="0 0 0" />
+					<geometry>
+						<sphere radius = "0.03"/>
+					</geometry>
+					<material name="green">
+					<color rgba="0 1 0 1"/>
+					</material>
+				</visual>
+				
+				<collision>
+					<origin xyz="0 0 0" rpy="0 0 0" />
+					<geometry>
+						<sphere radius = "0.03"/>
+					</geometry>
+				</collision>
+
+				<inertial>
+					<mass value="0.1"/>
+					<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+				</inertial>
+
+			</link>
+
+			<gazebo reference="back_right_paw">
+				<material>Gazebo/Green</material>
+			</gazebo>
+
+			<joint name="joint_back_right_paw" type="fixed">
+				<parent link="back_right_lowerleg"/>
+				<child link="back_right_paw"/>
+				<origin xyz="0.15 0 0" rpy="0 0 0" /> 
+			</joint>
+
+	<!-- Back Left Leg -->
 		<!-- Back Left Hip -->	
-		<visual name="back_right_hip">
-			<origin xyz="-0.12 -0.075 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.05 0.05 0.05"/>
-			</geometry>
-			<material name="red">
-				<color rgba="1 0 0 1"/>
-			</material>
-		</visual>
+			<link name="back_left_hip">
 
-		<collision>
-			<origin xyz="-0.12 -0.075 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.05 0.05 0.05"/>
-			</geometry>
-		</collision>
+				<visual>
+					<origin xyz="0 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.03 0.05 0.03"/>
+					</geometry>
+					<material name="red">
+						<color rgba="1 0 0 1"/>
+					</material>
+				</visual>
 
-		<inertial>
-			<mass value="0.1"/>
-			<inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
-		</inertial>
+				<collision>
+					<origin xyz="0 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.03 0.05 0.03"/>
+					</geometry>
+				</collision>
 
+				<inertial>
+					<mass value="0.1"/>
+					<inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+				</inertial>	
+
+			</link>
+
+			<joint name="joint_back_left_hip" type="continuous">
+				<parent link="base_link"/>
+				<child link="back_left_hip"/>
+				<origin xyz="-0.12 0.075 0" rpy="0 0 0" /> 
+				<axis xyz="1 0 0" />
+			</joint>
+
+			<gazebo reference="back_left_hip">
+				<material>Gazebo/Blue</material>
+			</gazebo>
+
+			<transmission name="transmission_back_left_hip">
+				<type>transmission_interface/SimpleTransmission</type>
+				<joint name="joint_back_left_hip">
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</joint>
+				<actuator name="motor_back_left_hip">
+					<mechanicalReduction>1</mechanicalReduction>
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</actuator>
+			</transmission>
+
+		<!-- Back Left UpperLeg -->
+
+			<link name="back_left_upperleg">
+				<visual>
+					<origin xyz="-0.075 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.18 0.03 0.03"/>
+					</geometry>
+					<material name="blue">
+						<color rgba="0 0.5 1 1"/>
+					</material>
+				</visual>
+				
+				<collision>
+					<origin xyz="-0.015 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.18 0.03 0.03"/>
+					</geometry>
+				</collision>
+
+				<inertial>
+					<mass value="0.1"/>
+					<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+				</inertial>
+
+			</link>
+
+			<gazebo reference="back_left_upperleg">
+				<material>Gazebo/Blue</material>
+			</gazebo>
+
+			<joint name="joint_back_left_upperleg" type="continuous">
+				<parent link="back_left_hip"/>
+				<child link="back_left_upperleg"/>
+				<origin xyz="0 0.04 0" rpy="0 -0.7854 0" /> 
+				<axis xyz="0 1 0" />
+			</joint>
+
+			<transmission name="transmission_back_left_upperleg">
+				<type>transmission_interface/SimpleTransmission</type>
+				<joint name="joint_back_left_upperleg">
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</joint>
+				<actuator name="motor_back_left_upperleg">
+					<mechanicalReduction>1</mechanicalReduction>
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</actuator>
+			</transmission>
+		
+
+		<!-- Back Left LowerLeg -->	
+			<link name="back_left_lowerleg">
+				<visual>
+					<origin xyz="0.075 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.18 0.03 0.03"/>
+					</geometry>
+					<material name="blue">
+					<color rgba="0 0.5 1 1"/>
+					</material>
+				</visual>
+				
+				<collision>
+					<origin xyz="0.075 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.18 0.03 0.03"/>
+					</geometry>
+				</collision>
+
+				<inertial>
+					<mass value="0.1"/>
+					<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+				</inertial>
+			</link>
+
+			<gazebo reference="back_left_lowerleg">
+				<material>Gazebo/Blue</material>
+			</gazebo>
+
+			<joint name="joint_back_left_lowerleg" type="continuous">
+				<parent link="back_left_upperleg"/>
+				<child link="back_left_lowerleg"/>
+				<origin xyz="-0.15 0 0" rpy="0 1.5708 0" /> 
+				<axis xyz="0 1 0" />
+			</joint>
+
+			<transmission name="transmission_back_left_lowerleg">
+				<type>transmission_interface/SimpleTransmission</type>
+				<joint name="joint_back_left_lowerleg">
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</joint>
+				<actuator name="motor_back_left_lowerleg">
+					<mechanicalReduction>1</mechanicalReduction>
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</actuator>
+			</transmission>
+
+		<!-- Back Left paw -->	
+			<link name="back_left_paw">
+				<visual>
+					<origin xyz="0 0 0" rpy="0 0 0" />
+					<geometry>
+						<sphere radius = "0.03"/>
+					</geometry>
+					<material name="green">
+					<color rgba="0 1 0 1"/>
+					</material>
+				</visual>
+				
+				<collision>
+					<origin xyz="0 0 0" rpy="0 0 0" />
+					<geometry>
+						<sphere radius = "0.03"/>
+					</geometry>
+				</collision>
+
+				<inertial>
+					<mass value="0.1"/>
+					<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+				</inertial>
+
+			</link>
+
+			<gazebo reference="back_left_paw">
+				<material>Gazebo/Green</material>
+			</gazebo>
+
+			<joint name="joint_back_left_paw" type="fixed">
+				<parent link="back_left_lowerleg"/>
+				<child link="back_left_paw"/>
+				<origin xyz="0.15 0 0" rpy="0 0 0" /> 
+			</joint>
+
+	<!-- Front Right Leg -->
 		<!-- Front Right Hip -->	
-		<visual name="back_right_hip">
-			<origin xyz="0.12 0.075 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.05 0.05 0.05"/>
-			</geometry>
-			<material name="red">
-				<color rgba="1 0 0 1"/>
-			</material>
-		</visual>
+			<link name="front_right_hip">
+				<visual>
+					<origin xyz="0 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.03 0.05 0.03"/>
+					</geometry>
+					<material name="red">
+						<color rgba="1 0 0 1"/>
+					</material>
+				</visual>
 
-		<collision>
-			<origin xyz="0.12 0.075 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.05 0.05 0.05"/>
-			</geometry>
-		</collision>
+				<collision>
+					<origin xyz="0 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.03 0.05 0.03"/>
+					</geometry>
+				</collision>
 
-		<inertial>
-			<mass value="0.1"/>
-			<inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
-		</inertial>
+				<inertial>
+					<mass value="0.1"/>
+					<inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+				</inertial>	
 
+			</link>
+
+			<gazebo reference="front_right_hip">
+				<material>Gazebo/Blue</material>
+			</gazebo>
+
+			<joint name="joint_front_right_hip" type="continuous">
+				<parent link="base_link"/>
+				<child link="front_right_hip"/>
+				<origin xyz="0.12 -0.075 0" rpy="0 0 0" /> 
+				<axis xyz="1 0 0" />
+			</joint>
+
+			<transmission name="transmission_front_right_hip">
+				<type>transmission_interface/SimpleTransmission</type>
+				<joint name="joint_front_right_hip">
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</joint>
+				<actuator name="motor_front_right_hip">
+					<mechanicalReduction>1</mechanicalReduction>
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</actuator>
+			</transmission>
+
+
+		<!-- Front Right UpperLeg -->
+			<link name="front_right_upperleg">
+				<visual>
+					<origin xyz="-0.075 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.18 0.03 0.03"/>
+					</geometry>
+					<material name="blue">
+						<color rgba="0 0.5 1 1"/>
+					</material>
+				</visual>
+				
+				<collision>
+					<origin xyz="-0.015 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.18 0.03 0.03"/>
+					</geometry>
+				</collision>
+
+				<inertial>
+					<mass value="0.1"/>
+					<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+				</inertial>
+
+			</link>
+
+			<gazebo reference="front_right_upperleg">
+				<material>Gazebo/Blue</material>
+			</gazebo>
+
+			<joint name="joint_front_right_upperleg" type="continuous">
+				<parent link="front_right_hip"/>
+				<child link="front_right_upperleg"/>
+				<origin xyz="0 -0.04 0" rpy="0 -0.7854 0" /> 
+				<axis xyz="0 1 0" />
+			</joint>
+		
+			<transmission name="transmission_front_right_upperleg">
+				<type>transmission_interface/SimpleTransmission</type>
+				<joint name="joint_front_right_upperleg">
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</joint>
+				<actuator name="motor_front_right_upperleg">
+					<mechanicalReduction>1</mechanicalReduction>
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</actuator>
+			</transmission>
+		
+
+		<!-- Front Right LowerLeg -->	
+			<link name="front_right_lowerleg">
+				<visual>
+					<origin xyz="0.075 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.18 0.03 0.03"/>
+					</geometry>
+					<material name="blue">
+					<color rgba="0 0.5 1 1"/>
+					</material>
+				</visual>
+				
+				<collision>
+					<origin xyz="0.075 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.18 0.03 0.03"/>
+					</geometry>
+				</collision>
+
+				<inertial>
+					<mass value="0.1"/>
+					<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+				</inertial>
+			</link>
+
+			<gazebo reference="front_right_lowerleg">
+				<material>Gazebo/Blue</material>
+			</gazebo>
+
+			<joint name="joint_front_right_lowerleg" type="continuous">
+				<parent link="front_right_upperleg"/>
+				<child link="front_right_lowerleg"/>
+				<origin xyz="-0.15 0 0" rpy="0 1.5708 0" /> 
+				<axis xyz="0 1 0" />
+			</joint>
+
+			<transmission name="transmission_front_right_lowerleg">
+				<type>transmission_interface/SimpleTransmission</type>
+				<joint name="joint_front_right_lowerleg">
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</joint>
+				<actuator name="motor_front_right_lowerleg">
+					<mechanicalReduction>1</mechanicalReduction>
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</actuator>
+			</transmission>
+
+		<!-- Front Right paw -->	
+			<link name="front_right_paw">
+				<visual>
+					<origin xyz="0 0 0" rpy="0 0 0" />
+					<geometry>
+						<sphere radius = "0.03"/>
+					</geometry>
+					<material name="green">
+					<color rgba="0 1 0 1"/>
+					</material>
+				</visual>
+				
+				<collision>
+					<origin xyz="0 0 0" rpy="0 0 0" />
+					<geometry>
+						<sphere radius = "0.03"/>
+					</geometry>
+				</collision>
+
+				<inertial>
+					<mass value="0.1"/>
+					<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+				</inertial>
+
+			</link>
+
+			<gazebo reference="front_right_paw">
+				<material>Gazebo/Green</material>
+			</gazebo>
+
+			<joint name="joint_front_right_paw" type="fixed">
+				<parent link="front_right_lowerleg"/>
+				<child link="front_right_paw"/>
+				<origin xyz="0.15 0 0" rpy="0 0 0" /> 
+			</joint>
+
+	<!-- Front Left Leg -->
 		<!-- Front Left Hip -->	
-		<visual name="back_right_hip">
-			<origin xyz="0.12 -0.075 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.05 0.05 0.05"/>
-			</geometry>
-			<material name="red">
-				<color rgba="1 0 0 1"/>
-			</material>
-		</visual>
+			<link name="front_left_hip">
 
-		<collision>
-			<origin xyz="0.12 -0.075 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.05 0.05 0.05"/>
-			</geometry>
-		</collision>
+				<visual>
+					<origin xyz="0 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.03 0.05 0.03"/>
+					</geometry>
+					<material name="red">
+						<color rgba="1 0 0 1"/>
+					</material>
+				</visual>
 
-		<inertial>
-			<mass value="0.1"/>
-			<inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
-		</inertial>				
+				<collision>
+					<origin xyz="0 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.03 0.05 0.03"/>
+					</geometry>
+				</collision>
 
-	</link>
+				<inertial>
+					<mass value="0.1"/>
+					<inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+				</inertial>	
 
-	<gazebo reference="base_link">
-		<material>Gazebo/Blue</material>
-		<pose>0 0 0.242 0 0 0 </pose>
-	</gazebo>
-  
-  <!-- ____________________________________________________________ -->
+			</link>
 
-	<!-- Back Right UpperLeg -->
+			<gazebo reference="front_left_hip">
+				<material>Gazebo/Blue</material>
+			</gazebo>
 
-	<link name="back_right_dummy">
-	  	<origin xyz="0 0 0"/>
-		<inertial>
-			<mass value="0.001"/>
-			<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
-		</inertial>
-  	</link>
+			<joint name="joint_front_left_hip" type="continuous">
+				<parent link="base_link"/>
+				<child link="front_left_hip"/>
+				<origin xyz="0.12 0.075 0" rpy="0 0 0" /> 
+				<axis xyz="1 0 0" />
+			</joint>
 
-	<link name="back_right_upperleg">
-	  	<visual>
-			<origin xyz="-0.075 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.18 0.03 0.03"/>
-			</geometry>
-			<material name="blue">
-				<color rgba="0 0.5 1 1"/>
-			</material>
-	  	</visual>
+			<transmission name="transmission_front_left_hip">
+				<type>transmission_interface/SimpleTransmission</type>
+				<joint name="joint_front_left_hip">
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</joint>
+				<actuator name="motor_front_left_hip">
+					<mechanicalReduction>1</mechanicalReduction>
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</actuator>
+			</transmission>
+
+
+		<!-- Front Left UpperLeg -->
+
+			<link name="front_left_upperleg">
+				<visual>
+					<origin xyz="-0.075 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.18 0.03 0.03"/>
+					</geometry>
+					<material name="blue">
+						<color rgba="0 0.5 1 1"/>
+					</material>
+				</visual>
+				
+				<collision>
+					<origin xyz="-0.015 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.18 0.03 0.03"/>
+					</geometry>
+				</collision>
+
+				<inertial>
+					<mass value="0.1"/>
+					<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+				</inertial>
+
+			</link>
+
+			<gazebo reference="front_left_upperleg">
+				<material>Gazebo/Blue</material>
+			</gazebo>
+
+			<joint name="joint_front_left_upperleg" type="continuous">
+				<parent link="front_left_hip"/>
+				<child link="front_left_upperleg"/>
+				<origin xyz="0 0.04 0" rpy="0 -0.7854 0" /> 
+				<axis xyz="0 1 0" />
+			</joint>
+
+			<transmission name="transmission_front_left_upperleg">
+				<type>transmission_interface/SimpleTransmission</type>
+				<joint name="joint_front_left_upperleg">
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</joint>
+				<actuator name="motor_front_left_upperleg">
+					<mechanicalReduction>1</mechanicalReduction>
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</actuator>
+			</transmission>
 		
-		<collision>
-			<origin xyz="-0.015 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.18 0.03 0.03"/>
-			</geometry>
-		</collision>
 
-		<inertial>
-			<mass value="0.1"/>
-			<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
-		</inertial>
-
-  	</link>
-
-	<gazebo reference="back_right_upperleg">
-		<material>Gazebo/Blue</material>
-	</gazebo>
-  
-
-	<joint name="joint_back_right_hip" type="continuous">
-		<parent link="base_link"/>
-		<child link="back_right_dummy"/>
-		<origin xyz="-0.12 -0.075 0" rpy="0 0 0" /> 
-		<axis xyz="1 0 0" />
-	</joint>
-
-	<joint name="joint_back_right_upperleg" type="continuous">
-		<parent link="back_right_dummy"/>
-		<child link="back_right_upperleg"/>
-		<origin xyz="-0.05 0 0" rpy="0 -0.7854 0" /> 
-		<axis xyz="0 1 0" />
-	</joint>
-	
-
-  	<!-- Back Right LowerLeg -->	
-	<link name="back_right_lowerleg">
-		<visual>
-			<origin xyz="0.075 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.18 0.03 0.03"/>
-			</geometry>
-			<material name="blue">
-			<color rgba="0 0.5 1 1"/>
-			</material>
-		</visual>
-		
-		<collision>
-			<origin xyz="0.075 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.18 0.03 0.03"/>
-			</geometry>
-		</collision>
-
-		<inertial>
-			<mass value="0.1"/>
-			<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
-		</inertial>
-
-  	</link>
-
-	<gazebo reference="back_right_lowerleg">
-		<material>Gazebo/Blue</material>
-	</gazebo>
-
-	<joint name="joint_back_right_lowerleg" type="continuous">
-		<parent link="back_right_upperleg"/>
-		<child link="back_right_lowerleg"/>
-		<origin xyz="-0.15 0 0" rpy="0 1.5708 0" /> 
-		<axis xyz="0 1 0" />
-	</joint>
-
-  	<!-- Back Right paw -->	
-	<link name="back_right_paw">
-		<visual>
-			<origin xyz="0 0 0" rpy="0 0 0" />
-			<geometry>
-				<sphere radius = "0.03"/>
-			</geometry>
-			<material name="green">
-			<color rgba="0 1 0 1"/>
-			</material>
-		</visual>
-		
-		<collision>
-			<origin xyz="0 0 0" rpy="0 0 0" />
-			<geometry>
-				<sphere radius = "0.03"/>
-			</geometry>
-		</collision>
-
-		<inertial>
-			<mass value="0.1"/>
-			<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
-		</inertial>
-
-  	</link>
-
-	<gazebo reference="back_right_paw">
-		<material>Gazebo/Green</material>
-	</gazebo>
-
-	<joint name="joint_back_right_paw" type="fixed">
-		<parent link="back_right_lowerleg"/>
-		<child link="back_right_paw"/>
-		<origin xyz="0.15 0 0" rpy="0 0 0" /> 
-	</joint>
-
-
-  <!-- ____________________________________________________________ -->
-
-	<!-- Back Left UpperLeg -->
-
-	<link name="back_left_dummy">
-	  	<origin xyz="0 0 0"/>
-		<inertial>
-			<mass value="0.001"/>
-			<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
-		</inertial>
-  	</link>
-
-	<link name="back_left_upperleg">
-	  	<visual>
-			<origin xyz="-0.075 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.18 0.03 0.03"/>
-			</geometry>
-			<material name="blue">
-				<color rgba="0 0.5 1 1"/>
-			</material>
-	  	</visual>
-		
-		<collision>
-			<origin xyz="-0.015 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.18 0.03 0.03"/>
-			</geometry>
-		</collision>
-
-		<inertial>
-			<mass value="0.1"/>
-			<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
-		</inertial>
-
-  	</link>
-
-	<gazebo reference="back_left_upperleg">
-		<material>Gazebo/Blue</material>
-	</gazebo>
-
-	<joint name="joint_back_left_hip" type="continuous">
-		<parent link="base_link"/>
-		<child link="back_left_dummy"/>
-		<origin xyz="-0.12 0.075 0" rpy="0 0 0" /> 
-		<axis xyz="1 0 0" />
-	</joint>
-
-	<joint name="joint_back_left_upperleg" type="continuous">
-		<parent link="back_left_dummy"/>
-		<child link="back_left_upperleg"/>
-		<origin xyz="-0.05 0 0" rpy="0 -0.7854 0" /> 
-		<axis xyz="0 1 0" />
-	</joint>
-	
-
-  	<!-- Back Left LowerLeg -->	
-	<link name="back_left_lowerleg">
-		<visual>
-			<origin xyz="0.075 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.18 0.03 0.03"/>
-			</geometry>
-			<material name="blue">
-			<color rgba="0 0.5 1 1"/>
-			</material>
-		</visual>
-		
-		<collision>
-			<origin xyz="0.075 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.18 0.03 0.03"/>
-			</geometry>
-		</collision>
-
-		<inertial>
-			<mass value="0.1"/>
-			<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
-		</inertial>
-  </link>
-
-	<gazebo reference="back_left_lowerleg">
-		<material>Gazebo/Blue</material>
-	</gazebo>
-
-  <joint name="joint_back_left_lowerleg" type="continuous">
-    <parent link="back_left_upperleg"/>
-    <child link="back_left_lowerleg"/>
-    <origin xyz="-0.15 0 0" rpy="0 1.5708 0" /> 
-    <axis xyz="0 1 0" />
-  </joint>
-
-  	<!-- Back Left paw -->	
-	<link name="back_left_paw">
-		<visual>
-			<origin xyz="0 0 0" rpy="0 0 0" />
-			<geometry>
-				<sphere radius = "0.03"/>
-			</geometry>
-			<material name="green">
-			<color rgba="0 1 0 1"/>
-			</material>
-		</visual>
-		
-		<collision>
-			<origin xyz="0 0 0" rpy="0 0 0" />
-			<geometry>
-				<sphere radius = "0.03"/>
-			</geometry>
-		</collision>
-
-		<inertial>
-			<mass value="0.1"/>
-			<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
-		</inertial>
-
-  	</link>
-
-	<gazebo reference="back_left_paw">
-		<material>Gazebo/Green</material>
-	</gazebo>
-
-	<joint name="joint_back_left_paw" type="fixed">
-		<parent link="back_left_lowerleg"/>
-		<child link="back_left_paw"/>
-		<origin xyz="0.15 0 0" rpy="0 0 0" /> 
-	</joint>
-
-
-  <!-- ____________________________________________________________ -->
-
-	<!-- Front Right UpperLeg -->
-
-	<link name="front_right_dummy">
-	  	<origin xyz="0 0 0"/>
-		<inertial>
-			<mass value="0.001"/>
-			<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
-		</inertial>
-  	</link>
-
-	<link name="front_right_upperleg">
-	  	<visual>
-			<origin xyz="-0.075 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.18 0.03 0.03"/>
-			</geometry>
-			<material name="blue">
-				<color rgba="0 0.5 1 1"/>
-			</material>
-	  	</visual>
-		
-		<collision>
-			<origin xyz="-0.015 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.18 0.03 0.03"/>
-			</geometry>
-		</collision>
-
-		<inertial>
-			<mass value="0.1"/>
-			<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
-		</inertial>
-
-  	</link>
-
-	<gazebo reference="front_right_upperleg">
-		<material>Gazebo/Blue</material>
-	</gazebo>
-
-	<joint name="joint_front_right_hip" type="continuous">
-		<parent link="base_link"/>
-		<child link="front_right_dummy"/>
-		<origin xyz="0.12 -0.075 0" rpy="0 0 0" /> 
-		<axis xyz="1 0 0" />
-	</joint>
-
-	<joint name="joint_front_right_upperleg" type="continuous">
-		<parent link="front_right_dummy"/>
-		<child link="front_right_upperleg"/>
-		<origin xyz="-0.05 0 0" rpy="0 -0.7854 0" /> 
-		<axis xyz="0 1 0" />
-	</joint>
-	
-
-  	<!-- Front Right LowerLeg -->	
-	<link name="front_right_lowerleg">
-		<visual>
-			<origin xyz="0.075 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.18 0.03 0.03"/>
-			</geometry>
-			<material name="blue">
-			<color rgba="0 0.5 1 1"/>
-			</material>
-		</visual>
-		
-		<collision>
-			<origin xyz="0.075 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.18 0.03 0.03"/>
-			</geometry>
-		</collision>
-
-		<inertial>
-			<mass value="0.1"/>
-			<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
-		</inertial>
-  </link>
-
-	<gazebo reference="front_right_lowerleg">
-		<material>Gazebo/Blue</material>
-	</gazebo>
-
-  <joint name="joint_front_right_lowerleg" type="continuous">
-    <parent link="front_right_upperleg"/>
-    <child link="front_right_lowerleg"/>
-    <origin xyz="-0.15 0 0" rpy="0 1.5708 0" /> 
-    <axis xyz="0 1 0" />
-  </joint>
-
-  	<!-- Front Right paw -->	
-	<link name="front_right_paw">
-		<visual>
-			<origin xyz="0 0 0" rpy="0 0 0" />
-			<geometry>
-				<sphere radius = "0.03"/>
-			</geometry>
-			<material name="green">
-			<color rgba="0 1 0 1"/>
-			</material>
-		</visual>
-		
-		<collision>
-			<origin xyz="0 0 0" rpy="0 0 0" />
-			<geometry>
-				<sphere radius = "0.03"/>
-			</geometry>
-		</collision>
-
-		<inertial>
-			<mass value="0.1"/>
-			<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
-		</inertial>
-
-  	</link>
-
-	<gazebo reference="front_right_paw">
-		<material>Gazebo/Green</material>
-	</gazebo>
-
-	<joint name="joint_front_right_paw" type="fixed">
-		<parent link="front_right_lowerleg"/>
-		<child link="front_right_paw"/>
-		<origin xyz="0.15 0 0" rpy="0 0 0" /> 
-	</joint>
-
-
-  <!-- ____________________________________________________________ -->
-
-	<!-- Front Left UpperLeg -->
-
-	<link name="front_left_dummy">
-		<origin xyz="0 0 0"/>
-		<inertial>
-			<mass value="0.001"/>
-			<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
-		</inertial>
-  	</link>
-
-	<link name="front_left_upperleg">
-	  	<visual>
-			<origin xyz="-0.075 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.18 0.03 0.03"/>
-			</geometry>
-			<material name="blue">
-				<color rgba="0 0.5 1 1"/>
-			</material>
-	  	</visual>
-		
-		<collision>
-			<origin xyz="-0.015 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.18 0.03 0.03"/>
-			</geometry>
-		</collision>
-
-		<inertial>
-			<mass value="0.1"/>
-			<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
-		</inertial>
-
-  	</link>
-
-	<gazebo reference="front_left_upperleg">
-		<material>Gazebo/Blue</material>
-	</gazebo>
-
-	<joint name="joint_front_left_hip" type="continuous">
-		<parent link="base_link"/>
-		<child link="front_left_dummy"/>
-		<origin xyz="0.12 0.075 0" rpy="0 0 0" /> 
-		<axis xyz="1 0 0" />
-	</joint>
-
-	<joint name="joint_front_left_upperleg" type="continuous">
-		<parent link="front_left_dummy"/>
-		<child link="front_left_upperleg"/>
-		<origin xyz="-0.05 0 0" rpy="0 -0.7854 0" /> 
-		<axis xyz="0 1 0" />
-	</joint>
-	
-
-  	<!-- Front Left LowerLeg -->	
-	<link name="front_left_lowerleg">
-		<visual>
-			<origin xyz="0.075 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.18 0.03 0.03"/>
-			</geometry>
-			<material name="blue">
-			<color rgba="0 0.5 1 1"/>
-			</material>
-		</visual>
-		
-		<collision>
-			<origin xyz="0.075 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.18 0.03 0.03"/>
-			</geometry>
-		</collision>
-
-		<inertial>
-			<mass value="0.1"/>
-			<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
-		</inertial>
-  </link>
-
-	<gazebo reference="front_left_lowerleg">
-		<material>Gazebo/Blue</material>
-	</gazebo>
-
-  <joint name="joint_front_left_lowerleg" type="continuous">
-    <parent link="front_left_upperleg"/>
-    <child link="front_left_lowerleg"/>
-    <origin xyz="-0.15 0 0" rpy="0 1.5708 0" /> 
-    <axis xyz="0 1 0" />
-  </joint>
-
-  	<!-- Front Left paw -->	
-	<link name="front_left_paw">
-		<visual>
-			<origin xyz="0 0 0" rpy="0 0 0" />
-			<geometry>
-				<sphere radius = "0.03"/>
-			</geometry>
-			<material name="green">
-			<color rgba="0 1 0 1"/>
-			</material>
-		</visual>
-		
-		<collision>
-			<origin xyz="0 0 0" rpy="0 0 0" />
-			<geometry>
-				<sphere radius = "0.03"/>
-			</geometry>
-		</collision>
-
-		<inertial>
-			<mass value="0.1"/>
-			<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
-		</inertial>
-
-  	</link>
-
-	<joint name="joint_front_left_paw" type="fixed">
-		<parent link="front_left_lowerleg"/>
-		<child link="front_left_paw"/>
-		<origin xyz="0.15 0 0" rpy="0 0 0" /> 
-	</joint>
-
-	<gazebo reference="front_left_paw">
-		<material>Gazebo/Green</material>
-	</gazebo>
-
-
+		<!-- Front Left LowerLeg -->	
+			<link name="front_left_lowerleg">
+				<visual>
+					<origin xyz="0.075 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.18 0.03 0.03"/>
+					</geometry>
+					<material name="blue">
+					<color rgba="0 0.5 1 1"/>
+					</material>
+				</visual>
+				
+				<collision>
+					<origin xyz="0.075 0 0" rpy="0 0 0" />
+					<geometry>
+						<box size="0.18 0.03 0.03"/>
+					</geometry>
+				</collision>
+
+				<inertial>
+					<mass value="0.1"/>
+					<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+				</inertial>
+			</link>
+
+			<gazebo reference="front_left_lowerleg">
+				<material>Gazebo/Blue</material>
+			</gazebo>
+
+			<joint name="joint_front_left_lowerleg" type="continuous">
+				<parent link="front_left_upperleg"/>
+				<child link="front_left_lowerleg"/>
+				<origin xyz="-0.15 0 0" rpy="0 1.5708 0" /> 
+				<axis xyz="0 1 0" />
+			</joint>
+
+			<transmission name="transmission_front_left_lowerleg">
+				<type>transmission_interface/SimpleTransmission</type>
+				<joint name="joint_front_left_lowerleg">
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</joint>
+				<actuator name="motor_front_left_lowerleg">
+					<mechanicalReduction>1</mechanicalReduction>
+					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+				</actuator>
+			</transmission>
+
+		<!-- Front Left paw -->	
+			<link name="front_left_paw">
+				<visual>
+					<origin xyz="0 0 0" rpy="0 0 0" />
+					<geometry>
+						<sphere radius = "0.03"/>
+					</geometry>
+					<material name="green">
+					<color rgba="0 1 0 1"/>
+					</material>
+				</visual>
+				
+				<collision>
+					<origin xyz="0 0 0" rpy="0 0 0" />
+					<geometry>
+						<sphere radius = "0.03"/>
+					</geometry>
+				</collision>
+
+				<inertial>
+					<mass value="0.1"/>
+					<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+				</inertial>
+
+			</link>
+
+			<joint name="joint_front_left_paw" type="fixed">
+				<parent link="front_left_lowerleg"/>
+				<child link="front_left_paw"/>
+				<origin xyz="0.15 0 0" rpy="0 0 0" /> 
+			</joint>
+
+			<gazebo reference="front_left_paw">
+				<material>Gazebo/Green</material>
+			</gazebo>
 
 </robot>
 
