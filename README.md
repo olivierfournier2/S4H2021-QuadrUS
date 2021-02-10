@@ -8,6 +8,8 @@
 - ROS Noetic Ninjemys:  [Installation documentation](http://wiki.ros.org/noetic/Installation/Ubuntu)
 - Gazebo/Rviz : Choose Desktop-Full Install option when installing ROS
 
+- Install Terminator
+
 ## To set up this ROS project
 - Create and initialize a catkin workspace
 
