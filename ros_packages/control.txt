@@ -1,0 +1,15 @@
+sudo apt-get install ros-noetic-ros-control
+sudo apt-get install ros-noetic-ros-controllers
+
+
+	<!-- Used for fixing robot to Gazebo 'base_link' -->
+	<link name="world"/>
+
+	<joint name="fixed" type="fixed">
+		<parent link="world"/>
+		<child link="base_link"/>
+		<origin xyz="0 0 1"/>
+	</joint>
+
+<!-- UpperLeg -->
+			

@@ -4,8 +4,18 @@
 	<gazebo>
 		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
 			<robotNamespace>/quadrus</robotNamespace>
+			<robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
 		</plugin>
 	</gazebo>
+
+	<!-- Used for fixing robot to Gazebo 'base_link' -->
+	<link name="world"/>
+
+	<joint name="fixed" type="fixed">
+		<parent link="world"/>
+		<child link="base_link"/>
+		<origin xyz="0 0 1"/>
+	</joint>
 
 	<!-- Body -->
 		<!-- Base Link -->
@@ -36,11 +46,11 @@
 					<box size="0.30 0.10 0.07"/>
 				</geometry>
 			</collision>
-
+		
 			<inertial>
 				<mass value="2"/>
 				<inertia ixx="0.13" ixy="0.0" ixz="0.0" iyy="0.21" iyz="0.0" izz="0.13"/>
-			</inertial>			
+			</inertial>	
 
 		</link>
 
@@ -48,6 +58,8 @@
 			<material>Gazebo/Blue</material>
 			<pose>0 0 0.242 0 0 0 </pose>
 		</gazebo>
+
+
 
 	<!-- Back Right Leg -->
 		<!-- Back Right Hip -->		
