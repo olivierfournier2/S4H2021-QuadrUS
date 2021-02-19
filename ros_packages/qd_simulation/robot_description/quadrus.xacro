@@ -14,9 +14,9 @@
 	
 
 	<!-- Import Rviz colors -->
-	<xacro:include filename="$(find simulation)/robot_description/materials.xacro" />
+	<xacro:include filename="$(find qd_simulation)/robot_description/materials.xacro" />
 	<!-- Import all Gazebo-customization elements, including Gazebo colors -->
-	<xacro:include filename="$(find simulation)/robot_description/quadrus.gazebo" />
+	<xacro:include filename="$(find qd_simulation)/robot_description/quadrus.gazebo" />
 
 	<!-- Used for fixing robot to Gazebo 'base_link' -->
 	<link name="world"/>
