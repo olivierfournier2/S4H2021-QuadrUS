@@ -1,9 +1,9 @@
 <launch>
 
   <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam file="$(find quadrus_control)/config/quadrus_trajectory.yaml" command="load"/>
+  <rosparam file="$(find qd_control)/config/qd_trajectory.yaml" command="load"/>
   
-  <param name="robot_description" command="cat $(find simulation)/robot_description/quadrus.urdf"/>
+  <param name="robot_description" command="cat $(find qd_simulation)/robot_description/quadrus.urdf"/>
   
   <!-- load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
