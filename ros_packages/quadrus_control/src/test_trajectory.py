@@ -13,22 +13,22 @@ from control_msgs.msg import JointTrajectoryAction, JointTrajectoryGoal, FollowJ
 class Leg:
     def __init__(self, leg_name):
         self.name = leg_name
-        self.hip = Joint('joint_back_right_hip')
-        self.upperleg = Joint('joint_back_right_upperleg')
-        self.lowerleg = Joint('joint_back_right_lowerleg')
+        self.hip = Joint('joint_' + self.name + '_hip')
+        self.upperleg = Joint('joint_' + self.name + '_upperleg')
+        self.lowerleg = Joint('joint_' + self.name + '_lowerleg')
 
-        self.jta = actionlib.SimpleActionClient('/quadrus/leg_back_right_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
+        self.jta = actionlib.SimpleActionClient('/quadrus/leg_' + self.name + '_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
         rospy.loginfo('Waiting for joint trajectory action')
         self.jta.wait_for_server()
         rospy.loginfo('Found joint trajectory action')
 
     def move_leg(self, angles):
         goal = FollowJointTrajectoryGoal()
-        goal.trajectory.joint_names = ['joint_back_right_hip', 'joint_back_right_upperleg', 'joint_back_right_lowerleg']
+        goal.trajectory.joint_names = ['joint_' + self.name + '_hip', 'joint_' + self.name + '_upperleg', 'joint_' + self.name + '_lowerleg']
         
         point = JointTrajectoryPoint()
         point.positions = angles
-        point.time_from_start = rospy.Duration(1)
+        point.time_from_start = rospy.Duration(0.5)
         goal.trajectory.points.append(point)
         self.jta.send_goal_and_wait(goal)
 
@@ -38,11 +38,11 @@ class Joint:
 
 
 def main():
-    leg = Leg('back_right_leg')
-    leg.move_leg([0, -1, 0])
-    leg.move_leg([0, -1, 1])
-    leg.move_leg([0, 0, 0])
-
+    legs = [Leg('back_right')]
+    legs[0].move_leg([0, 0, 0])
+    legs[0].move_leg([0, -0.5, -0.2])
+    legs[0].move_leg([0, -0.6, 0.2])
+    legs[0].move_leg([0, 0, 0])
 
 if __name__ == '__main__':
     rospy.init_node('joint_position_tester')

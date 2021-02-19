@@ -13,3 +13,5 @@ sudo apt-get install ros-noetic-ros-controllers
 
 <!-- UpperLeg -->
 			
+
+Hardware interface

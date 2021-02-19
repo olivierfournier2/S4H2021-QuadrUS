@@ -1,5 +1,9 @@
 <launch>
 
+   <!-- Load the URDF into the ROS Parameter Server -->
+   <param name="robot_description" 
+      command="xacro --inorder '$(find simulation)/robot_description/quadrus.xacro'" />
+
    <!-- values passed by command line input -->
    <arg name="paused" default="false"/>
    <arg name="use_sim_time" default="true"/>
@@ -16,13 +20,9 @@
       <arg name="headless" value="$(arg headless)"/>
    </include>
    
-   <!-- Load the URDF into the ROS Parameter Server -->
-   <param name="robot_description" 
-      command="xacro --inorder '$(find simulation)/robot_description/quadrus.xacro'" />
-
    <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
-      args="-file $(find simulation)/robot_description/quadrus.urdf -urdf -model quadrus" />
+      args="-urdf -model quadrus -param robot_description" />
 
 </launch>
    
