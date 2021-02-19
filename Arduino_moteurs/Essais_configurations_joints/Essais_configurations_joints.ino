@@ -38,13 +38,17 @@ void deplacement_fluide(int angle_actuel, int angle_voulu, int moteur) {
   if (angle_voulu > angle_actuel){
     for (int i = angleToPulse(angle_actuel) ; i <= angleToPulse(angle_voulu) ; i++){
       driver.writeMicroseconds(moteur,i);
-      delay(1);
+      if (i % 1 == 0){
+        delay(1);
+      }
     }
   }
   else if (angle_voulu < angle_actuel){
     for (int i = angleToPulse(angle_actuel); i >= angleToPulse(angle_voulu) ; i--){
       driver.writeMicroseconds(moteur,i);
-      delay(1);
+      if (i % 1 == 0){
+        delay(1);
+      }
     }
   }
   return angle_voulu;
