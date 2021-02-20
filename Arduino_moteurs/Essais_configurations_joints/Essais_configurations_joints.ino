@@ -12,7 +12,7 @@ int actual_angle_0 = 135;
 int actual_angle_1 = 135;
 int actual_angle_2 = 135;
 
-int vitesse = 1;
+int vitesse = 5;
 int tempsEntrePulse = 1;
 
 void setup() {
@@ -59,14 +59,14 @@ int deplacement_fluide(int angle_actuel, int angle_voulu, int moteur) {
 
 
 void loop() {
-  actual_angle_1 = deplacement_fluide(actual_angle_1, 180, 1);
+  actual_angle_0 = deplacement_fluide(actual_angle_0, 0, 0);
   
-  actual_angle_2 = deplacement_fluide(angleToPulse(actual_angle_2), angleToPulse(90), 2);
+  actual_angle_1 = deplacement_fluide(actual_angle_1, 0, 1);
   
 
-  actual_angle_1 = deplacement_fluide(angleToPulse(actual_angle_1), angleToPulse(135), 1);
+  actual_angle_0 = deplacement_fluide(actual_angle_0, 270, 0);
   
-  actual_angle_2 = deplacement_fluide(angleToPulse(actual_angle_2), angleToPulse(135), 2);
+  actual_angle_1 = deplacement_fluide(actual_angle_1, 270, 1);
   
 
   /*driver.writeMicroseconds(0,angleToPulse(135));
