@@ -12,6 +12,9 @@ int actual_angle_0 = 135;
 int actual_angle_1 = 135;
 int actual_angle_2 = 135;
 
+int vitesse = 1;
+int tempsEntrePulse = 1;
+
 void setup() {
   Serial.begin(9600);
   Serial.println("Premier essai de configuration de joints");
@@ -34,20 +37,20 @@ int angleToPulse(int ang) {
 }
 
 
-void deplacement_fluide(int angle_actuel, int angle_voulu, int moteur) { 
+int deplacement_fluide(int angle_actuel, int angle_voulu, int moteur) { 
   if (angle_voulu > angle_actuel){
     for (int i = angleToPulse(angle_actuel) ; i <= angleToPulse(angle_voulu) ; i++){
       driver.writeMicroseconds(moteur,i);
-      if (i % 1 == 0){
-        delay(1);
+      if (i % vitesse == 0){
+        delay(tempsEntrePulse);
       }
     }
   }
   else if (angle_voulu < angle_actuel){
     for (int i = angleToPulse(angle_actuel); i >= angleToPulse(angle_voulu) ; i--){
       driver.writeMicroseconds(moteur,i);
-      if (i % 1 == 0){
-        delay(1);
+      if (i % vitesse == 0){
+        delay(tempsEntrePulse);
       }
     }
   }
@@ -56,8 +59,6 @@ void deplacement_fluide(int angle_actuel, int angle_voulu, int moteur) {
 
 
 void loop() {
-  
-  Serial.println(driver.getPWM(1));
   actual_angle_1 = deplacement_fluide(actual_angle_1, 180, 1);
   
   actual_angle_2 = deplacement_fluide(angleToPulse(actual_angle_2), angleToPulse(90), 2);
