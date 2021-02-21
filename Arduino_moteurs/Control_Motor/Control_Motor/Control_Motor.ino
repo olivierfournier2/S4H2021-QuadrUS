@@ -1,6 +1,14 @@
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
+#include <ros.h>
+#include <std_msgs/String.h>
+#include <std_msgs/MultiArrayLayout.h>
+#include <std_msgs/MultiArrayDimension.h>
+#include <std_msgs/UInt16MultiArray.h>
 
+//Node config
+ros::NodeHandle node_handle;
+std_msgs::UInt16MultiArray motor_msg;
 
 Adafruit_PWMServoDriver driver = Adafruit_PWMServoDriver();
 
@@ -15,18 +23,6 @@ int actualPulse[12] = {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 150
 //Moteurs :                        M0                    M1                    M2                   M3                   M4                     M5                    M6                  M7                     M8                  M9                     M10                  M11
 int jointLimit[12][2] = { {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX} };    // En pulse
 int pulseInterval = 1;
-
-void setup() {
-  Serial.begin(9600);
-  Serial.println("Premier essai de configuration de joints");
-
-  driver.begin();
-  driver.setOscillatorFrequency(27000000);
-  driver.setPWMFreq(SERVO_FREQ);
-
-  
-  yield();
-}
 
 
 //Transform angle to pulse
@@ -108,19 +104,42 @@ void motorControl(int pulseCommand[12]) {
       } 
   }
 
+void subscriberCallback(const std_msgs::UInt16MultiArray& motor_msg) {
+  speedSelection(1);
+  int ros_motor_commands[12] = {motor_msg.data[1], motor_msg.data[2], motor_msg.data[3], motor_msg.data[4], motor_msg.data[5], motor_msg.data[6], motor_msg.data[7], 1500, 1500, 1500, 1500, 1500};
+  motorControl(ros_motor_commands);
+}
+
+ros::Subscriber<std_msgs::UInt16MultiArray> motor_subscriber("motor_command", &subscriberCallback);
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Premier essai de configuration de joints");
+
+  driver.begin();
+  driver.setOscillatorFrequency(27000000);
+  driver.setPWMFreq(SERVO_FREQ);
+
+  node_handle.initNode();
+  node_handle.subscribe(motor_subscriber);
+  yield();
+}
 
 void loop() {
-  speedSelection(2);
+  //speedSelection(2);
 
-  int pulseCommand1 [12] = {700, 1300, 2200, 1000, 1800, 2000, 900, 2000, 2000, 2000, 2000, 2000};
+  //int pulseCommand1 [12] = {700, 1300, 2200, 1000, 1800, 2000, 900, 2000, 2000, 2000, 2000, 2000};
   //int pulseCommand1 [12] = {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};
   
-  motorControl(pulseCommand1);
+  //motorControl(pulseCommand1);
 
-  speedSelection(2);
+  //speedSelection(2);
 
-  int pulseCommand2 [12] = {2300, 1000, 1200, 700, 600, 1500, 2200, 1000, 1000, 1000, 1000, 1000};
+  //int pulseCommand2 [12] = {2300, 1000, 1200, 700, 600, 1500, 2200, 1000, 1000, 1000, 1000, 1000};
   
-  motorControl(pulseCommand2);
+  //motorControl(pulseCommand2);
+
+  node_handle.spinOnce();
+  delay(100);
 
 }
