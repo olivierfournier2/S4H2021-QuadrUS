@@ -15,7 +15,6 @@ int actualPulse[12] = {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 150
 //Moteurs :                        M0                    M1                    M2                   M3                   M4                     M5                    M6                  M7                     M8                  M9                     M10                  M11
 int jointLimit[12][2] = { {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX} };    // En pulse
 int pulseInterval = 1;
-int timeBetweenPulse = 1;
 
 void setup() {
   Serial.begin(9600);
@@ -95,9 +94,10 @@ void motorControl(int pulseCommand[12]) {
 
 
 void loop() {
-  speedSelection(1);
+  speedSelection(2);
 
-  int pulseCommand1 [12] = {700, 2000, 1800, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000};
+  //int pulseCommand1 [12] = {700, 2000, 1800, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000};
+  int pulseCommand1 [12] = {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};
   
   motorControl(pulseCommand1);
 
@@ -105,6 +105,6 @@ void loop() {
 
   int pulseCommand2 [12] = {2300, 1000, 1200, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000};
   
-  motorControl(pulseCommand2);
+  //motorControl(pulseCommand2);
 
 }
