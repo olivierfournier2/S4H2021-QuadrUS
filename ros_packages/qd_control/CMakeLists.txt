@@ -8,6 +8,7 @@ project(qd_control)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  roscpp
   controller_manager
   joint_state_controller
   robot_state_publisher
@@ -113,10 +114,13 @@ catkin_package(
 ## Build ##
 ###########
 
+add_executable(qd_hw_interface src/qd_hw_interface.cpp)
+target_link_libraries(qd_hw_interface ${catkin_LIBRARIES})
+
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -204,3 +208,5 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+

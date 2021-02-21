@@ -10,8 +10,3 @@ sudo apt-get install ros-noetic-ros-controllers
 		<child link="base_link"/>
 		<origin xyz="0 0 1"/>
 	</joint>
-
-<!-- UpperLeg -->
-			
-
-Hardware interface

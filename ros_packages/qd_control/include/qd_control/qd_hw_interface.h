@@ -6,12 +6,14 @@
 #include <controller_manager/controller_manager.h>
 #include <boost/scoped_ptr.hpp>
 #include <ros/ros.h>
+#include <std_msgs/String.h>
+#include <std_msgs/Float64.h>
 
-class MyRobot : public hardware_interface::RobotHW 
+class Quadrus : public hardware_interface::RobotHW 
 {
     public:
-        MyRobot(ros::NodeHandle& nh);                                                                   //Constructor
-        ~MyRobot();                                                                                     //Destructor
+        Quadrus(ros::NodeHandle& nh);                                                                   //Constructor
+        ~Quadrus();                                                                                     //Destructor
         void init();                                                                                    //define all joint handle, joint's interfaces and joint limits interfaces
         void update(const ros::TimerEvent& e);                                                          //control loop()
         void read();                                                                                    //reading joint sensor data
@@ -25,14 +27,16 @@ class MyRobot : public hardware_interface::RobotHW
         joint_limits_interface::JointLimits limits;
         joint_limits_interface::PositionJointSaturationInterface positionJointSaturationInterface;
         
-        double joint_position_[3];
-        double joint_velocity_[3];
-        double joint_effort_[3];
-        double joint_effort_command_[2];
-        double joint_position_command_;
+        const static int jnt_nb = 1;
+        double pos[jnt_nb];
+        double vel[jnt_nb];
+        double eff[jnt_nb];
+        double cmd[jnt_nb];
+
+        ros::Publisher position_pub;
         
         ros::NodeHandle nh_;
-        ros::Timer my_control_loop_;
+        ros::Timer qd_control_loop_;
         ros::Duration elapsed_time_;
         double loop_hz_;
         boost::shared_ptr<controller_manager::ControllerManager> controller_manager_;

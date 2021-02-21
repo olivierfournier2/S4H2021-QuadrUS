@@ -1,20 +1,14 @@
 <launch>
 
   <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam file="$(find qd_control)/config/qd_trajectory.yaml" command="load"/>
-  
-  <param name="robot_description" command="cat $(find qd_simulation)/robot_description/quadrus.urdf"/>
-  
+  <rosparam file="$(find qd_control)/config/qd_control_test.yaml" command="load"/>
+
+  <node name="QuadrusHardwareInterface" pkg="qd_control" type="qd_hw_interface" output="screen"/>
+
   <!-- load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" ns="/quadrus" args="
-      leg_back_right_controller
-      joint_state_controller"/>
-
-  <!-- convert joint states to TF transforms for rviz, etc -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
-  respawn="false" output="screen">
-    <remap from="/joint_states" to="/quadrus/joint_states"/>
-  </node>
+    output="screen" args="
+      /quadrus/joint1_position_controller
+      /quadrus/joint_state_controller"/>
 
 </launch>
