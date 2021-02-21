@@ -1,6 +1,7 @@
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 
+
 Adafruit_PWMServoDriver driver = Adafruit_PWMServoDriver();
 
 #define PULSEMIN 555
@@ -13,7 +14,7 @@ int actualPulse[12] = {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 150
 
 //Moteurs :                        M0                    M1                    M2                   M3                   M4                     M5                    M6                  M7                     M8                  M9                     M10                  M11
 int jointLimit[12][2] = { {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX} };    // En pulse
-int delayInterval = 1;
+int pulseInterval = 1;
 int timeBetweenPulse = 1;
 
 void setup() {
@@ -40,28 +41,23 @@ int angleToPulse(int ang) {
 void speedSelection(int desiredSpeed) {
     switch (desiredSpeed) {
     case 1 : 
-      timeBetweenPulse = 3;
-      delayInterval = 1;
+      pulseInterval = 1;
       break;
       
     case 2 : 
-      timeBetweenPulse = 2;
-      delayInterval = 1;
+      pulseInterval = 5;
       break;
 
     case 3 : 
-      timeBetweenPulse = 1;
-      delayInterval = 1;
+      pulseInterval = 10;
       break;
 
     case 4 : 
-      timeBetweenPulse = 1;
-      delayInterval = 5;
+      pulseInterval = 15;
       break;
 
     case 5 : 
-      timeBetweenPulse = 1;
-      delayInterval = 10;
+      pulseInterval = 20;
       break;
       
     
@@ -80,12 +76,12 @@ void motorControl(int pulseCommand[12]) {
         
         for (int i = 0; i < 12 ; i++){
           if (pulseCommand[i] > actualPulse[i] && actualPulse[i] < jointLimit[i][1]){
-              actualPulse[i] += delayInterval;
+              actualPulse[i] += pulseInterval;
               driver.writeMicroseconds(i,actualPulse[i]);
             }
 
           if (pulseCommand[i] < actualPulse[i] && actualPulse[i] > jointLimit[i][0]){
-              actualPulse[i] -= delayInterval;
+              actualPulse[i] -= pulseInterval;
               driver.writeMicroseconds(i,actualPulse[i]);
             }
 
@@ -94,26 +90,20 @@ void motorControl(int pulseCommand[12]) {
             stop = false;
           }
         }
-        
-        /*if (pulseCounter % delayInterval == 0){
-          delay(timeBetweenPulse);
-        }*/
-          
-        //pulseCounter += 1;
       } 
   }
 
 
 void loop() {
-  speedSelection(3);
+  speedSelection(1);
 
-  int pulseCommand1 [12] = {700, 2000, 1800, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};
+  int pulseCommand1 [12] = {700, 2000, 1800, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000};
   
   motorControl(pulseCommand1);
 
-  speedSelection(4);
+  speedSelection(3);
 
-  int pulseCommand2 [12] = {2300, 1000, 1200, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};
+  int pulseCommand2 [12] = {2300, 1000, 1200, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000};
   
   motorControl(pulseCommand2);
 
