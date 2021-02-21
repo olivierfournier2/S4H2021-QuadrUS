@@ -68,25 +68,41 @@ void speedSelection(int desiredSpeed) {
 // Use angleToPulse() function to populate array
 void motorControl(int pulseCommand[12]) {
     bool stop = false;
-    //int pulseCounter = 1;
+    int lastStep = 10000;
     
     while(stop == false) {
         stop = true;
         
         for (int i = 0; i < 12 ; i++){
           if (pulseCommand[i] > actualPulse[i] && actualPulse[i] < jointLimit[i][1]){
-              actualPulse[i] += pulseInterval;
+              lastStep = pulseCommand[i] - actualPulse[i];
+              
+              if ( lastStep < pulseInterval) {
+                actualPulse[i] += lastStep;
+              } 
+              else {
+                actualPulse[i] += pulseInterval;
+              }
+                
               driver.writeMicroseconds(i,actualPulse[i]);
             }
 
           if (pulseCommand[i] < actualPulse[i] && actualPulse[i] > jointLimit[i][0]){
-              actualPulse[i] -= pulseInterval;
+              lastStep = actualPulse[i] - pulseCommand[i];
+              
+              if ( lastStep < pulseInterval) {
+                actualPulse[i] -= lastStep;
+              } 
+              else {
+                actualPulse[i] -= pulseInterval;
+              }
+              
               driver.writeMicroseconds(i,actualPulse[i]);
             }
 
 
-            if (actualPulse[i] < pulseCommand[i] && actualPulse[i] > jointLimit[i][0] && actualPulse[i] < jointLimit[i][1]) {
-            stop = false;
+            if (actualPulse[i] != pulseCommand[i] && actualPulse[i] > jointLimit[i][0] && actualPulse[i] < jointLimit[i][1]) {
+              stop = false;
           }
         }
       } 
@@ -96,15 +112,15 @@ void motorControl(int pulseCommand[12]) {
 void loop() {
   speedSelection(2);
 
-  //int pulseCommand1 [12] = {700, 2000, 1800, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000};
-  int pulseCommand1 [12] = {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};
+  int pulseCommand1 [12] = {700, 1300, 2200, 1000, 1800, 2000, 900, 2000, 2000, 2000, 2000, 2000};
+  //int pulseCommand1 [12] = {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};
   
   motorControl(pulseCommand1);
 
-  speedSelection(3);
+  speedSelection(2);
 
-  int pulseCommand2 [12] = {2300, 1000, 1200, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000};
+  int pulseCommand2 [12] = {2300, 1000, 1200, 700, 600, 1500, 2200, 1000, 1000, 1000, 1000, 1000};
   
-  //motorControl(pulseCommand2);
+  motorControl(pulseCommand2);
 
 }
