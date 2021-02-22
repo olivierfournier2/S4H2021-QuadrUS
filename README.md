@@ -1,6 +1,5 @@
 # S4H2021-QuadrUS
 
-
 ## System requirements
 - Ubuntu 20.04 LTS
 
