@@ -11,14 +11,19 @@ ros::NodeHandle node_handle;
 std_msgs::UInt16MultiArray motor_msg;
 
 Adafruit_PWMServoDriver driver = Adafruit_PWMServoDriver();
+int angleToPulse(int ang);
+void motorControl(int pulseCommand[12]);
+void speedSelection(int desiredSpeed);
+
 
 #define PULSEMIN 555
 #define PULSEMAX 2395
 
 #define SERVO_FREQ 60
 
-//Moteurs :              M0    M1    M2    M3    M4    M5    M6    M7    M8    M9   M10   M11
-int currentPulse[12] = {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};   // Position initiale en pulse
+//  MX: hanche/femur/tibia - left/right - front/rear    1475 pulses = 135 degrés
+//Moteurs :             M0:H-L-F  M1:F-L-F  M2:T-L-F  M3:H-L-R  M4:F-L-R  M5:T-L-R  M6:H-R-F  M7:F-R-F  M8:T-R-F  M9:H-R-R  M10:F-R-R  M11:T-R-R
+int currentPulse[12] = {1475,     1475,     1475,     1475,     1475,     1475,     1475,     1475,     1475,     1475,     1475,      1475};   // Position initiale en pulse
 
 //Moteurs :                        M0                    M1                    M2                   M3                   M4                     M5                    M6                  M7                     M8                  M9                     M10                  M11
 int jointLimit[12][2] = { {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX} };    // En pulse
@@ -131,16 +136,20 @@ void setup() {
   driver.setOscillatorFrequency(27000000);
   driver.setPWMFreq(SERVO_FREQ);
 
+  for(int i = 0; i < 12; i++){
+      driver.writeMicroseconds(i, 1475);
+    }
+
   node_handle.initNode();
   node_handle.subscribe(motor_subscriber);
   yield();
 }
 
 void loop() {
-  speedSelection(1);
+  
+  /*speedSelection(1);
 
   int pulseCommand1 [12] = {700, 1300, 2200, 1000, 1800, 2000, 900, 2000, 2000, 2000, 2000, 2000};
-  //int pulseCommand1 [12] = {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};
   
   motorControl(pulseCommand1);
 
@@ -148,7 +157,7 @@ void loop() {
 
   int pulseCommand2 [12] = {2300, 1000, 1200, 700, 600, 1500, 2200, 1000, 1000, 1000, 1000, 1000};
   
-  motorControl(pulseCommand2);
+  motorControl(pulseCommand2);*/
 
   //node_handle.spinOnce();
   //delay(100);
