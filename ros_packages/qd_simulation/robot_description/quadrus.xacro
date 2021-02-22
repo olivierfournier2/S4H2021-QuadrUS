@@ -4,9 +4,9 @@
 	<!-- Constants for robot dimensions, mass and inertia-->
 	<xacro:property name="PI" value="3.1415926535897931"/>
 	
-	<xacro:property name="hip_offset" value="2" /> 
-	<xacro:property name="upperleg_length" value="1" /> 
-	<xacro:property name="lowerleg_length" value="1" />
+	<xacro:property name="hip_offset" value="0.04" /> 
+	<xacro:property name="upperleg_length" value="0.150" /> 
+	<xacro:property name="lowerleg_length" value="0.150" />
 
 	<xacro:property name="rear_hip_long_offset" value="-0.12" /> 
 	<xacro:property name="hip_long_center_dist" value="0.24" />
@@ -14,7 +14,18 @@
 	
 
 	<!-- Import Rviz colors -->
-	<xacro:include filename="$(find simulation)/robot_description/materials.xacro" />
+	<xacro:include filename="$(find qd_simulation)/robot_description/materials.xacro" />
+	<!-- Import all Gazebo-customization elements, including Gazebo colors -->
+	<xacro:include filename="$(find qd_simulation)/robot_description/quadrus.gazebo" />
+
+	<!-- Used for fixing robot to Gazebo 'base_link' -->
+	<link name="world"/>
+
+	<joint name="fixed" type="fixed">
+		<parent link="world"/>
+		<child link="base_link"/>
+		<origin xyz="0 0 1"/>
+	</joint>
 
 	<link name="base_link">
 		<visual>
@@ -115,7 +126,7 @@
 				<visual>
 					<origin xyz="-0.075 0 0" rpy="0 0 0" />
 					<geometry>
-						<box size="0.18 0.03 0.03"/>
+						<box size="${upperleg_length+0.03} 0.03 0.03"/>
 					</geometry>
 					<material name="blue"/>
 				</visual>
@@ -123,7 +134,7 @@
 				<collision>
 					<origin xyz="-0.075 0 0" rpy="0 0 0" />
 					<geometry>
-						<box size="0.18 0.03 0.03"/>
+						<box size="${upperleg_length+0.03}  0.03 0.03"/>
 					</geometry>
 				</collision>
 
@@ -139,11 +150,11 @@
 				<child link="link_${long}_${lat}_upperleg"/>
 
 				<xacro:if value="${lat == 'left'}">
-					<origin xyz="0 0.04 0" rpy="0 -0.7854 0" /> 
+					<origin xyz="0 ${hip_offset} 0" rpy="0 -0.7854 0" /> 
 				</xacro:if>
 
 				<xacro:if value="${lat == 'right'}">
-					<origin xyz="0 -0.04 0" rpy="0 -0.7854 0" /> 
+					<origin xyz="0 ${-hip_offset} 0" rpy="0 -0.7854 0" /> 
 				</xacro:if>
 
 				<axis xyz="0 1 0" />
@@ -169,7 +180,7 @@
 				<visual>
 					<origin xyz="0.075 0 0" rpy="0 0 0" />
 					<geometry>
-						<box size="0.18 0.03 0.03"/>
+						<box size="${lowerleg_length+0.03} 0.03 0.03"/>
 					</geometry>
 					<material name="blue"/>
 				</visual>
@@ -177,7 +188,7 @@
 				<collision>
 					<origin xyz="0.075 0 0" rpy="0 0 0" />
 					<geometry>
-						<box size="0.18 0.03 0.03"/>
+						<box size="${lowerleg_length+0.03} 0.03 0.03"/>
 					</geometry>
 				</collision>
 
@@ -247,11 +258,7 @@
 	</xacro:macro>
 
 	<xacro:quadrus_leg long="back" lat="right"/>
-	<xacro:quadrus_leg long="back" lat="left"/>
-	<xacro:quadrus_leg long="front" lat="right"/>
-	<xacro:quadrus_leg long="front" lat="left"/>
 
-	<!-- Import all Gazebo-customization elements, including Gazebo colors -->
-	<xacro:include filename="$(find simulation)/robot_description/quadrus.gazebo" />
+
 
 </robot>
