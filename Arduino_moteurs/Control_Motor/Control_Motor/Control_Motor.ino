@@ -17,11 +17,12 @@ Adafruit_PWMServoDriver driver = Adafruit_PWMServoDriver();
 
 #define SERVO_FREQ 60
 
-//Moteurs :             M0    M1    M2    M3    M4    M5    M6    M7    M8    M9   M10  M11
-int actualPulse[12] = {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};   // Position initiale en pulse
+//Moteurs :              M0    M1    M2    M3    M4    M5    M6    M7    M8    M9   M10   M11
+int currentPulse[12] = {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};   // Position initiale en pulse
 
 //Moteurs :                        M0                    M1                    M2                   M3                   M4                     M5                    M6                  M7                     M8                  M9                     M10                  M11
 int jointLimit[12][2] = { {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX} };    // En pulse
+
 int pulseInterval = 1;
 
 
@@ -64,42 +65,52 @@ void speedSelection(int desiredSpeed) {
 // Use angleToPulse() function to populate array
 void motorControl(int pulseCommand[12]) {
     bool stop = false;
-    int lastStep = 10000;
+    int lastStep = 0;
+
+    for (int i = 0; i < 12; i++){
+        if(pulseCommand[i] > jointLimit[i][1]){
+            pulseCommand[i] = jointLimit[i][1];
+          }
+        else if(pulseCommand[i] < jointLimit[i][0]){
+            pulseCommand[i] = jointLimit[i][0];
+          }
+      }
     
     while(stop == false) {
         stop = true;
-        
+
         for (int i = 0; i < 12 ; i++){
-          if (pulseCommand[i] > actualPulse[i] && actualPulse[i] < jointLimit[i][1]){
-              lastStep = pulseCommand[i] - actualPulse[i];
+          if (pulseCommand[i] > currentPulse[i]){
+              lastStep = pulseCommand[i] - currentPulse[i];
               
               if ( lastStep < pulseInterval) {
-                actualPulse[i] += lastStep;
+                currentPulse[i] += lastStep;
               } 
               else {
-                actualPulse[i] += pulseInterval;
+                currentPulse[i] += pulseInterval;
               }
                 
-              driver.writeMicroseconds(i,actualPulse[i]);
+              driver.writeMicroseconds(i,currentPulse[i]);
             }
-
-          if (pulseCommand[i] < actualPulse[i] && actualPulse[i] > jointLimit[i][0]){
-              lastStep = actualPulse[i] - pulseCommand[i];
+          else if (pulseCommand[i] < currentPulse[i]){
+              lastStep = currentPulse[i] - pulseCommand[i];
               
               if ( lastStep < pulseInterval) {
-                actualPulse[i] -= lastStep;
+                currentPulse[i] -= lastStep;
               } 
               else {
-                actualPulse[i] -= pulseInterval;
+                currentPulse[i] -= pulseInterval;
               }
               
-              driver.writeMicroseconds(i,actualPulse[i]);
+              driver.writeMicroseconds(i,currentPulse[i]);
+            }
+          else {
+              delayMicroseconds(1000);
             }
 
-
-            if (actualPulse[i] != pulseCommand[i] && actualPulse[i] > jointLimit[i][0] && actualPulse[i] < jointLimit[i][1]) {
+          if (currentPulse[i] != pulseCommand[i]) {
               stop = false;
-          }
+            }
         }
       } 
   }
@@ -126,20 +137,20 @@ void setup() {
 }
 
 void loop() {
-  //speedSelection(2);
+  speedSelection(1);
 
-  //int pulseCommand1 [12] = {700, 1300, 2200, 1000, 1800, 2000, 900, 2000, 2000, 2000, 2000, 2000};
+  int pulseCommand1 [12] = {700, 1300, 2200, 1000, 1800, 2000, 900, 2000, 2000, 2000, 2000, 2000};
   //int pulseCommand1 [12] = {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};
   
-  //motorControl(pulseCommand1);
+  motorControl(pulseCommand1);
 
-  //speedSelection(2);
+  speedSelection(1);
 
-  //int pulseCommand2 [12] = {2300, 1000, 1200, 700, 600, 1500, 2200, 1000, 1000, 1000, 1000, 1000};
+  int pulseCommand2 [12] = {2300, 1000, 1200, 700, 600, 1500, 2200, 1000, 1000, 1000, 1000, 1000};
   
-  //motorControl(pulseCommand2);
+  motorControl(pulseCommand2);
 
-  node_handle.spinOnce();
-  delay(100);
+  //node_handle.spinOnce();
+  //delay(100);
 
 }
