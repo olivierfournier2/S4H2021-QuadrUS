@@ -28,6 +28,24 @@
   <material name="white">
     <color rgba="1.0 1.0 1.0 1.0"/>
   </material>
+  <!-- ros_control plugin -->
+  <gazebo>
+    <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
+      <robotNamespace>/quadrus</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+  <gazebo reference="base_link">
+    <material>Gazebo/Blue</material>
+    <pose>0 0 1 0 0 0 </pose>
+  </gazebo>
+  <!-- Used for fixing robot to Gazebo 'base_link' -->
+  <link name="world"/>
+  <joint name="fixed" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 1"/>
+  </joint>
   <link name="base_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -633,17 +651,6 @@
   </joint>
   <gazebo reference="link_front_left_paw">
     <material>Gazebo/Green</material>
-  </gazebo>
-  <!-- ros_control plugin -->
-  <gazebo>
-    <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
-      <robotNamespace>/quadrus</robotNamespace>
-      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-    </plugin>
-  </gazebo>
-  <gazebo reference="base_link">
-    <material>Gazebo/Blue</material>
-    <pose>0 0 1 0 0 0 </pose>
   </gazebo>
 </robot>
 
