@@ -6,6 +6,13 @@
 ## ROS installation (Development environment)
 - ROS Noetic Ninjemys:  [Installation documentation](http://wiki.ros.org/noetic/Installation/Ubuntu)
 - Gazebo/Rviz : Choose Desktop-Full Install option when installing ROS
+- Install Terminator
+
+    ```
+    sudo apt-get update
+    ```
+    ```
+    sudo apt-get install terminator
 
 ## To set up this ROS project
 - Create and initialize a catkin workspace
@@ -42,17 +49,19 @@
 At this point, the ROS environment should be set up and ready to work with.
 
 ## Launching 2D and 3D simulations
-- Start by launching roscore, the main ros node
+- Start by launching terminator and splitting into two terminals (T1 and T2)
+
+- Launch roscore, the main ros node in T1:
     ```
     roscore 
     ```
     
-- To view the robot model in Rviz, execute the following command : 
+- To view the robot model in Rviz, execute the following command in T2: 
     ```
     roslaunch simulation quadrus_rviz.launch
     ```
 
-- To start the dynamic simulation in Gazebo, execute the following command:
+- To start the dynamic simulation in Gazebo, execute the following command in T2:
     ```
     roslaunch simulation quadrus_gazebo.launch
     ```
