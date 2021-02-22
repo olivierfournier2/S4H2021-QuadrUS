@@ -14,7 +14,10 @@ Adafruit_PWMServoDriver driver = Adafruit_PWMServoDriver();
 int angleToPulse(int ang);
 void motorControl(int pulseCommand[12]);
 void speedSelection(int desiredSpeed);
+void subscriberCallback(const std_msgs::UInt16MultiArray& motor_msg); //Fonction called with each SpinOnce()
 
+//Setup the topic the node is subscribed to
+ros::Subscriber<std_msgs::UInt16MultiArray> motor_subscriber("motor_command", &subscriberCallback);
 
 #define PULSEMIN 555
 #define PULSEMAX 2395
@@ -121,12 +124,11 @@ void motorControl(int pulseCommand[12]) {
   }
 
 void subscriberCallback(const std_msgs::UInt16MultiArray& motor_msg) {
-  speedSelection(1);
-  int ros_motor_commands[12] = {motor_msg.data[1], motor_msg.data[2], motor_msg.data[3], motor_msg.data[4], motor_msg.data[5], motor_msg.data[6], motor_msg.data[7], 1500, 1500, 1500, 1500, 1500};
+  //speedSelection(1);
+  int ros_motor_commands[12] = {motor_msg.data[1], motor_msg.data[2], motor_msg.data[3], motor_msg.data[4], motor_msg.data[5], 
+  motor_msg.data[6], motor_msg.data[7], motor_msg.data[8], motor_msg.data[9], motor_msg.data[10], motor_msg.data[11], motor_msg.data[12]};
   motorControl(ros_motor_commands);
 }
-
-ros::Subscriber<std_msgs::UInt16MultiArray> motor_subscriber("motor_command", &subscriberCallback);
 
 void setup() {
   Serial.begin(9600);
@@ -159,7 +161,8 @@ void loop() {
   
   motorControl(pulseCommand2);*/
 
-  //node_handle.spinOnce();
-  //delay(100);
+  speedSelection(1);
+  node_handle.spinOnce();
+  delay(100);
 
 }
