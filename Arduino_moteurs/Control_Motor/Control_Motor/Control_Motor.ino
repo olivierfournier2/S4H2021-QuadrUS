@@ -148,21 +148,26 @@ void setup() {
 }
 
 void loop() {
-  
-  /*speedSelection(1);
 
-  int pulseCommand1 [12] = {700, 1300, 2200, 1000, 1800, 2000, 900, 2000, 2000, 2000, 2000, 2000};
-  
-  motorControl(pulseCommand1);
+  // Motors : AVANT : GAUCHE : Hanche, Femur, Tibia; DROIT : Hanche, Femur, Tibia, ARRIERE : GAUCHE : Hanche, Femur, Tibia; DROIT : Hanche, Femur, Tibia, 
+  // Motor #:                     1       2     3               4       5     6                           7     8       9               10    11      12
 
+  int testArray[12] = {1475,     angleToPulse(180),     1475,     angleToPulse(143),     angleToPulse(95),     angleToPulse(120),     angleToPulse(130),     angleToPulse(180),     1475,     angleToPulse(130),     angleToPulse(90),      angleToPulse(120)};
+  
   speedSelection(1);
 
-  int pulseCommand2 [12] = {2300, 1000, 1200, 700, 600, 1500, 2200, 1000, 1000, 1000, 1000, 1000};
+  //int pulseCommand1 [12] = {700, 1300, 2200, 1000, 1800, 2000, 900, 2000, 2000, 2000, 2000, 2000};
   
-  motorControl(pulseCommand2);*/
+  motorControl(testArray);
 
-  speedSelection(1);
-  node_handle.spinOnce();
+  //speedSelection(1);
+
+  //int pulseCommand2 [12] = {2300, 1000, 1200, 700, 600, 1500, 2200, 1000, 1000, 1000, 1000, 1000};
+  
+  //motorControl(pulseCommand2);
+
+  //speedSelection(1);
+  //node_handle.spinOnce();
   delay(100);
 
 }
