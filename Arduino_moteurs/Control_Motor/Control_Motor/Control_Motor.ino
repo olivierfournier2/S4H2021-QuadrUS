@@ -149,7 +149,8 @@ void setup() {
 
 void loop() {
 
-  
+  // Motors : AVANT : GAUCHE : Hanche, Femur, Tibia; DROIT : Hanche, Femur, Tibia, ARRIERE : GAUCHE : Hanche, Femur, Tibia; DROIT : Hanche, Femur, Tibia, 
+  // Motor #:                     1       2     3               4       5     6                           7     8       9               10    11      12
 
   int testArray[12] = {1475,     angleToPulse(180),     1475,     angleToPulse(143),     angleToPulse(95),     angleToPulse(120),     angleToPulse(130),     angleToPulse(180),     1475,     angleToPulse(130),     angleToPulse(90),      angleToPulse(120)};
   
