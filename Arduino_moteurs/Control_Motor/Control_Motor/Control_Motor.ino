@@ -151,7 +151,7 @@ void loop() {
 
   
 
-  int testArray[12] = {1475,     angleToPulse(180),     1475,     angleToPulse(143),     angleToPulse(90),     1475,     angleToPulse(130),     angleToPulse(180),     1475,     angleToPulse(130),     angleToPulse(90),      angleToPulse(130)};   // Position initiale en pulse
+  int testArray[12] = {1475,     angleToPulse(180),     1475,     angleToPulse(143),     angleToPulse(95),     angleToPulse(120),     angleToPulse(130),     angleToPulse(180),     1475,     angleToPulse(130),     angleToPulse(90),      angleToPulse(120)};
   
   speedSelection(1);
 
