@@ -5,8 +5,11 @@
 	path = ros_packages/ros_controllers
 	url = https://github.com/ros-controls/ros_controllers.git
 [submodule "ros_packages/four_wheel_steering_msgs"]
-	url = https://github.com/ros-drivers/four_wheel_steering_msgs
+	path = ros_packages/four_wheel_steering_msgs
+	url = https://github.com/ros-drivers/four_wheel_steering_msgs.git
 [submodule "ros_packages/rosserial"]
-	url = https://github.com/ros-drivers/rosserial
+	path = ros_packages/rosserial
+	url = https://github.com/ros-drivers/rosserial.git
 [submodule "ros_packages/urdf_geometry_parser"]
-	url = https://github.com/ros-controls/urdf_geometry_parser
+	path = ros_packages/urdf_geometry_parser
+	url = https://github.com/ros-controls/urdf_geometry_parser.git
