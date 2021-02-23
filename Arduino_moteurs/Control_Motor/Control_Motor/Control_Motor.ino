@@ -27,6 +27,20 @@ ros::Subscriber<std_msgs::UInt16MultiArray> motor_subscriber("motor_command", &s
 
 #define SERVO_FREQ 60
 
+float compensationArrayMec[12] = { 0.0,  -1.0,  -7.0,
+                                   7.5,   7.0,  -7.0,
+                                  -5.0,   0.0,   0.0,
+                                  -5.0,  -4.0,  -8.0};
+                               
+
+float compensationArrayROS[12] = { 135.0,  225.0,  135.0,
+                                   135.0,   45.0,  135.0,
+                                   135.0,   225.0,   135.0,
+                                   135.0,  45.0,  135.0}; 
+
+float compensationArray[12];
+                                                          
+
 //  MX: hanche/femur/tibia - left/right - front/rear    1475 pulses = 135 degrés
 //Moteurs :             M0:H-L-F  M1:F-L-F  M2:T-L-F  M3:H-L-R  M4:F-L-R  M5:T-L-R  M6:H-R-F  M7:F-R-F  M8:T-R-F  M9:H-R-R  M10:F-R-R  M11:T-R-R
 int currentPulse[12] = {1475,     1475,     1475,     1475,     1475,     1475,     1475,     1475,     1475,     1475,     1475,      1475};   // Position initiale en pulse
@@ -45,7 +59,7 @@ int angleToPulse(float ang) {
 
 //Transform rad angle to pulse
 int radToPulse(float radAng) {
-  int pulse = map(radAng,0 , (3 * PI / 2), PULSEMIN, PULSEMAX);
+  int pulse = map(radAng*100,0 , (3 * PI / 2)*100, PULSEMIN, PULSEMAX);
   return pulse;
 }
 
@@ -134,13 +148,23 @@ void motorControl(int pulseCommand[12]) {
 
 void subscriberCallback(const std_msgs::UInt16MultiArray& motor_msg) {
   //speedSelection(1);
-  int ros_motor_commands[12] = {motor_msg.data[1], motor_msg.data[2], motor_msg.data[3], motor_msg.data[4], motor_msg.data[5], 
+  int command[12];
+  float ros_motor_commands[12] = {motor_msg.data[1], motor_msg.data[2], motor_msg.data[3], motor_msg.data[4], motor_msg.data[5], 
   motor_msg.data[6], motor_msg.data[7], motor_msg.data[8], motor_msg.data[9], motor_msg.data[10], motor_msg.data[11], motor_msg.data[12]};
-  motorControl(ros_motor_commands);
+  
+  float compensated_command[12];
+
+  for(int i = 0; i < 12; i++){
+    compensated_command[i] = compensationArray[i] + ros_motor_commands[i+1];
+    command[i] = radToPulse(compensated_command[i]);
+  };
+  
+  
+  motorControl(command);
 }
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println("Premier essai de configuration de joints");
 
   driver.begin();
@@ -153,30 +177,23 @@ void setup() {
 
   node_handle.initNode();
   node_handle.subscribe(motor_subscriber);
+
+  for (int j = 0; j < 12; j++){
+    compensationArray[j] = (compensationArrayMec[j]+compensationArrayROS[j]) * PI/180;
+  }
+
+  speedSelection(1);
+  
   yield();
 }
 
 void loop() {
+  //Serial.println("Premier essai de configuration de joints");
 
   // Motors : AVANT : GAUCHE : Hanche, Femur, Tibia; DROIT : Hanche, Femur, Tibia, ARRIERE : GAUCHE : Hanche, Femur, Tibia; DROIT : Hanche, Femur, Tibia, 
   // Motor #:                     1       2     3               4       5     6                           7     8       9               10    11      12
 
-  int testArray[12] = {1475,     angleToPulse(180),     1475,     angleToPulse(143),     angleToPulse(95),     angleToPulse(120),     angleToPulse(130),     angleToPulse(180),     1475,     angleToPulse(130),     angleToPulse(90),      angleToPulse(120)};
-  
-  speedSelection(1);
-
-  //int pulseCommand1 [12] = {700, 1300, 2200, 1000, 1800, 2000, 900, 2000, 2000, 2000, 2000, 2000};
-  
-  motorControl(testArray);
-
-  //speedSelection(1);
-
-  //int pulseCommand2 [12] = {2300, 1000, 1200, 700, 600, 1500, 2200, 1000, 1000, 1000, 1000, 1000};
-  
-  //motorControl(pulseCommand2);
-
-  //speedSelection(1);
-  //node_handle.spinOnce();
+  node_handle.spinOnce();
   delay(100);
 
 }
