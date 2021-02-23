@@ -186,7 +186,7 @@ void setup() {
     compensationPulse[j] = radToPulse(compensationArray[j]);
   }
 
-  speedSelection(1);
+  speedSelection(2);
   
   yield();
 }
