@@ -22,7 +22,7 @@ Quadrus::~Quadrus(){
 void Quadrus::init(){
         
     for(int i = 0;i<jnt_nb;i++){
-        
+    
         jsHandle[i] = new hardware_interface::JointStateHandle(("J" + std::to_string(i+1)), &pos[i], &vel[i], &eff[i]);
         joint_state_interface_.registerHandle(*jsHandle[i]);
 

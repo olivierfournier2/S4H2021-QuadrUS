@@ -50,6 +50,9 @@
           output="screen" args="
           /quadrus/joint_state_controller 
           /quadrus/leg_controller_1
+          /quadrus/leg_controller_2
+          /quadrus/leg_controller_3
+          /quadrus/leg_controller_4
           "/>
 
       <!-- Load the ROSSerial node on the OpenCR card-->

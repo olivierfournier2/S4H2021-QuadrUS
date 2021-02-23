@@ -36,9 +36,10 @@ class Leg:
 def main():
     legs = [Leg(1)]
 
-    legs[0].move_leg([0, 0, 0])
-    legs[0].move_leg([0, -0.1, 0])
-    legs[0].move_leg([0, 0, 0])
+    legs[0].move_leg([0, -0.78, 0])
+    legs[0].move_leg([0, -1, 0.5])
+    legs[0].move_leg([0, -1.5, -0.5])
+    legs[0].move_leg([0, -0.78, 0])
 
 if __name__ == '__main__':
     rospy.init_node('joint_position_tester')
