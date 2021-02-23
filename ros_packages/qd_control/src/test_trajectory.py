@@ -37,8 +37,7 @@ def main():
     legs = [Leg(1)]
 
     legs[0].move_leg([0, 0, 0])
-    legs[0].move_leg([0, -0.5, -0.2])
-    legs[0].move_leg([0, -0.6, 0.2])
+    legs[0].move_leg([0, -0.1, 0])
     legs[0].move_leg([0, 0, 0])
 
 if __name__ == '__main__':

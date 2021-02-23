@@ -17,7 +17,7 @@ void speedSelection(int desiredSpeed);
 void subscriberCallback(const std_msgs::UInt16MultiArray& motor_msg); //Fonction called with each SpinOnce()
 
 //Setup the topic the node is subscribed to
-ros::Subscriber<std_msgs::UInt16MultiArray> motor_subscriber("motor_command", &subscriberCallback);
+ros::Subscriber<std_msgs::UInt16MultiArray> motor_subscriber("joint_positions", &subscriberCallback);
 
 #define PULSEMIN 555
 #define PULSEMAX 2395
