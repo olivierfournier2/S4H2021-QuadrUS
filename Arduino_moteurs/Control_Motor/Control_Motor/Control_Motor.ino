@@ -11,13 +11,16 @@ ros::NodeHandle node_handle;
 std_msgs::UInt16MultiArray motor_msg;
 
 Adafruit_PWMServoDriver driver = Adafruit_PWMServoDriver();
-int angleToPulse(int ang);
+int angleToPulse(float ang);
+int radToPulse(float radAng);
 void motorControl(int pulseCommand[12]);
 void speedSelection(int desiredSpeed);
 void subscriberCallback(const std_msgs::UInt16MultiArray& motor_msg); //Fonction called with each SpinOnce()
 
 //Setup the topic the node is subscribed to
 ros::Subscriber<std_msgs::UInt16MultiArray> motor_subscriber("motor_command", &subscriberCallback);
+
+#define PI 3.1415926535897932384626433832795
 
 #define PULSEMIN 555
 #define PULSEMAX 2395
@@ -34,9 +37,15 @@ int jointLimit[12][2] = { {PULSEMIN, PULSEMAX}, {PULSEMIN, PULSEMAX}, {PULSEMIN,
 int pulseInterval = 1;
 
 
-//Transform angle to pulse
-int angleToPulse(int ang) {
+//Transform degree angle to pulse
+int angleToPulse(float ang) {
   int pulse = map(ang, 0, 270, PULSEMIN, PULSEMAX);
+  return pulse;
+}
+
+//Transform rad angle to pulse
+int radToPulse(float radAng) {
+  int pulse = map(radAng,0 , (3 * PI / 2), PULSEMIN, PULSEMAX);
   return pulse;
 }
 
