@@ -19,6 +19,12 @@
       <arg name="use_sim_time" value="$(arg use_sim_time)"/>
       <arg name="headless" value="$(arg headless)"/>
    </include>
+
+   <!-- Convert joint states to TF transforms for rviz -->
+   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+      respawn="false" output="screen">
+         <remap from="/joint_states" to="/quadrus/joint_states"/>
+   </node>
    
    <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 

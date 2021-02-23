@@ -58,8 +58,10 @@
 
 	</link>
 
-	<xacro:macro name="quadrus_leg" params="long lat">
+	<xacro:macro name="quadrus_leg" params="long lat id">
 		<!-- Hip -->
+			<xacro:property name="hip_joint_id" value="J${(id-1)*3+1}"/>
+
 			<link name="link_${long}_${lat}_hip">
 				<visual>
 					<origin xyz="0 0 0" rpy="0 0 0" />
@@ -83,7 +85,7 @@
 
 			</link>
 
-			<joint name="joint_${long}_${lat}_hip" type="continuous">
+			<joint name="${hip_joint_id}" type="continuous">
 				<parent link="base_link"/>
 				<child link="link_${long}_${lat}_hip"/>
 
@@ -108,7 +110,7 @@
 
 			<transmission name="transmission_${long}_${lat}_hip">
 				<type>transmission_interface/SimpleTransmission</type>
-				<joint name="joint_${long}_${lat}_hip">
+				<joint name="${hip_joint_id}">
 					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
 				</joint>
 				<actuator name="motor_${long}_${lat}_hip">
@@ -122,6 +124,8 @@
 			</gazebo>
 		
 		<!-- Upperleg -->
+			<xacro:property name="upperleg_joint_id" value="J${(id-1)*3+2}"/>
+
 			<link name="link_${long}_${lat}_upperleg">
 				<visual>
 					<origin xyz="-0.075 0 0" rpy="0 0 0" />
@@ -145,7 +149,7 @@
 
 			</link>
 
-			<joint name="joint_${long}_${lat}_upperleg" type="continuous">
+			<joint name="${upperleg_joint_id}" type="continuous">
 				<parent link="link_${long}_${lat}_hip"/>
 				<child link="link_${long}_${lat}_upperleg"/>
 
@@ -162,7 +166,7 @@
 
 			<transmission name="transmission_${long}_${lat}_upperleg">
 				<type>transmission_interface/SimpleTransmission</type>
-				<joint name="joint_${long}_${lat}_upperleg">
+				<joint name="${upperleg_joint_id}">
 					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
 				</joint>
 				<actuator name="motor_${long}_${lat}_upperleg">
@@ -176,6 +180,8 @@
 			</gazebo>
 
 		<!-- LowerLeg -->	
+			<xacro:property name="lowerleg_joint_id" value="J${(id-1)*3+3}"/>
+
 			<link name="link_${long}_${lat}_lowerleg">
 				<visual>
 					<origin xyz="0.075 0 0" rpy="0 0 0" />
@@ -199,7 +205,7 @@
 
 			</link>
 
-			<joint name="joint_${long}_${lat}_lowerleg" type="continuous">
+			<joint name="${lowerleg_joint_id}" type="continuous">
 				<parent link="link_${long}_${lat}_upperleg"/>
 				<child link="link_${long}_${lat}_lowerleg"/>
 				<origin xyz="-0.15 0 0" rpy="0 1.5708 0" /> 
@@ -208,7 +214,7 @@
 
 			<transmission name="transmission_${long}_${lat}_lowerleg">
 				<type>transmission_interface/SimpleTransmission</type>
-				<joint name="joint_${long}_${lat}_lowerleg">
+				<joint name="${lowerleg_joint_id}">
 					<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
 				</joint>
 				<actuator name="motor_${long}_${lat}_lowerleg">
@@ -257,7 +263,10 @@
 	
 	</xacro:macro>
 
-	<xacro:quadrus_leg long="back" lat="right"/>
+	<xacro:quadrus_leg long="front" lat="left" id="1"/>
+	<xacro:quadrus_leg long="front" lat="right" id="2"/>
+	<xacro:quadrus_leg long="back" lat="left" id="3"/>
+	<xacro:quadrus_leg long="back" lat="right" id="4"/>
 
 
 
