@@ -1,0 +1,58 @@
+<launch>
+
+    <arg name="mode" default="sim" />
+    <arg name="sim_mode" default="dyn" />
+
+    <!-- SIMULATION MODE-->
+
+    <group if="$(eval arg('mode') == 'sim')">
+
+      <!-- Load joint controller configurations from YAML file to parameter server -->
+      <rosparam file="$(find qd_control)/config/qd_trajectory_sim.yaml" command="load"/>
+
+      <!-- Load the controllers -->
+      <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="/quadrus" args="joint_state_controller leg_controller_1"/>
+
+      <!-- Launch the simulation -->
+      <group if="$(eval arg('sim_mode') == 'dyn')">
+        <include file="$(find qd_simulation)/launch/qd_gazebo.launch"/>
+      </group>
+
+      <group if="$(eval arg('sim_mode') == 'kin')">
+        <include file="$(find qd_simulation)/launch/qd_rviz.launch"/>
+      </group>
+
+    </group>
+
+
+    <!-- HARDWARE MODE -->
+
+    <group if="$(eval arg('mode') == 'hw')">
+
+      <!-- Load the URDF into the ROS Parameter Server -->
+        <param name="robot_description" 
+          command="xacro --inorder '$(find qd_simulation)/robot_description/quadrus.xacro'" />
+
+      <!-- Load joint controller configurations from YAML file to parameter server -->
+      <rosparam file="$(find qd_control)/config/qd_trajectory_hw.yaml" command="load"/>
+      
+      <!-- Launch the custom hardware interface node -->
+      <node name="QuadrusHardwareInterface" pkg="qd_control" type="qd_hw_interface" output="screen"/>
+
+      <!-- Load the controllers -->
+        <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+          output="screen" args="/quadrus/joint_state_controller /quadrus/leg_controller_1"/>
+
+      <!-- Load the ROSSerial node on the OpenCR card-->
+        <node pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen">
+          <param name="port" value="/dev/ttyACM0">
+          <param name="baud" value="115200">
+        </node>
+
+    </group>
+
+
+
+
+</launch>

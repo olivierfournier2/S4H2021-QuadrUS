@@ -1,0 +1,4 @@
+- Add leg controlers to configuration files
+- Simulateous joint commands
+- RosSerial integration
+- RPi setup
