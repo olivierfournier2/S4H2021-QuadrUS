@@ -5,23 +5,22 @@ quadrus:
     publish_rate: 50  
 
   # Trajectory controllers -------------------------------------
-  leg_back_right_controller:
+  leg_controller_1:
     type: "position_controllers/JointTrajectoryController"
     joints:
-      - joint_back_right_hip
-      - joint_back_right_upperleg
-      - joint_back_right_lowerleg
+      - J1
+      - J2
+      - J3
 
     constraints:
       goal_time: 0.0
       stopped_velocity_tolerance: 0.02
-      joint_back_right_hip:
+      J1:
         goal: 0.02
-      joint_back_right_upperleg:
+      J2:
         goal: 0.01                   
-      joint_back_right_lowerleg:
+      J3:
         goal: 0.01                    
-
 
     state_publish_rate:  25     # a optimiser
     action_monitor_rate: 30     # a optimiser      
