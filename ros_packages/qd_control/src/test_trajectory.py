@@ -9,6 +9,7 @@ import trajectory_msgs.msg
 import control_msgs.msg
 from trajectory_msgs.msg import JointTrajectoryPoint
 from control_msgs.msg import JointTrajectoryAction, JointTrajectoryGoal, FollowJointTrajectoryAction, FollowJointTrajectoryGoal
+import threading
 
 class Leg:
     def __init__(self, ID):
@@ -32,15 +33,23 @@ class Leg:
         goal.trajectory.points.append(point)
         self.jta.send_goal_and_wait(goal)
 
+def push_up_sequence(leg_obj):
+    leg_obj.move_leg([0, -0.78, 0])
+    leg_obj.move_leg([0, 0, -1.0])
+    leg_obj.move_leg([0, -0.78, 0])
 
 def main():
-    legs = [Leg(1)]
+    legs = [Leg(1), Leg(2), Leg(3), Leg(4)]
+    threads = []
 
-    legs[0].move_leg([0, -0.78, 0])
-    legs[0].move_leg([0, -1, 0.5])
-    legs[0].move_leg([0, -1.5, -0.5])
-    legs[0].move_leg([0, -0.78, 0])
+    for leg in legs:
+        seq_thread = threading.Thread(target = push_up_sequence, args = (leg,))
+        seq_thread.start()
+        threads.append(seq_thread)
 
+    for thread in threads:
+        thread.join()
+    
 if __name__ == '__main__':
     rospy.init_node('joint_position_tester')
     main()
