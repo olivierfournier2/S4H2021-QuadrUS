@@ -4,3 +4,9 @@
 [submodule "ros_packages/ros_controllers"]
 	path = ros_packages/ros_controllers
 	url = https://github.com/ros-controls/ros_controllers.git
+[submodule "urdf_geometry_parser"]
+	path = urdf_geometry_parser
+	url = https://github.com/ros-controls/urdf_geometry_parser
+[submodule "four_wheel_steering_msgs"]
+	path = four_wheel_steering_msgs
+	url = https://github.com/ros-drivers/four_wheel_steering_msgs
