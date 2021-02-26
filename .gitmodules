@@ -7,3 +7,6 @@
 [submodule "ros_packages/rosserial"]
 	path = ros_packages/rosserial
 	url = https://github.com/ros-drivers/rosserial
+[submodule "ros_packages/four_wheel_steering_msgs"]
+	path = ros_packages/four_wheel_steering_msgs
+	url = https://github.com/ros-drivers/four_wheel_steering_msgs
