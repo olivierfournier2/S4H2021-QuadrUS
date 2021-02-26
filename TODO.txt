@@ -4,4 +4,13 @@
 - RPi 
 
 
-
+ --Antho & Jo --
+ 
+ Ecouter vid avec Prof
+ 	Changer MotorControl en consequence
+ 	
+ Commenter le .h
+ Caractériser les vitesses des moteurs a chaque joint (En parler avec OLI)
+ 
+ Remplacer la OpenCR (lundi en revenant de la relache)
+ Souder les crimps pour tout le filage final
