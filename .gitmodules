@@ -7,3 +7,9 @@
 [submodule "ros_packages/rosserial"]
 	path = ros_packages/rosserial
 	url = https://github.com/ros-drivers/rosserial
+[submodule "ros_packages/four_wheel_steering_msgs"]
+	path = ros_packages/four_wheel_steering_msgs
+	url = https://github.com/ros-drivers/four_wheel_steering_msgs
+[submodule "ros_packages/urdf_geometry_parser"]
+	path = ros_packages/urdf_geometry_parser
+	url = https://github.com/ros-controls/urdf_geometry_parser
