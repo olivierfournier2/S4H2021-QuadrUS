@@ -154,11 +154,11 @@
 				<child link="link_${long}_${lat}_upperleg"/>
 
 				<xacro:if value="${lat == 'left'}">
-					<origin xyz="0 ${hip_offset} 0" rpy="0 -0.7854 0" /> 
+					<origin xyz="0 ${hip_offset} 0" rpy="0 0 0" /> 
 				</xacro:if>
 
 				<xacro:if value="${lat == 'right'}">
-					<origin xyz="0 ${-hip_offset} 0" rpy="0 -0.7854 0" /> 
+					<origin xyz="0 ${-hip_offset} 0" rpy="0 0 0" /> 
 				</xacro:if>
 
 				<axis xyz="0 1 0" />

@@ -12,16 +12,23 @@ quadrus:
       - J2
       - J3
 
-    constraints:
-      goal_time: 0.0
-      stopped_velocity_tolerance: 0.02
-      J1:
-        goal: 0.02
-      J2:
-        goal: 0.01                   
-      J3:
-        goal: 0.01                    
+  leg_controller_2:
+    type: "position_controllers/JointTrajectoryController"
+    joints:
+      - J4
+      - J5
+      - J6
 
-    state_publish_rate:  25     # a optimiser
-    action_monitor_rate: 30     # a optimiser      
-    stop_trajectory_duration: 0
+  leg_controller_3:
+    type: "position_controllers/JointTrajectoryController"
+    joints:
+      - J7
+      - J8
+      - J9
+
+  leg_controller_4:
+    type: "position_controllers/JointTrajectoryController"
+    joints:
+      - J10
+      - J11
+      - J12

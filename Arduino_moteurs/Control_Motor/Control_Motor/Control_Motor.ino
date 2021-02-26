@@ -4,21 +4,24 @@
 #include <std_msgs/String.h>
 #include <std_msgs/MultiArrayLayout.h>
 #include <std_msgs/MultiArrayDimension.h>
-#include <std_msgs/UInt16MultiArray.h>
+#include <std_msgs/Float64MultiArray.h>
 
 //Node config
 ros::NodeHandle node_handle;
-std_msgs::UInt16MultiArray motor_msg;
+std_msgs::Float64MultiArray motor_msg;
 
 Adafruit_PWMServoDriver driver = Adafruit_PWMServoDriver();
 int angleToPulse(float ang);
 int radToPulse(float radAng);
 void motorControl(int pulseCommand[12]);
 void speedSelection(int desiredSpeed);
-void subscriberCallback(const std_msgs::UInt16MultiArray& motor_msg); //Fonction called with each SpinOnce()
+void subscriberCallback(const std_msgs::Float64MultiArray& motor_msg); //Fonction called with each SpinOnce()
 
 //Setup the topic the node is subscribed to
-ros::Subscriber<std_msgs::UInt16MultiArray> motor_subscriber("motor_command", &subscriberCallback);
+ros::Subscriber<std_msgs::Float64MultiArray> motor_subscriber("joint_positions", &subscriberCallback);
+
+
+int compensationPulse[12];
 
 #define PI 3.1415926535897932384626433832795
 
@@ -146,16 +149,16 @@ void motorControl(int pulseCommand[12]) {
       } 
   }
 
-void subscriberCallback(const std_msgs::UInt16MultiArray& motor_msg) {
+void subscriberCallback(const std_msgs::Float64MultiArray& motor_msg) {
   //speedSelection(1);
   int command[12];
-  float ros_motor_commands[12] = {motor_msg.data[1], motor_msg.data[2], motor_msg.data[3], motor_msg.data[4], motor_msg.data[5], 
-  motor_msg.data[6], motor_msg.data[7], motor_msg.data[8], motor_msg.data[9], motor_msg.data[10], motor_msg.data[11], motor_msg.data[12]};
+  float ros_motor_commands[12] = {motor_msg.data[0], motor_msg.data[1], motor_msg.data[2], motor_msg.data[3], motor_msg.data[4], 
+  motor_msg.data[5], motor_msg.data[6], motor_msg.data[7], motor_msg.data[8], motor_msg.data[9], motor_msg.data[10], motor_msg.data[11]};
   
   float compensated_command[12];
 
   for(int i = 0; i < 12; i++){
-    compensated_command[i] = compensationArray[i] + ros_motor_commands[i+1];
+    compensated_command[i] = compensationArray[i] + ros_motor_commands[i];
     command[i] = radToPulse(compensated_command[i]);
   };
   
@@ -180,9 +183,10 @@ void setup() {
 
   for (int j = 0; j < 12; j++){
     compensationArray[j] = (compensationArrayMec[j]+compensationArrayROS[j]) * PI/180;
+    compensationPulse[j] = radToPulse(compensationArray[j]);
   }
 
-  speedSelection(1);
+  speedSelection(2);
   
   yield();
 }
@@ -193,7 +197,86 @@ void loop() {
   // Motors : AVANT : GAUCHE : Hanche, Femur, Tibia; DROIT : Hanche, Femur, Tibia, ARRIERE : GAUCHE : Hanche, Femur, Tibia; DROIT : Hanche, Femur, Tibia, 
   // Motor #:                     1       2     3               4       5     6                           7     8       9               10    11      12
 
-  node_handle.spinOnce();
+  // Mouvement de push up
+  /*
+  speedSelection(2);
+
+  float positionInit[12] = {135,180,135,135,90,135,135,180,135,135,90,135};
+  int pulseInit[12];
+  
+  for (int i = 0; i < 12; i++){
+    pulseInit[i] =  angleToPulse(positionInit[i] + compensationArrayMec[i]);
+  }
+
+  motorControl(pulseInit);
+
+  delay(2000);
+
+  float frontDown[12] = {135,225,90,135,45,180,135,225,90,135,45,180};
+  int pulseFrontDown[12];
+  
+  for (int i = 0; i < 12; i++){
+    pulseFrontDown[i] =  angleToPulse(frontDown[i] + compensationArrayMec[i]);
+  }
+
+  motorControl(pulseFrontDown);
+  */
+
+  // S'assoir et se pencher vers l'avant
+  /*
+  speedSelection(2);
+
+  float positionInit[12] = {135,180,135,135,90,135,135,180,135,135,90,135};
+  int pulseInit[12];
+  
+  for (int i = 0; i < 12; i++){
+    pulseInit[i] =  angleToPulse(positionInit[i] + compensationArrayMec[i]);
+  }
+
+  motorControl(pulseInit);
+
+  delay(1000); // Is at init postion
+
+  float frontDown[12] = {135,195,100,135,75,170,135,180,135,135,90,135};
+  int pulseFrontDown[12];
+  
+  for (int i = 0; i < 12; i++){
+    pulseFrontDown[i] =  angleToPulse(frontDown[i] + compensationArrayMec[i]);
+  }
+
+  motorControl(pulseFrontDown);
+
+  delay(1000); // Is front incline
+  
+
+  float positionInit2[12] = {135,180,135,135,90,135,135,180,135,135,90,135};
+  int pulseInit2[12];
+  
+  for (int i = 0; i < 12; i++){
+    pulseInit[i] =  angleToPulse(positionInit[i] + compensationArrayMec[i]);
+  }
+
+  motorControl(pulseInit);
+
+  delay(1000); // Is at init postion
+
+  float rearDown[12] = {135,180,135,135,90,135,135,225,90,135,45,180};
+  int pulserearDown[12];
+  
+  for (int i = 0; i < 12; i++){
+    pulserearDown[i] =  angleToPulse(rearDown[i] + compensationArrayMec[i]);
+  }
+
+  motorControl(pulserearDown);
+
+  delay(1000); // Is rear incline
+
+  */
+  
+  
+  
+  //motorControl(compensationPulse);
+  //node_handle.spinOnce();
   delay(100);
 
 }

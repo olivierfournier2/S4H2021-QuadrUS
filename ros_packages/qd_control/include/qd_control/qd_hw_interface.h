@@ -26,13 +26,13 @@ class Quadrus : public hardware_interface::RobotHW
         hardware_interface::JointStateInterface joint_state_interface_;
         hardware_interface::PositionJointInterface position_joint_interface_;
         
-        hardware_interface::JointStateHandle *jsHandle[3];
-        hardware_interface::JointHandle *jpHandle[3];
+        hardware_interface::JointStateHandle *jsHandle[12];
+        hardware_interface::JointHandle *jpHandle[12];
         
         joint_limits_interface::JointLimits limits;
         joint_limits_interface::PositionJointSaturationInterface positionJointSaturationInterface;
         
-        const static int jnt_nb = 3;
+        const static int jnt_nb = 12;
         double pos[jnt_nb];
         double vel[jnt_nb];
         double eff[jnt_nb];
