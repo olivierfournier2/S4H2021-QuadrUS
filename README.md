@@ -58,11 +58,11 @@ At this point, the ROS environment should be set up and ready to work with.
     
 - To view the robot model in Rviz, execute the following command in T2: 
     ```
-    roslaunch simulation quadrus_rviz.launch
+    roslaunch qd_simulation qd_rviz.launch
     ```
 
 - To start the dynamic simulation in Gazebo, execute the following command in T2:
     ```
-    roslaunch simulation quadrus_gazebo.launch
+    roslaunch qd_simulation qd_gazebo.launch
     ```
 
