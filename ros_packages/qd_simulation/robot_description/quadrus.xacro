@@ -4,13 +4,13 @@
 	<!-- Constants for robot dimensions, mass and inertia-->
 	<xacro:property name="PI" value="3.1415926535897931"/>
 	
-	<xacro:property name="hip_offset" value="0.04" /> 
-	<xacro:property name="upperleg_length" value="0.150" /> 
-	<xacro:property name="lowerleg_length" value="0.150" />
+	<xacro:property name="hip_offset" value="0.05755" /> 
+	<xacro:property name="upperleg_length" value="0.140" /> 
+	<xacro:property name="lowerleg_length" value="0.14833" />
 
-	<xacro:property name="rear_hip_long_offset" value="-0.12" /> 
-	<xacro:property name="hip_long_center_dist" value="0.24" />
-	<xacro:property name="hip_lat_center_dist" value="0.15" />
+	<xacro:property name="rear_hip_long_offset" value="-0.148" /> 
+	<xacro:property name="hip_long_center_dist" value="0.268" />
+	<xacro:property name="hip_lat_center_dist" value="0.158" />
 	
 
 	<!-- Import Rviz colors -->
@@ -31,7 +31,7 @@
 		<visual>
 			<origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
-				<box size="0.30 0.10 0.07"/>
+				<box size="0.4172 0.116 0.03035"/>
 			</geometry>
 			<material name="blue" />
 		</visual>
@@ -39,7 +39,7 @@
 		<visual>
 			<origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
-				<box size="0.2 0.18 0.07"/>
+				<box size="0.2 0.2 0.03035"/>
 			</geometry>
 			<material name="blue"/>
 		</visual>
@@ -47,13 +47,13 @@
 		<collision>
 			<origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
-				<box size="0.30 0.10 0.07"/>
+				<box size="0.4172 0.116 0.03035"/>
 			</geometry>
 		</collision>
 	
 		<inertial>
-			<mass value="2"/>
-			<inertia ixx="0.13" ixy="0.0" ixz="0.0" iyy="0.21" iyz="0.0" izz="0.13"/>
+			<mass value="0.500"/>
+			<inertia ixx="0.00093" ixy="0.0" ixz="0.0" iyy="0.00458" iyz="0.0" izz="0.00540"/>
 		</inertial>	
 
 	</link>
@@ -66,7 +66,7 @@
 				<visual>
 					<origin xyz="0 0 0" rpy="0 0 0" />
 					<geometry>
-						<box size="0.03 0.05 0.03"/>
+						<box size="0.060 0.035 0.078"/>
 					</geometry>
 					<material name="red"/>
 				</visual>
@@ -74,13 +74,13 @@
 				<collision>
 					<origin xyz="0 0 0" rpy="0 0 0" />
 					<geometry>
-						<box size="0.03 0.05 0.03"/>
+						<box size="0.060 0.035 0.078"/>
 					</geometry>
 				</collision>
 
 				<inertial>
-					<mass value="0.1"/>
-					<inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+					<mass value="0.332"/>
+					<inertia ixx="0.00109" ixy="0.0" ixz="-0.00004" iyy="0.00146" iyz="-0.00039" izz="0.00066"/>
 				</inertial>	
 
 			</link>
@@ -128,23 +128,23 @@
 
 			<link name="link_${long}_${lat}_upperleg">
 				<visual>
-					<origin xyz="-0.075 0 0" rpy="0 0 0" />
+					<origin xyz="-0.07 0 0" rpy="0 0 0" />
 					<geometry>
-						<box size="${upperleg_length+0.03} 0.03 0.03"/>
+						<box size="${upperleg_length+0.03} 0.0365 0.026"/>
 					</geometry>
 					<material name="blue"/>
 				</visual>
 				
 				<collision>
-					<origin xyz="-0.075 0 0" rpy="0 0 0" />
+					<origin xyz="-0.07 0 0" rpy="0 0 0" />
 					<geometry>
-						<box size="${upperleg_length+0.03}  0.03 0.03"/>
+						<box size="${upperleg_length+0.03}  0.0365 0.026"/>
 					</geometry>
 				</collision>
 
 				<inertial>
-					<mass value="0.1"/>
-					<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+					<mass value="0.32114"/>
+					<inertia ixx="0.00014" ixy="0.00001" ixz="0.00002" iyy="0.00207" iyz="0.0" izz="0.00215"/>
 				</inertial>
 
 			</link>
@@ -186,7 +186,7 @@
 				<visual>
 					<origin xyz="0.075 0 0" rpy="0 0 0" />
 					<geometry>
-						<box size="${lowerleg_length+0.03} 0.03 0.03"/>
+						<box size="${lowerleg_length+0.03} 0.02 0.03"/>
 					</geometry>
 					<material name="blue"/>
 				</visual>
@@ -194,13 +194,13 @@
 				<collision>
 					<origin xyz="0.075 0 0" rpy="0 0 0" />
 					<geometry>
-						<box size="${lowerleg_length+0.03} 0.03 0.03"/>
+						<box size="${lowerleg_length+0.03} 0.02 0.03"/>
 					</geometry>
 				</collision>
 
 				<inertial>
-					<mass value="0.1"/>
-					<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+					<mass value="0.20407"/>
+					<inertia ixx="0.00005" ixy="0.00008" ixz="0.0" iyy="0.00121" iyz="0.0" izz="0.00123"/>
 				</inertial>
 
 			</link>
@@ -208,7 +208,7 @@
 			<joint name="${lowerleg_joint_id}" type="continuous">
 				<parent link="link_${long}_${lat}_upperleg"/>
 				<child link="link_${long}_${lat}_lowerleg"/>
-				<origin xyz="-0.15 0 0" rpy="0 1.5708 0" /> 
+				<origin xyz="-0.15 0 -0.0156" rpy="0 1.5708 0" /> 
 				<axis xyz="0 1 0" />
 			</joint>
 
@@ -232,7 +232,7 @@
 				<visual>
 					<origin xyz="0 0 0" rpy="0 0 0" />
 					<geometry>
-						<sphere radius = "0.03"/>
+						<sphere radius = "0.2"/>
 					</geometry>
 					<material name="green"/>
 				</visual>
@@ -240,13 +240,13 @@
 				<collision>
 					<origin xyz="0 0 0" rpy="0 0 0" />
 					<geometry>
-						<sphere radius = "0.03"/>
+						<sphere radius = "0.2"/>
 					</geometry>
 				</collision>
 
 				<inertial>
-					<mass value="0.1"/>
-					<inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+					<mass value="0.0"/>
+					<inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
 				</inertial>
 
 			</link>
