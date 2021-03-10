@@ -232,7 +232,7 @@
 				<visual>
 					<origin xyz="0 0 0" rpy="0 0 0" />
 					<geometry>
-						<sphere radius = "0.2"/>
+						<sphere radius = "0.02"/>
 					</geometry>
 					<material name="green"/>
 				</visual>
@@ -240,7 +240,7 @@
 				<collision>
 					<origin xyz="0 0 0" rpy="0 0 0" />
 					<geometry>
-						<sphere radius = "0.2"/>
+						<sphere radius = "0.02"/>
 					</geometry>
 				</collision>
 
