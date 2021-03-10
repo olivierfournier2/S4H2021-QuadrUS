@@ -1,5 +1,5 @@
-#ifndef Quadrus_h
-#define Quadrus_h
+#ifndef MotorController_h
+#define MotorController_h
 
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
