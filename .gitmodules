@@ -16,6 +16,3 @@
 [submodule "ros_packages/joystick/full_teleop"]
 	path = ros_packages/joystick/full_teleop
 	url = https://github.com/marj3220/full_teleop
-[submodule "ros_packages/joystick/joystick_drivers"]
-	path = ros_packages/joystick/joystick_drivers
-	url = https://github.com/ros-drivers/joystick_drivers
