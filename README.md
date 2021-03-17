@@ -1,9 +1,11 @@
 # S4H2021-QuadrUS
 
-## System requirements
+## Development environment 
+
+### System requirements
 - Ubuntu 20.04 LTS
 
-## ROS installation (Development environment)
+### ROS installation (Development environment)
 - ROS Noetic Ninjemys:  [Installation documentation](http://wiki.ros.org/noetic/Installation/Ubuntu)
 - Gazebo/Rviz : Choose Desktop-Full Install option when installing ROS
 - Install Terminator
@@ -14,7 +16,7 @@
     ```
     sudo apt-get install terminator
 
-## To set up this ROS project
+### To set up this ROS project
 - Create and initialize a catkin workspace
 
     ```
@@ -48,7 +50,7 @@
 
 At this point, the ROS environment should be set up and ready to work with.
 
-## Launching 2D and 3D simulations
+### Launching 2D and 3D simulations
 - Start by launching terminator and splitting into two terminals (T1 and T2)
 
 - Launch roscore, the main ros node in T1:
@@ -65,4 +67,19 @@ At this point, the ROS environment should be set up and ready to work with.
     ```
     roslaunch qd_simulation qd_gazebo.launch
     ```
+
+## Robot environment
+
+### System Requirements
+- RaspberryPi 4
+- Ubuntu 20.04.2 LTS, 64 bit
+
+### ROS installation
+- ROS Noetic Ninjemys:  [Installation documentation](http://wiki.ros.org/noetic/Installation/Ubuntu)
+
+### Network setup
+- Set up raspberry pi as access point: [Procedure](https://gist.github.com/ExtremeGTX/ea1d1c12dde8261b263ab2fead983dc8), [dnsmasq configuration](https://computingforgeeks.com/install-and-configure-dnsmasq-on-ubuntu-18-04-lts/)
+- To allow ssh over wired connection, you need to set up static ip adress for both devices: [Procedure](https://linuxize.com/post/how-to-configure-static-ip-address-on-ubuntu-20-04/)
+
+
 

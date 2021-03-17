@@ -12,12 +12,7 @@
 
       <!-- Load the controllers -->
       <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-        output="screen" ns="/quadrus" args="
-        joint_state_controller 
-        leg_controller_1
-        leg_controller_2
-        leg_controller_3
-        leg_controller_4"/>
+        output="screen" ns="/quadrus" args="joint_state_controller leg_controller"/>
 
       <!-- Launch the simulation -->
       <group if="$(eval arg('sim_mode') == 'dyn')">
@@ -49,10 +44,7 @@
         <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
           output="screen" args="
           /quadrus/joint_state_controller 
-          /quadrus/leg_controller_1
-          /quadrus/leg_controller_2
-          /quadrus/leg_controller_3
-          /quadrus/leg_controller_4
+          /quadrus/leg_controller
           "/>
      
       <!-- Load the ROSSerial node on the OpenCR card-->
