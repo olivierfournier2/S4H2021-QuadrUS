@@ -12,6 +12,7 @@
  Commenter le .h
  Caractériser les vitesses des moteurs a chaque joint (En parler avec OLI)
  
+<<<<<<< HEAD
  Remplacer la OpenCR (lundi en revenant de la relache)
  Souder les crimps pour tout le filage final
 
@@ -20,3 +21,7 @@
 https://gist.github.com/ExtremeGTX/ea1d1c12dde8261b263ab2fead983dc8
 https://computingforgeeks.com/install-and-configure-dnsmasq-on-ubuntu-18-04-lts/
 https://linuxize.com/post/how-to-configure-static-ip-address-on-ubuntu-20-04/
+=======
+Step de vitesses incrementer
+Valider la vitesse du spin()
+>>>>>>> 53dc11573db542dffa7be9ff5f4b07013e61b9d0

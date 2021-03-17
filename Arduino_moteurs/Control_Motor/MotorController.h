@@ -1,5 +1,5 @@
-#ifndef Quadrus_h
-#define Quadrus_h
+#ifndef MotorController_h
+#define MotorController_h
 
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
@@ -18,9 +18,10 @@ std_msgs::Float64MultiArray motor_msg;
 Adafruit_PWMServoDriver driver = Adafruit_PWMServoDriver();
 int angleToPulse(float ang);
 int radToPulse(float radAng);
-void motorControl(int pulseCommand[12]);
+void motorControl(int pulseCommand[12]); //Function that controls the motors with an internal loop
 void speedSelection(int desiredSpeed);
-void subscriberCallback(const std_msgs::Float64MultiArray& motor_msg); //Fonction called with each SpinOnce()
+void subscriberCallback(const std_msgs::Float64MultiArray& motor_msg); //Function called with each SpinOnce()
+void motorController(int pulseCommand[12]); //Function that controls the motors without an internal loop
 
 //Setup the topic the node is subscribed to
 ros::Subscriber<std_msgs::Float64MultiArray> motor_subscriber("joint_positions", &subscriberCallback);
@@ -158,8 +159,25 @@ void motorControl(int pulseCommand[12]) {
       } 
   }
 
+void motorController(int pulseCommand[12]){
+
+    for (int i = 0; i < 12; i++){
+        if(pulseCommand[i] > jointLimit[i][1]){
+            pulseCommand[i] = jointLimit[i][1];
+          }
+        else if(pulseCommand[i] < jointLimit[i][0]){
+            pulseCommand[i] = jointLimit[i][0];
+          }
+      }
+    
+    for (int i=0; i < 12; i++){
+        driver.writeMicroseconds(i, pulseCommand[i]);
+    }
+}
+
+
 void subscriberCallback(const std_msgs::Float64MultiArray& motor_msg) {
-  //speedSelection(1);
+
   int command[12];
   float ros_motor_commands[12] = {motor_msg.data[0], motor_msg.data[1], motor_msg.data[2], motor_msg.data[3], motor_msg.data[4], 
   motor_msg.data[5], motor_msg.data[6], motor_msg.data[7], motor_msg.data[8], motor_msg.data[9], motor_msg.data[10], motor_msg.data[11]};
@@ -172,7 +190,7 @@ void subscriberCallback(const std_msgs::Float64MultiArray& motor_msg) {
   };
   
   
-  motorControl(command);
+  motorController(command);
 }
 
 #endif
