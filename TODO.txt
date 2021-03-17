@@ -12,5 +12,5 @@
  Commenter le .h
  Caractériser les vitesses des moteurs a chaque joint (En parler avec OLI)
  
- Remplacer la OpenCR (lundi en revenant de la relache)
- Souder les crimps pour tout le filage final
+Step de vitesses incrementer
+Valider la vitesse du spin()
