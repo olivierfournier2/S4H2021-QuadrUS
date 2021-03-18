@@ -19,13 +19,7 @@
 	<xacro:include filename="$(find qd_simulation)/robot_description/quadrus.gazebo" />
 
 	<!-- Used for fixing robot to Gazebo 'base_link' -->
-	<link name="world"/>
 
-	<joint name="fixed" type="fixed">
-		<parent link="world"/>
-		<child link="base_link"/>
-		<origin xyz="0 0 1"/>
-	</joint>
 
 	<link name="base_link">
 		<visual>
@@ -81,7 +75,7 @@
 				<inertial>
 					<mass value="0.37017"/>
 					<origin xyz="0.00025 0.0063 0.04447"/>
-					<inertia ixx="0.00114" ixy="0.0" ixz="-0.00004" iyy="0.00074" iyz="-0.00021" izz="0.00064"/>
+					<inertia ixx="0.00114" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
 				</inertial>	
 
 			</link>
@@ -146,7 +140,7 @@
 				<inertial>
 					<mass value="0.35314"/>
 					<origin xyz="-0.06146 -0.00199 0.00083"/>
-					<inertia ixx="0.00015" ixy="-0.00003" ixz="0.00004" iyy="0.00074" iyz="0.0" izz="0.00083"/>
+					<inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
 				</inertial>
 
 			</link>
@@ -203,7 +197,7 @@
 				<inertial>
 					<origin xyz=" 0.05439 0.00478 0"/>
 					<mass value="0.23649"/>
-					<inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.00052" iyz="0.0" izz="0.00054"/>
+					<inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
 				</inertial>
 
 			</link>
