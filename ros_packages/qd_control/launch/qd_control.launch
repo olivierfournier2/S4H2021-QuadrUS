@@ -9,7 +9,6 @@
 
       <!-- Load joint controller configurations from YAML file to parameter server -->
       <rosparam file="$(find qd_control)/config/qd_trajectory_sim.yaml" command="load"/>
-      <rosparam file="$(find qd_control)/config/qd_joint_limits.yaml" command="load"/>
 
       <!-- Load the controllers -->
       <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
@@ -37,9 +36,10 @@
 
       <!-- Load joint controller configurations from YAML file to parameter server -->
       <rosparam file="$(find qd_control)/config/qd_trajectory_hw.yaml" command="load"/>
+      <rosparam file="$(find qd_control)/config/qd_joint_limits.yaml" command="load"/>
       
       <!-- Launch the custom hardware interface node -->
-      <node name="QuadrusHardwareInterface" pkg="qd_control" type="qd_hw_interface" output="screen"/>
+      <node name="QdHardwareInterface" pkg="qd_control" type="qd_hw_interface" output="screen"/>
 
       <!-- Load the controllers -->
         <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"

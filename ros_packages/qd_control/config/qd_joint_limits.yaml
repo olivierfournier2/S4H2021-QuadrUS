@@ -2,7 +2,7 @@ joint_limits:
   J1:
     has_position_limits: true
     min_position: 0.0
-    max_position: 1.0
+    max_position: 0.5
   J2:
     has_position_limits: true
     min_position: 0.0

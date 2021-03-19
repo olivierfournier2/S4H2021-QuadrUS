@@ -7,6 +7,7 @@
 #include <controller_manager/controller_manager.h>
 #include <boost/scoped_ptr.hpp>
 #include <ros/ros.h>
+#include <ros/console.h>
 #include <std_msgs/String.h>
 #include <std_msgs/Float64MultiArray.h>
 #include <string.h>
@@ -17,13 +18,14 @@
 class Quadrus : public hardware_interface::RobotHW 
 {
     public:
-        Quadrus(ros::NodeHandle& nh);                                                                   //Constructor
-        ~Quadrus();                                                                                     //Destructor
-        void init();                                                                                    //define all joint handle, joint's interfaces and joint limits interfaces
-        void update(const ros::TimerEvent& e);                                                          //control loop()
-        void read();                                                                                    //reading joint sensor data
-        void write(ros::Duration elapsed_time);                                                         //sending command to motors
-        
+        Quadrus(ros::NodeHandle& nh);
+        ~Quadrus();
+        void init();
+        void update(const ros::TimerEvent& e);
+        void read();                                                     
+        void write(ros::Duration elapsed_time);
+        void feedbackCallback(const std_msgs::Float64MultiArray& feedback_data);
+
     protected:
         //Declare the type of joint interfaces and joint limit interfaces your robot actuators/motors are using.
         
@@ -31,7 +33,7 @@ class Quadrus : public hardware_interface::RobotHW
         hardware_interface::PositionJointInterface position_joint_interface_;
         joint_limits_interface::PositionJointSaturationInterface position_joint_sat_interface;
 
-        joint_limits_interface::JointLimits *jlimits[NB_JOINTS];
+        joint_limits_interface::JointLimits jlimits[NB_JOINTS];
 
         hardware_interface::JointStateHandle *jsHandle[NB_JOINTS];
         hardware_interface::JointHandle *jpHandle[NB_JOINTS];
@@ -42,8 +44,9 @@ class Quadrus : public hardware_interface::RobotHW
         double eff[NB_JOINTS];
         double cmd[NB_JOINTS];
 
-        ros::Publisher position_pub;
-        std_msgs::Float64MultiArray pos_array;
+        ros::Subscriber feedback_sub;
+        ros::Publisher cmd_pub;
+        std_msgs::Float64MultiArray cmd_array;  
         
         ros::NodeHandle nh_;
         ros::Timer qd_control_loop_;
