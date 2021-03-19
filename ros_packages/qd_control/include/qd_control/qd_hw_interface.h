@@ -3,12 +3,16 @@
 #include <hardware_interface/robot_hw.h>
 #include <joint_limits_interface/joint_limits.h>
 #include <joint_limits_interface/joint_limits_interface.h>
+#include <joint_limits_interface/joint_limits_rosparam.h>
 #include <controller_manager/controller_manager.h>
 #include <boost/scoped_ptr.hpp>
 #include <ros/ros.h>
 #include <std_msgs/String.h>
 #include <std_msgs/Float64MultiArray.h>
 #include <string.h>
+
+#define NB_JOINTS 12
+#define LOOP_REFRESH_RATE 10
 
 class Quadrus : public hardware_interface::RobotHW 
 {
@@ -25,18 +29,18 @@ class Quadrus : public hardware_interface::RobotHW
         
         hardware_interface::JointStateInterface joint_state_interface_;
         hardware_interface::PositionJointInterface position_joint_interface_;
-        
-        hardware_interface::JointStateHandle *jsHandle[12];
-        hardware_interface::JointHandle *jpHandle[12];
-        
-        joint_limits_interface::JointLimits limits;
-        joint_limits_interface::PositionJointSaturationInterface positionJointSaturationInterface;
-        
-        const static int jnt_nb = 12;
-        double pos[jnt_nb];
-        double vel[jnt_nb];
-        double eff[jnt_nb];
-        double cmd[jnt_nb];
+        joint_limits_interface::PositionJointSaturationInterface position_joint_sat_interface;
+
+        joint_limits_interface::JointLimits *jlimits[NB_JOINTS];
+
+        hardware_interface::JointStateHandle *jsHandle[NB_JOINTS];
+        hardware_interface::JointHandle *jpHandle[NB_JOINTS];
+        joint_limits_interface::PositionJointSaturationHandle *jlHandle[NB_JOINTS];
+
+        double pos[NB_JOINTS];
+        double vel[NB_JOINTS];
+        double eff[NB_JOINTS];
+        double cmd[NB_JOINTS];
 
         ros::Publisher position_pub;
         std_msgs::Float64MultiArray pos_array;
