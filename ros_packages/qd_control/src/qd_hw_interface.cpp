@@ -17,9 +17,9 @@ Quadrus::Quadrus(ros::NodeHandle& nh): nh_(nh){ //Initialization list : set nh_ 
 }   
                                                    
 Quadrus::~Quadrus(){
-    //delete[] jsHandle;
-    //delete[] jpHandle;
-    //delete[] jlHandle;
+    delete[] jsHandle;
+    delete[] jpHandle;
+    delete[] jlHandle;
 }   
 
 void Quadrus::init(){
@@ -50,11 +50,7 @@ void Quadrus::update(const ros::TimerEvent& e){
 }  
 
 void Quadrus::read(){
-    // for(int i=0;i<NB_JOINTS;i++){
-    //     pos[i] = 0;
-    //     vel[i] = 0;
-    //     eff[i] = 0;
-    // }
+    //
 }
 
 void Quadrus::write(ros::Duration elapsed_time){
@@ -71,9 +67,9 @@ void Quadrus::write(ros::Duration elapsed_time){
 void Quadrus::feedbackCallback(const std_msgs::Float64MultiArray& feedback_data){
     
     for(int i=0; i<NB_JOINTS; i++){
-        pos[i] = feedback_data.data[i];
+        pos[i] = feedback_data.data[i];   
     }
-
+    
 }
 
 int main(int argc, char** argv){

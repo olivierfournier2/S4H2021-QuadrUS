@@ -12,6 +12,7 @@ void setup() {
       driver.writeMicroseconds(i, 1475);
     }
 
+  node_handle.getHardware()->setBaud(115200);
   node_handle.initNode();
   node_handle.subscribe(motor_subscriber);
 

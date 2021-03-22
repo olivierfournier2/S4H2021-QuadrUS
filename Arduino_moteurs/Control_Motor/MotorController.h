@@ -24,7 +24,7 @@ void subscriberCallback(const std_msgs::Float64MultiArray& motor_msg); //Functio
 void motorController(int pulseCommand[12]); //Function that controls the motors without an internal loop
 
 //Setup the topic the node is subscribed to
-ros::Subscriber<std_msgs::Float64MultiArray> motor_subscriber("joint_positions", &subscriberCallback);
+ros::Subscriber<std_msgs::Float64MultiArray> motor_subscriber("hw_cmd", &subscriberCallback);
 
 //Global variables
 
