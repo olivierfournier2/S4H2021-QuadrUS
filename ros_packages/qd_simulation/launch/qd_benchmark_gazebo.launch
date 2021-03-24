@@ -1,0 +1,34 @@
+<launch>
+
+   <!-- Load the URDF into the ROS Parameter Server -->
+   <param name="robot_description" 
+      command="xacro --inorder '$(find qd_simulation)/robot_description/quadrus_forced.xacro'" />
+
+   <!-- values passed by command line input -->
+   <arg name="paused" default="false"/>
+   <arg name="use_sim_time" default="true"/>
+   <arg name="gui" default="true"/>
+   <arg name="headless" default="false"/>
+   <arg name="debug" default="false"/>
+
+   <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="world_name" value="$(find qd_simulation)/worlds/quadrus.world" />
+      <arg name="debug" value="$(arg debug)" />
+      <arg name="gui" value="$(arg gui)" />
+      <arg name="paused" value="$(arg paused)"/>
+      <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+      <arg name="headless" value="$(arg headless)"/>
+   </include>
+
+   <!-- Convert joint states to TF transforms for rviz -->
+   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+      respawn="false" output="screen">
+         <remap from="/joint_states" to="/quadrus/joint_states"/>
+   </node>
+   
+   <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+      args="-urdf -model quadrus -param robot_description" />
+
+</launch>
+   
