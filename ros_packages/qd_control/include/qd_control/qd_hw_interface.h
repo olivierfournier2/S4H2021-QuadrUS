@@ -12,8 +12,8 @@
 #include <std_msgs/Float64MultiArray.h>
 #include <string.h>
 
-#define NB_JOINTS 12
-#define LOOP_REFRESH_RATE 30
+#define NB_JOINTS 50
+#define LOOP_REFRESH_RATE 50
 
 class Quadrus : public hardware_interface::RobotHW 
 {

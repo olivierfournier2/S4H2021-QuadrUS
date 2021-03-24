@@ -16,7 +16,7 @@ void readAngles(std_msgs::Float64MultiArray feedback_data){
 
 float AnalogToAngle(int analog_value){
   float angle = 0;
-  angle = map(analog_value, 0,1023, 0, 270);
+  angle = map(analog_value, 0,1023, 0, 270.0);
   return angle;
 }
 
@@ -27,7 +27,7 @@ ros::Subscriber<std_msgs::Float64MultiArray> cmd_sub("hw_cmd", CmdCallback );
 
 void setup()
 {
-  nh.getHardware()->setBaud(115200);
+  nh.getHardware()->setBaud(230400);
   nh.initNode();
   nh.advertise(feedback_pub);
   feedback_data.data_length = 12;
@@ -40,5 +40,5 @@ void loop()
   readAngles(feedback_data);
   feedback_pub.publish( &feedback_data );
   nh.spinOnce();
-  delay(10);
+  delay(20);
 }
