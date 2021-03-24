@@ -9,10 +9,11 @@ void setup() {
 
   node_handle.getHardware()->setBaud(115200);
   node_handle.initNode();
+  ros::Subscriber<std_msgs::Float64MultiArray> motor_subscriber("hw_cmd", &subscriberCallback);
   node_handle.subscribe(motor_subscriber);
 }
 
 void loop() {
-  //node_handle.spinOnce();
-  delay(1000);
+  node_handle.spinOnce();
+  delay(10);
 }

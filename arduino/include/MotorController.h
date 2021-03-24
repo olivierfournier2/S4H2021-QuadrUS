@@ -1,7 +1,6 @@
 #ifndef MotorController_h
 #define MotorController_h
 
-#include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 #include <ros.h>
 #include <std_msgs/String.h>
@@ -50,7 +49,7 @@ void motorController(int pulseCommand[12]);
 //ROS config
 ros::NodeHandle node_handle;
 std_msgs::Float64MultiArray motor_msg;
-ros::Subscriber<std_msgs::Float64MultiArray> motor_subscriber("hw_cmd", &subscriberCallback);
+
 
 void computeLimits() {
   for (int i = 0; i < 12; i++)
@@ -71,7 +70,7 @@ int degToPulse(float ang) {
 }
 
 float radToDeg(float angleRad) {
-  return map(angleRad, 0, (2*PI), 0, 360);
+  return angleRad*180.0/PI;
 }
 
 /**
