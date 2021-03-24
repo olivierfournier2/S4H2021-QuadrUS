@@ -1,5 +1,9 @@
 # S4H2021-QuadrUS
 
+### Quadruped Robot | UdeS-GRO
+[![Build Status](https://www.travis-ci.com/olivierfournier2/S4H2021-QuadrUS.svg?branch=main)](https://www.travis-ci.com/olivierfournier2/S4H2021-QuadrUS) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+
+
 ## Development environment 
 
 ### System requirements
