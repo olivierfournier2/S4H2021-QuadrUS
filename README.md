@@ -19,6 +19,7 @@
     ```
     ```
     sudo apt-get install terminator
+    ```
 
 ### To set up this ROS project
 - Create and initialize a catkin workspace
