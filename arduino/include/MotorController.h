@@ -50,7 +50,10 @@ void motorController(int pulseCommand[12]);
 ros::NodeHandle node_handle;
 std_msgs::Float64MultiArray motor_msg;
 
-
+/**
+ * Compute the joint limits with the base angle of 135 degree
+ * and the mechanical compensations
+ */
 void computeLimits() {
   for (int i = 0; i < 12; i++)
   {
@@ -63,12 +66,23 @@ void computeLimits() {
   
 }
 
-//Transform degree angle to pulse
+/**
+ * Map an angle in degrees to the corresponding pulse
+ *
+ * @param ang Angle in degrees
+ * @return Corresponding pulse
+ */
 int degToPulse(float ang) {
   int pulse = map(ang, 0, 270, PULSEMIN, PULSEMAX);
   return pulse;
 }
 
+/**
+ * Convert an angle in rad to degrees
+ *
+ * @param angleRad Angle in rad
+ * @return angle in degrees
+ */
 float radToDeg(float angleRad) {
   return angleRad*180.0/PI;
 }
@@ -90,7 +104,12 @@ void subscriberCallback(const std_msgs::Float64MultiArray& motor_msg) {
   moveMotor(ros_motor_commands);
 }
 
-
+/**
+ * Receive angle commands, add the compensations,
+ * convert them to pulse and move the motors
+ *
+ * @param cmdAngle Array of commands in degrees for the 12 motors
+ */
 void moveMotor(float cmdAngle[12]) {
   float compensatedCmd[12];
   int pulseCmd[12];
@@ -102,12 +121,23 @@ void moveMotor(float cmdAngle[12]) {
   motorController(pulseCmd);
 }
 
-
+/**
+ * Add the mechanical and the ROS compensations to the angle command passed
+ *
+ * @param rawAngle Angle in degrees before adding compensations
+ * @param index Index of the motor corresponding to the rawAngle passed
+ * @return The angle command with the compensations
+ */
 float compensateCommand(float rawAngle, int index) {
   return rawAngle + compensationArrayMec[index] + compensationArrayROS[index];
 }
 
-
+/**
+ * Check if the pulse commands are within the joint limits then write the commands
+ * to the driver to move the motors one after the other
+ *
+ * @param pulseCommand Array of commands in pulse for the 12 motors
+ */
 void motorController(int pulseCommand[12]) {
 
     for (int i = 0; i < 12; i++){
