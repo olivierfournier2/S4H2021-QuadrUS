@@ -63,10 +63,7 @@ std_msgs::Float64MultiArray feedback_msg;
 ros::Publisher feedback_pub(FEEDBACK_TOPIC, &feedback_msg);
 ros::Subscriber<std_msgs::Float64MultiArray> cmd_sub(CMD_TOPIC, &subscriberCallback);
 
-/**
- * Compute the joint limits with the base angle of 135 degree
- * and the mechanical compensations
- */
+
 void rosInit(){
   nh.getHardware()->setBaud(115200);
   nh.initNode();
@@ -82,6 +79,10 @@ void servoInit(){
   driver.setPWMFreq(SERVO_FREQ);
 }
 
+/**
+ * Compute the joint limits with the base angle of 135 degree
+ * and the mechanical compensations
+ */
 void computeLimits() {
   for (int i = 0; i < 12; i++){
     for (int j = 0; j < 2; j++){
