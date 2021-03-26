@@ -2,7 +2,7 @@
 
    <!-- Load the URDF into the ROS Parameter Server -->
    <param name="robot_description" 
-      command="xacro --inorder '$(find qd_simulation)/robot_description/quadrus_forced.xacro'" />
+      command="xacro --inorder '$(find qd_simulation)/robot_description/quadrus.xacro'" />
 
    <!-- values passed by command line input -->
    <arg name="paused" default="false"/>

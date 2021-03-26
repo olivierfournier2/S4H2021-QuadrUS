@@ -4,9 +4,9 @@
 	<!-- Constants for robot dimensions, mass and inertia-->
 	<xacro:property name="PI" value="3.1415926535897931"/>
 	
-	<xacro:property name="hip_offset" value="0.05755" /> 
-	<xacro:property name="upperleg_length" value="0.140" /> 
-	<xacro:property name="lowerleg_length" value="0.14833" />
+	<xacro:property name="hip_offset" value="0.05925" /> 
+	<xacro:property name="upperleg_length" value="0.13955" /> 
+	<xacro:property name="lowerleg_length" value="0.130" />
 
 	<xacro:property name="rear_hip_long_offset" value="-0.148" /> 
 	<xacro:property name="hip_long_center_dist" value="0.268" />
@@ -79,9 +79,9 @@
 				</collision>
 
 				<inertial>
-					<mass value="0.37017"/>
-					<origin xyz="0.00025 0.0063 0.04447"/>
-					<inertia ixx="0.00114" ixy="0.0" ixz="-0.00004" iyy="0.00074" iyz="-0.00021" izz="0.00064"/>
+					<mass value="0.1191"/>
+					<origin xyz="0.004136 0.002457 0.01974"/>
+					<inertia ixx="0.000176" ixy="-0.000004" ixz="-0.000017" iyy="0.000131" iyz="-0.000021" izz="0.000108"/>
 				</inertial>	
 
 			</link>
@@ -144,9 +144,9 @@
 				</collision>
 
 				<inertial>
-					<mass value="0.35314"/>
-					<origin xyz="-0.06146 -0.00199 0.00083"/>
-					<inertia ixx="0.00015" ixy="-0.00003" ixz="0.00004" iyy="0.00074" iyz="0.0" izz="0.00083"/>
+					<mass value="0.13118"/>
+					<origin xyz="-0.041697 -0.007043 -0.000214"/>
+					<inertia ixx="0.000042" ixy="-0.000009" ixz="0.000011" iyy="0.000283" iyz="0.000002" izz="0.000310"/>
 				</inertial>
 
 			</link>
@@ -201,9 +201,9 @@
 				</collision>
 
 				<inertial>
-					<origin xyz=" 0.05439 0.00478 0"/>
-					<mass value="0.23649"/>
-					<inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.00052" iyz="0.0" izz="0.00054"/>
+					<mass value="0.10059"/>
+					<origin xyz=" 0.025048 -0.002594 0.000523"/>
+					<inertia ixx="0.000017" ixy="0.000001" ixz="0.000004" iyy="0.000149" iyz="0.0" izz="0.000158"/>
 				</inertial>
 
 			</link>
@@ -211,7 +211,7 @@
 			<joint name="${lowerleg_joint_id}" type="continuous">
 				<parent link="link_${long}_${lat}_upperleg"/>
 				<child link="link_${long}_${lat}_lowerleg"/>
-				<origin xyz="-0.15 0 -0.0156" rpy="0 1.5708 0" /> 
+				<origin xyz="-0.15 0 -0.01886" rpy="0 1.5708 0" /> 
 				<axis xyz="0 1 0" />
 			</joint>
 
@@ -248,7 +248,7 @@
 				</collision>
 
 				<inertial>
-					<mass value="0.02"/>
+					<mass value="0.003"/>
 					<inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
 				</inertial>
 
