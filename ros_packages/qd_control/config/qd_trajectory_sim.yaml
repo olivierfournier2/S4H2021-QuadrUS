@@ -25,25 +25,25 @@ quadrus:
       goal_time: 0.0
       stopped_velocity_tolerance: 0.02
       J1:
-        goal: 0.02
+        goal: 0.01
       J2:
         goal: 0.01                   
       J3:
         goal: 0.01
       J4:
-        goal: 0.02
+        goal: 0.01
       J5:
         goal: 0.01                   
       J6:
         goal: 0.01 
       J7:
-        goal: 0.02
+        goal: 0.01
       J8:
         goal: 0.01                   
       J9:
         goal: 0.01 
       J10:
-        goal: 0.02
+        goal: 0.01
       J11:
         goal: 0.01                   
       J12:
