@@ -31,7 +31,7 @@ void servoInit(){
 void computeLimits() {
   for (int i = 0; i < 12; i++){
     for (int j = 0; j < 2; j++){
-      jointLimit[i][j] =  degToPulse(135 + compensationArrayMec[i] + jointLimit[i][j]);
+      jointLimitPulse[i][j] =  degToPulse(135 + compensationArrayMec[i] + jointLimit[i][j], i);
     }
   }
 }
@@ -41,11 +41,11 @@ void computeLimits() {
  * Map an angle in degrees to the corresponding pulse
  *
  * @param ang Angle in degrees
+ * @param motorIndex Index of the motor to map the pulse
  * @return Corresponding pulse
  */
-int degToPulse(float ang) {
-  int pulse = map(ang, 0, 270, pulsemin, pulsemax);
-  return pulse;
+int degToPulse(float ang, int motorIndex) {
+  return ang*(pulsemax[motorIndex]-pulsemin)/270.0 + pulsemin;
 }
 
 
@@ -75,8 +75,8 @@ float degToRad(float angleDeg) {
  * @param analog_value Analog reading from Arduino
  * @return angle in degrees
  */
-float analogToAngle(int analog_value){
-  return (analog_value - 60.0)*(270.0/(pulsemin-60.0));
+float analogToDeg(int analog_value){
+  return (analog_value - 67.0)*(270.0/(646.0-67.0));
 }
 
 
@@ -87,8 +87,12 @@ float analogToAngle(int analog_value){
  * @param feedback_data Current angle of the servos to feedback to ROS
  */
 void readAngles(std_msgs::Float64MultiArray feedback_data){
+  float feedbackAngle[12];
+  float compensatedAngle[12];
   for(int i=0;i<12;i++){
-    feedback_data.data[i] = analogToAngle(analogRead(analog_pins[i]));
+     feedbackAngle[i] = analogToDeg(analogRead(analog_pins[i]));
+     compensatedAngle[i] = compensateFeedback(feedbackAngle[i], i);
+     feedback_data.data[i] = degToRad(compensatedAngle[i]);
   }
 }
 
@@ -121,7 +125,7 @@ void moveMotor(float cmdAngle[12]) {
 
   for (int i = 0; i < 12; i++) {
     compensatedCmd[i] = compensateCommand(cmdAngle[i], i);
-    pulseCmd[i] = degToPulse(compensatedCmd[i]);
+    pulseCmd[i] = degToPulse(compensatedCmd[i], i);
   }
   motorController(pulseCmd);
 }
@@ -130,12 +134,24 @@ void moveMotor(float cmdAngle[12]) {
 /**
  * Add the mechanical and the ROS compensations to the angle command passed
  *
- * @param rawAngle Angle in degrees before adding compensations
- * @param index Index of the motor corresponding to the rawAngle passed
+ * @param rawCommand Angle in degrees before adding compensations
+ * @param index Index of the motor corresponding to the rawCommand passed
  * @return The angle command with the compensations
  */
-float compensateCommand(float rawAngle, int index) {
-  return rawAngle + compensationArrayMec[index] + compensationArrayROS[index];
+float compensateCommand(float rawCommand, int index) {
+  return rawCommand + compensationArrayMec[index] + compensationArrayROS[index];
+}
+
+
+/**
+ * Add the mechanical and the ROS compensations to the angle command passed
+ *
+ * @param rawAngle Angle in degrees before substracting compensations
+ * @param index Index of the motor corresponding to the rawAngle passed
+ * @return The angle feedback without the compensations
+ */
+float compensateFeedback(float rawAngle, int index) {
+  return rawAngle - compensationArrayMec[index] - compensationArrayROS[index];
 }
 
 
@@ -148,11 +164,11 @@ float compensateCommand(float rawAngle, int index) {
 void motorController(int pulseCommand[12]) {
 
     for (int i = 0; i < 12; i++){
-        if(pulseCommand[i] > jointLimit[i][1]){
-            pulseCommand[i] = jointLimit[i][1];
+        if(pulseCommand[i] > jointLimitPulse[i][1]){
+            pulseCommand[i] = jointLimitPulse[i][1];
           }
-        else if(pulseCommand[i] < jointLimit[i][0]){
-            pulseCommand[i] = jointLimit[i][0];
+        else if(pulseCommand[i] < jointLimitPulse[i][0]){
+            pulseCommand[i] = jointLimitPulse[i][0];
           }
       }
     
