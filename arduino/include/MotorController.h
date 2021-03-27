@@ -38,9 +38,10 @@ int jointLimit[12][2] = { {-30, 45}, {-110, 125}, {-75, 135},
                           {-30, 45}, {-110, 125}, {-75, 135},
                           {-45, 30}, {-125, 110}, {-135, 75} };
 
-int analog_pins[12] = {0, 1, 2,
-                       3, 4, 5,
-                       6, 7, 8};
+int analog_pins[12] = {0, 1,  2,
+                       3, 4,  5,
+                       6, 7,  8,
+                       9, 10, 11};
 
 
 //Function prototypes
@@ -53,6 +54,7 @@ void moveMotor(float cmdAngle[12]);
 float compensateCommand(float rawAngle, int index);
 void motorController(int pulseCommand[12]);
 float analogToAngle(int analog_value);
+void readAngles(std_msgs::Float64MultiArray feedback_data);
 void rosInit();
 void servoInit();
 
@@ -63,7 +65,9 @@ std_msgs::Float64MultiArray feedback_msg;
 ros::Publisher feedback_pub(FEEDBACK_TOPIC, &feedback_msg);
 ros::Subscriber<std_msgs::Float64MultiArray> cmd_sub(CMD_TOPIC, &subscriberCallback);
 
-
+/**
+* Initialise node handle of ROS
+*/
 void rosInit(){
   nh.getHardware()->setBaud(115200);
   nh.initNode();
@@ -73,6 +77,10 @@ void rosInit(){
   feedback_msg.data = (float *)malloc(sizeof(float) *12);
 }
 
+/**
+ * Initialise the driver object to control the servos
+ * from the PCA9685 board
+ */
 void servoInit(){
   driver.begin();
   driver.setOscillatorFrequency(27000000);
@@ -112,12 +120,27 @@ float radToDeg(float angleRad) {
   return angleRad*180.0/PI;
 }
 
+/**
+ * Convert the analog output of a servo potentiometer to an angle in degrees
+ *
+ * @param analog_value Analog reading from Arduino
+ * @return angle in degrees
+ */
 float analogToAngle(int analog_value){
+  // Je pense pas que le PLUSEMIN c'est la bonne valeur
   return (analog_value - 60.0)*(270.0/(PULSEMIN-60.0));
 }
 
+/**
+ * Read the analog inputs on the Arduino and store them
+ * in angle in the feedback_data to send back to ROS
+ *
+ * @param feedback_data Current angle of the servos to feedback to ROS
+ */
 void readAngles(std_msgs::Float64MultiArray feedback_data){
   for(int i=0;i<12;i++){
+    // Ton analog_pins ici est pas vrm pertinent vu que i == analog_pins[i]
+    // Angle devrait être en radian pour ROS
     feedback_data.data[i] = analogToAngle(analogRead(analog_pins[i]));
   }
 }
