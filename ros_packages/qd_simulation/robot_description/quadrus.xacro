@@ -5,49 +5,41 @@
 	<xacro:property name="PI" value="3.1415926535897931"/>
 	
 	<xacro:property name="hip_offset" value="0.05925" /> 
-	<xacro:property name="upperleg_length" value="0.13955" /> 
-	<xacro:property name="lowerleg_length" value="0.130" />
+	<xacro:property name="upperleg_length" value="0.1396" /> 
+	<xacro:property name="upperleg_offset" value="0.01886" /> 
+	<xacro:property name="lowerleg_length" value="0.1296" />
 
 	<xacro:property name="rear_hip_long_offset" value="-0.148" /> 
 	<xacro:property name="hip_long_center_dist" value="0.268" />
 	<xacro:property name="hip_lat_center_dist" value="0.158" />
 	
-
 	<!-- Import Rviz colors -->
 	<xacro:include filename="$(find qd_simulation)/robot_description/materials.xacro" />
 	<!-- Import all Gazebo-customization elements, including Gazebo colors -->
 	<xacro:include filename="$(find qd_simulation)/robot_description/quadrus.gazebo" />
 
 	<!-- Used for fixing robot to Gazebo 'base_link' -->
-	<link name="world"/>
+	<!-- link name="world"/>
 
 	<joint name="fixed" type="fixed">
 		<parent link="world"/>
 		<child link="base_link"/>
 		<origin xyz="0 0 1"/>
-	</joint>
+	</joint -->
 
 	<link name="base_link">
 		<visual>
 			<origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
-				<box size="0.4172 0.116 0.03035"/>
+				<mesh filename="package://qd_simulation/robot_description/mesh/body.dae"/>
 			</geometry>
 			<material name="blue" />
-		</visual>
-
-		<visual>
-			<origin xyz="0 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.2 0.2 0.03035"/>
-			</geometry>
-			<material name="blue"/>
 		</visual>
 		
 		<collision>
 			<origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
-				<box size="0.4172 0.116 0.03035"/>
+				<mesh filename="package://qd_simulation/robot_description/mesh/body.dae"/>
 			</geometry>
 		</collision>
 	
@@ -64,18 +56,38 @@
 
 			<link name="link_${long}_${lat}_hip">
 				<visual>
-					<origin xyz="0 0 0" rpy="0 0 0" />
-					<geometry>
-						<box size="0.060 0.035 0.078"/>
-					</geometry>
+
+					<xacro:if value="${lat == 'left'}">
+						<origin xyz="0 0 0" rpy="0 0 0" />
+						<geometry>
+							<mesh filename="package://qd_simulation/robot_description/mesh/left_hip.dae"/>
+						</geometry>
+					</xacro:if>
+
+					<xacro:if value="${lat == 'right'}">
+						<origin xyz="0 0 0" rpy="0 0 0" />
+						<geometry>
+							<mesh filename="package://qd_simulation/robot_description/mesh/right_hip.dae"/>
+						</geometry>
+					</xacro:if>
+
 					<material name="red"/>
 				</visual>
 
 				<collision>
-					<origin xyz="0 0 0" rpy="0 0 0" />
-					<geometry>
-						<box size="0.060 0.035 0.078"/>
-					</geometry>
+					<xacro:if value="${lat == 'left'}">
+						<origin xyz="0 0 0" rpy="0 0 0" />
+						<geometry>
+							<mesh filename="package://qd_simulation/robot_description/mesh/left_hip.dae"/>
+						</geometry>
+					</xacro:if>
+
+					<xacro:if value="${lat == 'right'}">
+						<origin xyz="0 0 0" rpy="0 0 0" />
+						<geometry>
+							<mesh filename="package://qd_simulation/robot_description/mesh/right_hip.dae"/>
+						</geometry>
+					</xacro:if>
 				</collision>
 
 				<inertial>
@@ -122,6 +134,8 @@
 
 			<gazebo reference="link_${long}_${lat}_hip">
 				<material>Gazebo/Red</material>
+				<selfCollide>true</selfCollide>
+				<gravity>true</gravity>
 			</gazebo>
 		
 		<!-- Upperleg -->
@@ -129,18 +143,36 @@
 
 			<link name="link_${long}_${lat}_upperleg">
 				<visual>
-					<origin xyz="-0.07 0 0" rpy="0 0 0" />
-					<geometry>
-						<box size="${upperleg_length+0.03} 0.0365 0.026"/>
-					</geometry>
+					<xacro:if value="${lat == 'left'}">
+						<origin xyz="0 0 0" rpy="0 0 0" />
+						<geometry>
+							<mesh filename="package://qd_simulation/robot_description/mesh/left_femur.dae"/>
+						</geometry>
+					</xacro:if>
+
+					<xacro:if value="${lat == 'right'}">
+						<origin xyz="0 0 0" rpy="0 0 0" />
+						<geometry>
+							<mesh filename="package://qd_simulation/robot_description/mesh/right_femur.dae"/>
+						</geometry>
+					</xacro:if>
 					<material name="blue"/>
 				</visual>
 				
 				<collision>
-					<origin xyz="-0.07 0 0" rpy="0 0 0" />
-					<geometry>
-						<box size="${upperleg_length+0.03}  0.0365 0.026"/>
-					</geometry>
+					<xacro:if value="${lat == 'left'}">
+						<origin xyz="0 0 0" rpy="0 0 0" />
+						<geometry>
+							<mesh filename="package://qd_simulation/robot_description/mesh/left_femur.dae"/>
+						</geometry>
+					</xacro:if>
+
+					<xacro:if value="${lat == 'right'}">
+						<origin xyz="0 0 0" rpy="0 0 0" />
+						<geometry>
+							<mesh filename="package://qd_simulation/robot_description/mesh/right_femur.dae"/>
+						</geometry>
+					</xacro:if>
 				</collision>
 
 				<inertial>
@@ -179,6 +211,8 @@
 
 			<gazebo reference="link_${long}_${lat}_upperleg">
 				<material>Gazebo/White</material>
+				<selfCollide>true</selfCollide>
+				<gravity>true</gravity>
 			</gazebo>
 
 		<!-- LowerLeg -->	
@@ -186,18 +220,38 @@
 
 			<link name="link_${long}_${lat}_lowerleg">
 				<visual>
-					<origin xyz="0.075 0 0" rpy="0 0 0" />
-					<geometry>
-						<box size="${lowerleg_length+0.03} 0.02 0.03"/>
-					</geometry>
+					<xacro:if value="${lat == 'left'}">
+						<origin xyz="0 0 0" rpy="0 0 0" />
+						<geometry>
+							<mesh filename="package://qd_simulation/robot_description/mesh/left_tibia.dae"/>
+						</geometry>
+					</xacro:if>
+
+					<xacro:if value="${lat == 'right'}">
+						<origin xyz="0 0 0" rpy="0 0 0" />
+						<geometry>
+							<mesh filename="package://qd_simulation/robot_description/mesh/right_tibia.dae"/>
+						</geometry>
+					</xacro:if>
+
 					<material name="blue"/>
 				</visual>
 				
 				<collision>
-					<origin xyz="0.075 0 0" rpy="0 0 0" />
-					<geometry>
-						<box size="${lowerleg_length+0.03} 0.02 0.03"/>
-					</geometry>
+					<xacro:if value="${lat == 'left'}">
+						<origin xyz="0 0 0" rpy="0 0 0" />
+						<geometry>
+							<mesh filename="package://qd_simulation/robot_description/mesh/left_tibia.dae"/>
+						</geometry>
+					</xacro:if>
+
+					<xacro:if value="${lat == 'right'}">
+						<origin xyz="0 0 0" rpy="0 0 0" />
+						<geometry>
+							<mesh filename="package://qd_simulation/robot_description/mesh/right_tibia.dae"/>
+						</geometry>
+					</xacro:if>
+
 				</collision>
 
 				<inertial>
@@ -211,7 +265,7 @@
 			<joint name="${lowerleg_joint_id}" type="continuous">
 				<parent link="link_${long}_${lat}_upperleg"/>
 				<child link="link_${long}_${lat}_lowerleg"/>
-				<origin xyz="-0.15 0 -0.01886" rpy="0 1.5708 0" /> 
+				<origin xyz="${-upperleg_length} 0 ${-upperleg_offset}" rpy="0 1.5708 0" /> 
 				<axis xyz="0 1 0" />
 			</joint>
 
@@ -228,6 +282,8 @@
 
 			<gazebo reference="link_${long}_${lat}_lowerleg">
 				<material>Gazebo/White</material>
+				<selfCollide>true</selfCollide>
+				<gravity>true</gravity>
 			</gazebo>
 
 		<!-- Paw -->	
@@ -235,7 +291,7 @@
 				<visual>
 					<origin xyz="0 0 0" rpy="0 0 0" />
 					<geometry>
-						<sphere radius = "0.02"/>
+						<mesh filename="package://qd_simulation/robot_description/mesh/tpe_tip.dae"/>
 					</geometry>
 					<material name="green"/>
 				</visual>
@@ -243,7 +299,7 @@
 				<collision>
 					<origin xyz="0 0 0" rpy="0 0 0" />
 					<geometry>
-						<sphere radius = "0.02"/>
+						<mesh filename="package://qd_simulation/robot_description/mesh/tpe_tip.dae"/>
 					</geometry>
 				</collision>
 
@@ -257,7 +313,7 @@
 			<joint name="joint_${long}_${lat}_paw" type="fixed">
 				<parent link="link_${long}_${lat}_lowerleg"/>
 				<child link="link_${long}_${lat}_paw"/>
-				<origin xyz="0.15 0 0" rpy="0 0 0" /> 
+				<origin xyz="${lowerleg_length} 0 0" rpy="0 0.698 0" /> 
 			</joint>
 
 			<gazebo reference="link_${long}_${lat}_paw">
@@ -271,4 +327,6 @@
 	<xacro:quadrus_leg long="back" lat="left" id="3"/>
 	<xacro:quadrus_leg long="back" lat="right" id="4"/>
 
+	<selfCollide>true</selfCollide>
+	
 </robot>
