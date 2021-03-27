@@ -13,20 +13,19 @@
 	<xacro:property name="hip_long_center_dist" value="0.268" />
 	<xacro:property name="hip_lat_center_dist" value="0.158" />
 	
-
 	<!-- Import Rviz colors -->
 	<xacro:include filename="$(find qd_simulation)/robot_description/materials.xacro" />
 	<!-- Import all Gazebo-customization elements, including Gazebo colors -->
 	<xacro:include filename="$(find qd_simulation)/robot_description/quadrus.gazebo" />
 
 	<!-- Used for fixing robot to Gazebo 'base_link' -->
-	<link name="world"/>
+	<!-- link name="world"/>
 
 	<joint name="fixed" type="fixed">
 		<parent link="world"/>
 		<child link="base_link"/>
 		<origin xyz="0 0 1"/>
-	</joint>
+	</joint -->
 
 	<link name="base_link">
 		<visual>
@@ -135,6 +134,8 @@
 
 			<gazebo reference="link_${long}_${lat}_hip">
 				<material>Gazebo/Red</material>
+				<selfCollide>true</selfCollide>
+				<gravity>true</gravity>
 			</gazebo>
 		
 		<!-- Upperleg -->
@@ -210,6 +211,8 @@
 
 			<gazebo reference="link_${long}_${lat}_upperleg">
 				<material>Gazebo/White</material>
+				<selfCollide>true</selfCollide>
+				<gravity>true</gravity>
 			</gazebo>
 
 		<!-- LowerLeg -->	
@@ -279,6 +282,8 @@
 
 			<gazebo reference="link_${long}_${lat}_lowerleg">
 				<material>Gazebo/White</material>
+				<selfCollide>true</selfCollide>
+				<gravity>true</gravity>
 			</gazebo>
 
 		<!-- Paw -->	
@@ -322,4 +327,6 @@
 	<xacro:quadrus_leg long="back" lat="left" id="3"/>
 	<xacro:quadrus_leg long="back" lat="right" id="4"/>
 
+	<selfCollide>true</selfCollide>
+	
 </robot>
