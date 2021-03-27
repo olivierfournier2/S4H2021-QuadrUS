@@ -14,6 +14,11 @@ void test_rad_to_deg(void) {
     TEST_ASSERT_EQUAL(90.0, radToDeg(PI/2));
 }
 
+void Test_analog_to_angle(void){
+    // pt changer pulse min selon la fonction
+    TEST_ASSERT_EQUAL(270.0, analogToAngle(555.0));
+}
+
 void test_deg_to_pulse_mid(void){
     TEST_ASSERT_EQUAL(1475, degToPulse(135.0));
 }
@@ -36,5 +41,6 @@ void loop() {
     RUN_TEST(test_deg_to_pulse_min);
     RUN_TEST(test_deg_to_pulse_mid);
     RUN_TEST(test_deg_to_pulse_max);
+    RUN_TEST(Test_analog_to_angle);
     UNITY_END();
 }

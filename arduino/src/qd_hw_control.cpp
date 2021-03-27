@@ -1,11 +1,8 @@
 #include "qd_hw_control.h"
 
 /**
- * Receive angle commands from ROS and convert them to degrees
- *
- * @param cmd_msg ROS controller message specifying joint angle in radian
- * @return fdsafdsafdsa
- */
+* Initialise node handle of ROS
+*/
 void rosInit(){
   nh.getHardware()->setBaud(115200);
   nh.initNode();
@@ -17,10 +14,8 @@ void rosInit(){
 
 
 /**
- * Receive angle commands from ROS and convert them to degrees
- *
- * @param cmd_msg ROS controller message specifying joint angle in radian
- * @return fdsafdsafdsa
+ * Initialise the driver object to control the servos
+ * from the PCA9685 board
  */
 void servoInit(){
   driver.begin();
@@ -30,10 +25,8 @@ void servoInit(){
 
 
 /**
- * Receive angle commands from ROS and convert them to degrees
- *
- * @param cmd_msg ROS controller message specifying joint angle in radian
- * @return fdsafdsafdsa
+ * Compute the joint limits with the base angle of 135 degree
+ * and the mechanical compensations
  */
 void computeLimits() {
   for (int i = 0; i < 12; i++){
@@ -45,10 +38,10 @@ void computeLimits() {
 
 
 /**
- * Receive angle commands from ROS and convert them to degrees
+ * Map an angle in degrees to the corresponding pulse
  *
- * @param cmd_msg ROS controller message specifying joint angle in radian
- * @return fdsafdsafdsa
+ * @param ang Angle in degrees
+ * @return Corresponding pulse
  */
 int degToPulse(float ang) {
   int pulse = map(ang, 0, 270, pulsemin, pulsemax);
@@ -57,21 +50,30 @@ int degToPulse(float ang) {
 
 
 /**
- * Receive angle commands from ROS and convert them to degrees
+ * Convert an angle in rad to degrees
  *
- * @param cmd_msg ROS controller message specifying joint angle in radian
- * @return fdsafdsafdsa
+ * @param angleRad Angle in rad
+ * @return angle in degrees
  */
 float radToDeg(float angleRad) {
   return angleRad*180.0/PI;
 }
 
+/**
+ * Convert an angle in degrees to radians
+ *
+ * @param angleDeg Angle in deg
+ * @return angle in rad
+ */
+float degToRad(float angleDeg) {
+  return angleDeg*PI/180.0;
+}
 
 /**
- * Receive angle commands from ROS and convert them to degrees
+ * Convert the analog output of a servo potentiometer to an angle in degrees
  *
- * @param cmd_msg ROS controller message specifying joint angle in radian
- * @return fdsafdsafdsa
+ * @param analog_value Analog reading from Arduino
+ * @return angle in degrees
  */
 float analogToAngle(int analog_value){
   return (analog_value - 60.0)*(270.0/(pulsemin-60.0));
@@ -79,10 +81,10 @@ float analogToAngle(int analog_value){
 
 
 /**
- * Receive angle commands from ROS and convert them to degrees
+ * Read the analog inputs on the Arduino and store them
+ * in angle in the feedback_data to send back to ROS
  *
- * @param cmd_msg ROS controller message specifying joint angle in radian
- * @return fdsafdsafdsa
+ * @param feedback_data Current angle of the servos to feedback to ROS
  */
 void readAngles(std_msgs::Float64MultiArray feedback_data){
   for(int i=0;i<12;i++){
@@ -94,8 +96,7 @@ void readAngles(std_msgs::Float64MultiArray feedback_data){
 /**
  * Receive angle commands from ROS and convert them to degrees
  *
- * @param cmd_msg ROS controller message specifying joint angle in radian
- * @return fdsafdsafdsa
+ * @param cmd_msg ROS controller message specifying joint angle in radians
  */
 void subscriberCallback(const std_msgs::Float64MultiArray& cmd_msg) {
 
@@ -109,10 +110,10 @@ void subscriberCallback(const std_msgs::Float64MultiArray& cmd_msg) {
 
 
 /**
- * Receive angle commands from ROS and convert them to degrees
+ * Receive angle commands, add the compensations,
+ * convert them to pulse and move the motors
  *
- * @param cmd_msg ROS controller message specifying joint angle in radian
- * @return fdsafdsafdsa
+ * @param cmdAngle Array of commands in degrees for the 12 motors
  */
 void moveMotor(float cmdAngle[12]) {
   float compensatedCmd[12];
@@ -127,10 +128,11 @@ void moveMotor(float cmdAngle[12]) {
 
 
 /**
- * Receive angle commands from ROS and convert them to degrees
+ * Add the mechanical and the ROS compensations to the angle command passed
  *
- * @param cmd_msg ROS controller message specifying joint angle in radian
- * @return fdsafdsafdsa
+ * @param rawAngle Angle in degrees before adding compensations
+ * @param index Index of the motor corresponding to the rawAngle passed
+ * @return The angle command with the compensations
  */
 float compensateCommand(float rawAngle, int index) {
   return rawAngle + compensationArrayMec[index] + compensationArrayROS[index];
@@ -138,10 +140,10 @@ float compensateCommand(float rawAngle, int index) {
 
 
 /**
- * Receive angle commands from ROS and convert them to degrees
+ * Check if the pulse commands are within the joint limits then write the commands
+ * to the driver to move the motors one after the other
  *
- * @param cmd_msg ROS controller message specifying joint angle in radian
- * @return fdsafdsafdsa
+ * @param pulseCommand Array of commands in pulse for the 12 motors
  */
 void motorController(int pulseCommand[12]) {
 

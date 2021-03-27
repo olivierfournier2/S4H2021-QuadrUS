@@ -12,6 +12,7 @@
 void computeLimits();
 int degToPulse(float ang);
 float radToDeg(float angleRad);
+float degToRad(float angleDeg);
 void subscriberCallback(const std_msgs::Float64MultiArray& cmd_msg);
 void moveMotor(float cmdAngle[12]);
 float compensateCommand(float rawAngle, int index);
