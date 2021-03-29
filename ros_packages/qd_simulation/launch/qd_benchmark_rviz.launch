@@ -4,7 +4,7 @@
 
    <!-- set these parameters on Parameter Server -->
    <param name="robot_description" 
-      command="xacro '$(find qd_simulation)/robot_description/motor_benchmark.urdf'" />
+      command="xacro '$(find qd_simulation)/robot_description/motor_benchmark.xacro'" />
    
    <!-- Send joint values -->
    <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui">

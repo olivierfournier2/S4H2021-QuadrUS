@@ -1,0 +1,29 @@
+<launch>
+
+    <arg name="mode" default="sim" />
+    <arg name="sim_mode" default="dyn" />
+
+    <!-- SIMULATION MODE-->
+
+    <group if="$(eval arg('mode') == 'sim')">
+
+      <!-- Load joint controller configurations from YAML file to parameter server -->
+      <rosparam file="$(find qd_control)/config/qd_trajectory_benchmark.yaml" command="load"/>
+
+      <!-- Load the controllers -->
+      <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="/quadrus" args="joint_state_controller leg_controller"/>
+
+      <!-- Launch the simulation -->
+      <group if="$(eval arg('sim_mode') == 'dyn')">
+        <include file="$(find qd_simulation)/launch/qd_benchmark_gazebo.launch"/>
+      </group>
+
+      <group if="$(eval arg('sim_mode') == 'kin')">
+        <include file="$(find qd_simulation)/launch/qd_benchmark_rviz.launch"/>
+      </group>
+
+    </group>
+
+
+</launch>

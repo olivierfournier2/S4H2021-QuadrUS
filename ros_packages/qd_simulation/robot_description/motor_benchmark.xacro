@@ -3,7 +3,8 @@
 
 	<!-- Import Rviz colors -->
 	<xacro:include filename="$(find qd_simulation)/robot_description/materials.xacro" />
-	<!-- Import all Gazebo-customization elements, including Gazebo colors -->
+	
+    <!-- Import all Gazebo-customization elements, including Gazebo colors -->
 	<xacro:include filename="$(find qd_simulation)/robot_description/quadrus.gazebo" />
 
 	<!-- Used for fixing robot to Gazebo 'base_link' -->
@@ -17,6 +18,12 @@
 			</geometry>
 			<material name="blue" />
 		</visual>
+
+        <inertial>
+            <origin xyz="0 0 0"/>
+            <mass value="0.15"/>
+            <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+        </inertial>
 
 	</link>
 
@@ -65,7 +72,7 @@
         <parent link="base_link"/>
         <child link="baton"/>
         <origin xyz="0 0.06 0.45" rpy="-1.570 1.57 0" /> 
-        <axis xyz="0 1 0" />
+        <axis xyz="0 0 1" />
     </joint>
 
     <joint name="fixed2" type="fixed">
@@ -78,7 +85,7 @@
     <transmission name="transmission_J1">
         <type>transmission_interface/SimpleTransmission</type>
 
-        <joint name="$J1">
+        <joint name="J1">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
 
