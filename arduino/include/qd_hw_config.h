@@ -10,7 +10,7 @@ const char cmd_topic[] = "hw_cmd";
 const char feedback_topic[] = "hw_feedback";
 const int pulsemin = 555;
 const int servo_freq = 60;
-const int loop_hz = 30;
+const int loop_hz = 20;
 
 float initPositions[12] = {0,90,0,
                            0,90,0,

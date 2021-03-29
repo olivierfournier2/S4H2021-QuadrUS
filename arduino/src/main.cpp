@@ -19,5 +19,5 @@ void loop() {
   readAngles(feedback_msg);
   feedback_pub.publish(&feedback_msg);
   nh.spinOnce();
-  delay(1.00/loop_hz);
+  delay(1000/loop_hz);
 }
