@@ -37,9 +37,9 @@
         </visual>      
 
         <inertial>
-            <origin xyz="0 0 0"/>
-            <mass value="0.15"/>
-            <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+            <origin xyz="0.0875 0 0"/>
+            <mass value="0.015"/>
+            <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.000039062"/>
         </inertial>
 
     </link>
@@ -56,7 +56,7 @@
         <inertial>
             <origin xyz="0 0 0"/>
             <mass value="0.163"/>
-            <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+            <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.000050625"/>
         </inertial>
 
     </link>

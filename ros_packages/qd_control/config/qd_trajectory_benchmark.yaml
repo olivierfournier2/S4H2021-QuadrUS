@@ -14,12 +14,12 @@ quadrus:
       goal_time: 0.0
       stopped_velocity_tolerance: 0.02
       J1:
-        goal: 0.01                
+        goal: 0.03 #1.5-2 deg, correspond a l'erreur de lecture sur le pot                
 
     gains:
-      J1: {p: 1,  d: 0, i: 0, i_clamp: 0}
+      J1: {p: 2000,  d: 1000, i: 0, i_clamp: 0}
 
 
     state_publish_rate:  25            
-    action_monitor_rate: 30           
+    action_monitor_rate: 20           
     stop_trajectory_duration: 0
