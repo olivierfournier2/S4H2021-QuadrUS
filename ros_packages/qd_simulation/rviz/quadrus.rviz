@@ -149,10 +149,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        world:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -198,8 +194,6 @@ Visualization Manager:
           Value: true
         link_front_right_upperleg:
           Value: true
-        world:
-          Value: true
       Marker Alpha: 1
       Marker Scale: 1
       Name: TF
@@ -207,28 +201,27 @@ Visualization Manager:
       Show Axes: false
       Show Names: false
       Tree:
-        world:
-          base_link:
-            link_back_left_hip:
-              link_back_left_upperleg:
-                link_back_left_lowerleg:
-                  link_back_left_paw:
-                    {}
-            link_back_right_hip:
-              link_back_right_upperleg:
-                link_back_right_lowerleg:
-                  link_back_right_paw:
-                    {}
-            link_front_left_hip:
-              link_front_left_upperleg:
-                link_front_left_lowerleg:
-                  link_front_left_paw:
-                    {}
-            link_front_right_hip:
-              link_front_right_upperleg:
-                link_front_right_lowerleg:
-                  link_front_right_paw:
-                    {}
+        base_link:
+          link_back_left_hip:
+            link_back_left_upperleg:
+              link_back_left_lowerleg:
+                link_back_left_paw:
+                  {}
+          link_back_right_hip:
+            link_back_right_upperleg:
+              link_back_right_lowerleg:
+                link_back_right_paw:
+                  {}
+          link_front_left_hip:
+            link_front_left_upperleg:
+              link_front_left_lowerleg:
+                link_front_left_paw:
+                  {}
+          link_front_right_hip:
+            link_front_right_upperleg:
+              link_front_right_lowerleg:
+                link_front_right_paw:
+                  {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -259,7 +252,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 0.8019915223121643
+      Distance: 0.2884238362312317
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -267,17 +260,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.08192325383424759
-        Y: 0.13405731320381165
-        Z: -0.051166631281375885
+        X: 0.04041050374507904
+        Y: 0.09650154411792755
+        Z: 0.06902669370174408
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4347974956035614
+      Pitch: 1.309796690940857
       Target Frame: <Fixed Frame>
-      Yaw: 0.8103569149971008
+      Yaw: 0.37535378336906433
     Saved: ~
 Window Geometry:
   Displays:
