@@ -3,15 +3,34 @@
 ### Quadruped Robot | UdeS-GRO
 [![Build Status](https://www.travis-ci.com/olivierfournier2/S4H2021-QuadrUS.svg?branch=main)](https://www.travis-ci.com/olivierfournier2/S4H2021-QuadrUS) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
+## Table of contents
+* [Development environment](#Development-environment)
+    * [Needed installation](#ROS-installation)
+    * [To set up this ROS project](#to-set-up-this-ROS-project)
+    * [Launching 2D and 3D simulations](#Launching-2D-and-3D-simulations)
+* [Robot environment](#Robot-environment)
 
 ## Development environment 
 
 ### System requirements
 - Ubuntu 20.04 LTS
 
+### Dependencies
+- ROS Noetic
+- Gazebo
+- Pybullet
+- Gym
+- Scipy
+- Numpy
+- ROS Joy
+- ROS Control
+
+
 ### ROS installation (Development environment)
 - ROS Noetic Ninjemys:  [Installation documentation](http://wiki.ros.org/noetic/Installation/Ubuntu)
 - Gazebo/Rviz : Choose Desktop-Full Install option when installing ROS
+
+### Dependencies installation (packages and second environment)
 - Install Terminator
 
     ```
@@ -20,7 +39,20 @@
     ```
     sudo apt-get install terminator
     ```
+- Install all dependencies for Kinematics
 
+    ```
+    sudo apt install python-is-python3
+    ```
+    ```
+    sudo apt install python3-pip
+    ```
+    ```
+    pip3 install pybullet
+    ```
+    ```
+    pip3 install gym
+    ```
 ### To set up this ROS project
 - Create and initialize a catkin workspace
 
