@@ -1,17 +1,25 @@
 import rospy
 from std_msgs import Float64
+from sensor_msgs import JointStates
 
+rospy.Timer()
 
-def callback(data):
-    rospy.loginfo("I heard %s",data.data)
+def callback(data, pub):
+    pub.
     
-def listener():
-    rospy.init_node('node_name')
-    rospy.Subscriber("quadrus/joint_positions", String, callback)
-    rospy.spin()
-
+    
+    
+    
 
 if __name__ == "__main__":
 
-    pub = rospy.Publisher('topic_name', std_msgs.msg.String, queue_size=10)
+    pub = rospy.Publisher('gazebo_benchmark_angle', 
+                          std_msgs.msg.Float64, 
+                          queue_size=100)
+
+    rospy.init_node('angle_publisher')
+    rospy.Subscriber("quadrus/joint_positions", JointStates, callback, (pub,))
+    rospy.spin()
+
+    
 

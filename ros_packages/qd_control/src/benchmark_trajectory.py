@@ -18,7 +18,7 @@ def move(jta, angle):
     
     point = JointTrajectoryPoint()
     point.positions = [angle]
-    point.time_from_start = rospy.Duration(1)
+    point.time_from_start = rospy.Duration(0.25)
     goal.trajectory.points.append(point)
     jta.send_goal_and_wait(goal)
     
