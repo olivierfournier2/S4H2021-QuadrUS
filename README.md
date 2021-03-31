@@ -5,7 +5,7 @@
 
 ## Table of contents
 * [Development environment](#Development-environment)
-    * [Needed installation](#ROS-installation)
+    * [Needed installation](#Dependencies)
     * [To set up this ROS project](#to-set-up-this-ROS-project)
     * [Launching 2D and 3D simulations](#Launching-2D-and-3D-simulations)
 * [Robot environment](#Robot-environment)
