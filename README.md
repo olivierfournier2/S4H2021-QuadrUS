@@ -5,7 +5,7 @@
 
 ## Table of contents
 * [Development environment](#Development-environment)
-    * [Needed installation](#Dependencies)
+    * [Needed installation](#ROS-installation)
     * [To set up this ROS project](#to-set-up-this-ROS-project)
     * [Launching 2D and 3D simulations](#Launching-2D-and-3D-simulations)
 * [Robot environment](#Robot-environment)
@@ -97,12 +97,12 @@ At this point, the ROS environment should be set up and ready to work with.
     
 - To view the robot model in Rviz, execute the following command in T2: 
     ```
-    roslaunch qd_simulation qd_rviz.launch
+    roslaunch qd_master qd_master.launch mode:=sim sim_mode:=kin
     ```
 
 - To start the dynamic simulation in Gazebo, execute the following command in T2:
     ```
-    roslaunch qd_simulation qd_gazebo.launch
+    rroslaunch qd_master qd_master.launch mode:=sim sim_mode:=dyn
     ```
 
 ## Robot environment
