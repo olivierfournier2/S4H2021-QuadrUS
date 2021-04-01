@@ -1,4 +1,9 @@
 <launch>
+
+ <!-- Load the URDF into the ROS Parameter Server -->
+ <param name="robot_description" 
+    command="xacro --inorder '$(find qd_simulation)/robot_description/quadrus.xacro'" />
+
  <!-- Minitaur State Machine Node-->
   <node name="spot_sm" pkg="qd_kinematics" type="spot_sm" output="screen">
     <param name="frequency" value="200.0" type="double"/>

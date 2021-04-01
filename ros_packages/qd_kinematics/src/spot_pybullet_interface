@@ -15,18 +15,13 @@ from qd_kinematics.msg import MiniCmd, JoyButtons
 import copy
 
 import sys
-
-import rospkg 
+import rospkg
 rospack = rospkg.RosPack()
+sys.path.append(rospack.get_path('qd_kinematics'))
 
-
-sys.path.append(rospack.get_path('qd_kinematics') + '/../')
-
-sys.path.append('../../')
-
-from spotmicro.GymEnvs.spot_bezier_env import spotBezierEnv
-from spotmicro.Kinematics.SpotKinematics import SpotModel
-from spotmicro.GaitGenerator.Bezier import BezierGait
+from include.spotmini_kinematics.GymEnvs.spot_bezier_env import spotBezierEnv
+from include.spotmini_kinematics.Kinematics.SpotKinematics import SpotModel
+from include.spotmini_kinematics.GaitGenerator.Bezier import BezierGait
 
 # Controller Params
 STEPLENGTH_SCALE = 0.06
