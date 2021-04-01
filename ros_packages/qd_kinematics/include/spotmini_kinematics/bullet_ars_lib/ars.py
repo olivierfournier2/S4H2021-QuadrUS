@@ -2,12 +2,17 @@
 import pickle
 import numpy as np
 from scipy.signal import butter, filtfilt
-from spotmicro.GaitGenerator.Bezier import BezierGait
-from spotmicro.OpenLoopSM.SpotOL import BezierStepper
-from spotmicro.Kinematics.SpotKinematics import SpotModel
-from spotmicro.Kinematics.LieAlgebra import TransToRp
+
+import sys
+import rospkg
+rospack = rospkg.RosPack()
+sys.path.append(rospack.get_path('qd_kinematics'))
+from include.spotmini_kinematics.GaitGenerator.Bezier import BezierGait
+from include.spotmini_kinematics.OpenLoopSM.SpotOL import BezierStepper
+from include.spotmini_kinematics.Kinematics.SpotKinematics import SpotModel
+from include.spotmini_kinematics.Kinematics.LieAlgebra import TransToRp
 import copy
-from spotmicro.util.gui import GUI
+from include.spotmini_kinematics.util.gui import GUI
 
 np.random.seed(0)
 

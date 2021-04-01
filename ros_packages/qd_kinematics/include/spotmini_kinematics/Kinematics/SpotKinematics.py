@@ -1,8 +1,14 @@
 #!/usr/bin/env python
 
 import numpy as np
-from S4H2021-QuadrUS.ros_packages.qd_kinematics.include.spotmini_kinematics.Kinematics.LegKinematics import LegIK
-from S4H2021-QuadrUS.ros_packages.qd_kinematics.include.spotmini_kinematics.Kinematics.LieAlgebra import RpToTrans, TransToRp, TransInv, RPY, TransformVector
+
+import sys
+import rospkg
+rospack = rospkg.RosPack()
+sys.path.append(rospack.get_path('qd_kinematics'))
+
+from include.spotmini_kinematics.Kinematics.LegKinematics import LegIK
+from include.spotmini_kinematics.Kinematics.LieAlgebra import RpToTrans, TransToRp, TransInv, RPY, TransformVector
 from collections import OrderedDict
 
 

@@ -16,14 +16,13 @@ import os
 import rospkg
 rospack = rospkg.RosPack()
 
-sys.path.append(rospack.get_path('qd_kinematics') + '/../')
 
-sys.path.append('../../')
+sys.path.append(rospack.get_path('qd_kinematics'))
 
-from S4H2021-QuadrUS.ros_packages.qd_kinematics.include.spotmini_kinematics.Kinematics.SpotKinematics import SpotModel
-from S4H2021-QuadrUS.ros_packages.qd_kinematics.include.spotmini_kinematics.GaitGenerator.Bezier import BezierGait
-from S4H2021-QuadrUS.ros_packages.qd_kinematics.include.spotmini_kinematics.src.bullet_ars_lib.ars import ARSAgent, Normalizer, Policy
-from S4H2021-QuadrUS.ros_packages.qd_kinematics.include.spotmini_kinematics.GymEnvs.spot_bezier_env import spotBezierEnv
+from include.spotmini_kinematics.Kinematics.SpotKinematics import SpotModel
+from include.spotmini_kinematics.GaitGenerator.Bezier import BezierGait
+from include.spotmini_kinematics.bullet_ars_lib.ars import ARSAgent, Normalizer, Policy
+from include.spotmini_kinematics.GymEnvs.spot_bezier_env import spotBezierEnv
 
 # Initialize Node
 rospy.init_node('Policies', anonymous=True)

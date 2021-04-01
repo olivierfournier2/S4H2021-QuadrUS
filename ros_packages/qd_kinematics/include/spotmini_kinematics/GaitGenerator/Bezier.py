@@ -1,5 +1,10 @@
 import numpy as np
-from spotmicro.Kinematics.LieAlgebra import TransToRp
+
+import sys
+import rospkg
+rospack = rospkg.RosPack()
+sys.path.append(rospack.get_path('qd_kinematics'))
+from include.spotmini_kinematics.Kinematics.LieAlgebra import TransToRp
 import copy
 
 STANCE = 0

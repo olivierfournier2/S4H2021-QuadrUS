@@ -1,5 +1,9 @@
 """ This file implements the gym environment of SpotMicro with Bezier Curve.
 """
+import sys
+import rospkg
+rospack = rospkg.RosPack()
+sys.path.append(rospack.get_path('qd_kinematics'))
 import math
 import time
 import gym
@@ -9,13 +13,13 @@ import pybullet_data
 from gym import spaces
 from gym.utils import seeding
 from pkg_resources import parse_version
-from spotmicro import spot
+from include.spotmini_kinematics import spot
 import pybullet_utils.bullet_client as bullet_client
 from gym.envs.registration import register
-from spotmicro.OpenLoopSM.SpotOL import BezierStepper
-from spotmicro.spot_gym_env import spotGymEnv
-import spotmicro.Kinematics.LieAlgebra as LA
-from spotmicro.spot_env_randomizer import SpotEnvRandomizer
+from include.spotmini_kinematics.OpenLoopSM.SpotOL import BezierStepper
+from include.spotmini_kinematics.spot_gym_env import spotGymEnv
+import include.spotmini_kinematics.Kinematics.LieAlgebra as LA
+from include.spotmini_kinematics.spot_env_randomizer import SpotEnvRandomizer
 
 SENSOR_NOISE_STDDEV = spot.SENSOR_NOISE_STDDEV
 
