@@ -64,12 +64,12 @@ OLD_FOOT_NAMES = [
 
 LEG_POSITION = ["front_left", "front_right", "back_left", "back_right"]
 MOTOR_NAMES = [
-    "motor_front_left_hip", "motor_front_left_upper_leg",
-    "motor_front_left_lower_leg", "motor_front_right_hip",
-    "motor_front_right_upper_leg", "motor_front_right_lower_leg",
-    "motor_back_left_hip", "motor_back_left_upper_leg",
-    "motor_back_left_lower_leg", "motor_back_right_hip",
-    "motor_back_right_upper_leg", "motor_back_right_lower_leg"
+    "J1", "J2",
+    "J3", "J4",
+    "J5", "J6",
+    "J7", "J8",
+    "J9", "J10",
+    "J11", "J12"
 ]
 
 MOTOR_LIMITS_BY_NAME = {}
@@ -82,8 +82,8 @@ for name in MOTOR_NAMES:
         MOTOR_LIMITS_BY_NAME[name] = [-2.9, 1.671]
 
 FOOT_NAMES = [
-    "front_left_leg_foot", "front_right_leg_foot", "back_left_leg_foot",
-    "back_right_leg_foot"
+    "joint_front_left_paw", "joint_front_right_paw", "joint_back_left_paw",
+    "joint_back_left_paw"
 ]
 
 _CHASSIS_NAME_PATTERN = re.compile(r"chassis\D*")
