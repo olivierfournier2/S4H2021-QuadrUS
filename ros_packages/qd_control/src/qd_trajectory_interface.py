@@ -4,17 +4,16 @@ import roslib
 #roslib.load_manifest('joint_trajectory_test')
 import rospy
 import actionlib
-from std_msgs.msg import Float64 Float64MultiArray
+from std_msgs.msg import Float64MultiArray
 import trajectory_msgs.msg
 import control_msgs.msg
 from trajectory_msgs.msg import JointTrajectoryPoint
 from control_msgs.msg import JointTrajectoryAction, JointTrajectoryGoal, FollowJointTrajectoryAction, FollowJointTrajectoryGoal
 import time
 
-def callback(data,jta)
-    joints_angles_ = data.data
-		move(jta, joint_angles_)
-		rospy.loginfo('Sent cmd to joint_angles')
+def callback(data, jta):
+    move(jta, data.data)
+    rospy.loginfo('Sent cmd to joint_angles')
 
 def move(jta, angles):
     goal = FollowJointTrajectoryGoal()
@@ -22,7 +21,7 @@ def move(jta, angles):
     
     point = JointTrajectoryPoint()
     point.positions = angles
-    point.time_from_start = rospy.Duration(0.5) #to optimize with real spot execution time
+    point.time_from_start = rospy.Duration(0.1)
     goal.trajectory.points.append(point)
     jta.send_goal_and_wait(goal)
     

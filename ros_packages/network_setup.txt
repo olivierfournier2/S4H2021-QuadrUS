@@ -1,0 +1,11 @@
+Connect to "quadrus" hotspot
+
+Wifi IP:
+192.168.4.1
+
+Wired IP:
+192.168.5.1
+
+SSH
+User: Ubuntu
+Pass: Raspberry
