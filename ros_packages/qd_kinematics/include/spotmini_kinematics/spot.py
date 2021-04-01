@@ -381,13 +381,13 @@ class Spot(object):
         if reload_urdf:
             if self._self_collision_enabled:
                 self.quadruped = self._pybullet_client.loadURDF(
-                    pybullet_data.getDataPath() + "/assets/urdf/spot.urdf",
+                    pybullet_data.getDataPath() + "/../../../../../qd_simulation/robot_description/quadrus.urdf",
                     init_position,
                     useFixedBase=self._on_rack,
                     flags=self._pybullet_client.URDF_USE_SELF_COLLISION_EXCLUDE_PARENT)
             else:
                 self.quadruped = self._pybullet_client.loadURDF(
-                    pybullet_data.getDataPath() + "/assets/urdf/spot.urdf",
+                    pybullet_data.getDataPath() + "/../../../../../qd_simulation/robot_description/quadrus.urdf",
                     init_position,
                     INIT_ORIENTATION,
                     useFixedBase=self._on_rack)
