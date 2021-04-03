@@ -154,7 +154,7 @@ class Spot(object):
                  motor_overheat_protection=False,
                  on_rack=False,
                  kd_for_pd_controllers=0.3,
-                 pose_id='stand',
+                 pose_id='zero',
                  np_random=np.random,
                  contacts=True):
         """Constructs a spot and reset it to the initial states.
