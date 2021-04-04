@@ -7,6 +7,8 @@
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
 #include "qd_kinematics/JoyButtons.h"
+#include "std_msgs/Bool.h"
+#include "std_srvs/Empty.h"
 
 namespace tele
 {
@@ -35,7 +37,7 @@ namespace tele
                const int & angular, const double & l_scale, const double & a_scale,
                const int & LB, const int & RB, const int & B_scale, const int & LT,
                const int & RT, const int & UD, const int & LR,
-               const int & sw, const int & es);
+               const int & sw, const int & es, ros::NodeHandle* nh, tele::Teleop &teleop);
 
         // \brief Takes a Joy messages and converts it to linear and angular velocity (Twist)
         // \param joy: sensor_msgs describing Joystick inputs
@@ -52,6 +54,9 @@ namespace tele
         // \brief returns whether the E-STOP has been pressed
         // \returns: ESTOP(bool)
         bool return_estop();
+
+        // publish command vel from joy
+        void sendCommandVel(const sensor_msgs::Joy::ConstPtr& joy);
 
         /// \brief returns other joystick buttons triggers, arrow pad etc)
         qd_kinematics::JoyButtons return_buttons();
@@ -78,12 +83,23 @@ namespace tele
         // TRIGGERS
         bool switch_trigger = false;
         bool ESTOP = false;
+        bool ready2pressES = true;
+        bool ready2pressSW = true;
         int updown = 0;
         int leftright = 0;
         bool left_bump = false;
         bool right_bump = false;
+        // RAMP UP
+        double current_cmd[6] = {0,0,0,0,0,0};
+        // PUBLISHER & SUBSCRIBER
+        ros::Publisher estop_pub;
+        ros::Publisher vel_pub;
+        ros::Publisher jb_pub;
+        ros::Subscriber joy_sub;
+        ros::ServiceClient switch_movement_client;
     };
     
 }
 
 #endif
+

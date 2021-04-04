@@ -70,65 +70,9 @@ int main(int argc, char** argv)
 
     tele::Teleop teleop = tele::Teleop(linear_x, linear_y, linear_z, angular,
                                        l_scale, a_scale, LB, RB, B_scale, LT,
-                                       RT, UD, LR, sw, es);
-
-    // Init Switch Movement Server
-    ros::ServiceClient switch_movement_client = nh.serviceClient<std_srvs::Empty>("switch_movement");
-    ros::service::waitForService("switch_movement", -1);
-
-    // Init ESTOP Publisher
-    ros::Publisher estop_pub = nh.advertise<std_msgs::Bool>("estop", 1);
-    // Init Command Publisher
-    ros::Publisher vel_pub = nh.advertise<geometry_msgs::Twist>("teleop", 1);
-    // Init Joy Button Publisher
-    ros::Publisher jb_pub = nh.advertise<qd_kinematics::JoyButtons>("joybuttons", 1);
-
-    // Init Subscriber (also handles pub)
-    // TODO: Figure out how to use std::bind properly
-    // ros::Subscriber joy_sub = nh.subscribe<sensor_msgs::Joy>("joy", 1, std::bind(&tele::Teleop::joyCallback, std::placeholders::_1, vel_pub), &teleop);
-    ros::Subscriber joy_sub = nh.subscribe<sensor_msgs::Joy>("joy", 1, &tele::Teleop::joyCallback, &teleop);
-
-    ros::Rate rate(frequency);
-
-    // Record time for debouncing buttons
-    ros::Time current_time = ros::Time::now();
-    ros::Time last_time = ros::Time::now();
-
-
-    // Main While
-    while (ros::ok())
-    {
-        ros::spinOnce();
-        current_time = ros::Time::now();
-
-        std_msgs::Bool estop;
-        estop.data = teleop.return_estop();
-
-        if (estop.data and current_time.toSec() - last_time.toSec() >= debounce_thresh)
-        {
-            ROS_INFO("SENDING E-STOP COMMAND!");
-            last_time = ros::Time::now();
-        } else if (!teleop.return_trigger())
-        {
-          // Send Twist
-          vel_pub.publish(teleop.return_twist());
-          estop.data = 0;
-        } else if (current_time.toSec() - last_time.toSec() >= debounce_thresh)
-        {
-          // Call Switch Service
-          std_srvs::Empty e;
-          switch_movement_client.call(e);
-          estop.data = 0;
-          last_time = ros::Time::now();
-        }
-        // pub buttons
-        jb_pub.publish(teleop.return_buttons());
-
-        estop_pub.publish(estop);
-        
-        
-        rate.sleep();
-    }
+                                       RT, UD, LR, sw, es, &nh, teleop);
+    
+    ros::spin();
 
     return 0;
 }
