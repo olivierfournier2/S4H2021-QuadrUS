@@ -41,6 +41,7 @@ alpha = 0.7
 # Added this to avoid filtering residuals
 # -1 for all
 
+joint_offsets = [[0.0, -1.4792, 1.3127], [0.0, -1.4792, 1.3127], [0.0, -1.4792, 1.3127], [0.0,-1.4792, 1.3127]]
 
 class SpotCommander():
     def __init__(self):
@@ -226,6 +227,7 @@ class SpotCommander():
                                                 contacts, dt)
 
         joint_angles = self.spot.IK(orn, pos, self.T_bf)
+        joint_angles += joint_offsets
         self.env.pass_joint_angles(joint_angles.reshape(-1))
         # Get External Observations
         # TODO

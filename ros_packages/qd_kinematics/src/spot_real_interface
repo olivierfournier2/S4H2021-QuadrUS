@@ -46,6 +46,8 @@ alpha = rospy.get_param("alpha")
 # -1 for all
 actions_to_filter = rospy.get_param("actions_to_filter")
 
+joint_offsets = [[0.0, -1.4792, 1.3127], [0.0, -1.4792, 1.3127], [0.0, -1.4792, 1.3127], [0.0,-1.4792, 1.3127]]
+
 
 class SpotCommander():
     def __init__(self, Agent=True, contacts=False):
@@ -346,6 +348,7 @@ class SpotCommander():
             pos[2] += abs(self.action[1]) * Z_SCALE
 
         joint_angles = self.spot.IK(orn, pos, T_bf_copy)
+        joint_angles += joint_offsets
 
         ja_msg = JointAngles()
 

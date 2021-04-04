@@ -37,58 +37,55 @@
   </gazebo>
   <gazebo reference="base_link">
     <material>Gazebo/Blue</material>
-    <pose>0 0 1 0 0 0 </pose>
+    <pose>0 0 0.23 0 0 0 </pose>
   </gazebo>
   <!-- Used for fixing robot to Gazebo 'base_link' -->
-  <link name="world"/>
-  <joint name="fixed" type="fixed">
-    <parent link="world"/>
-    <child link="base_link"/>
-    <origin xyz="0 0 1"/>
-  </joint>
+  <!-- link name="world"/>
+
+	<joint name="fixed" type="fixed">
+		<parent link="world"/>
+		<child link="base_link"/>
+		<origin xyz="0 0 1"/>
+	</joint -->
   <link name="base_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.4172 0.116 0.03035"/>
-      </geometry>
-      <material name="blue"/>
-    </visual>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <box size="0.2 0.2 0.03035"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/body.dae"/>
       </geometry>
       <material name="blue"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.4172 0.116 0.03035"/>
+        <box size="0.417 0.116 0.03"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/body.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.500"/>
-      <inertia ixx="0.00093" ixy="0.0" ixz="0.0" iyy="0.00458" iyz="0.0" izz="0.00540"/>
+      <mass value="0.800"/>
+      <inertia ixx="0.00228" ixy="0.0" ixz="0.0" iyy="0.01125" iyz="0.0" izz="0.01326"/>
     </inertial>
   </link>
   <link name="link_front_left_hip">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.060 0.035 0.078"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/left_hip.dae"/>
       </geometry>
       <material name="red"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0.014 0.04125 0.0147"/>
       <geometry>
-        <box size="0.060 0.035 0.078"/>
+        <box size="0.064 0.103 0.0685"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/left_hip.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.332"/>
-      <inertia ixx="0.00109" ixy="0.0" ixz="-0.00004" iyy="0.00146" iyz="-0.00039" izz="0.00066"/>
+      <mass value="0.1191"/>
+      <origin xyz="0.004136 0.002457 0.01974"/>
+      <inertia ixx="0.000176" ixy="-0.000004" ixz="-0.000017" iyy="0.000131" iyz="-0.000021" izz="0.000108"/>
     </inertial>
   </link>
   <joint name="J1" type="continuous">
@@ -109,30 +106,34 @@
   </transmission>
   <gazebo reference="link_front_left_hip">
     <material>Gazebo/Red</material>
+    <!-- selfCollide>true</selfCollide -->
+    <gravity>true</gravity>
   </gazebo>
   <link name="link_front_left_upperleg">
     <visual>
-      <origin rpy="0 0 0" xyz="-0.07 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.17 0.0365 0.026"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/left_femur.dae"/>
       </geometry>
       <material name="blue"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="-0.07 0 0"/>
+      <origin rpy="0 0 0" xyz="-0.066 0 -0.008"/>
       <geometry>
-        <box size="0.17  0.0365 0.026"/>
+        <box size="0.172 0.073 0.046"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/left_femur.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.32114"/>
-      <inertia ixx="0.00014" ixy="0.00001" ixz="0.00002" iyy="0.00207" iyz="0.0" izz="0.00215"/>
+      <mass value="0.13118"/>
+      <origin xyz="-0.041697 -0.007043 -0.000214"/>
+      <inertia ixx="0.000042" ixy="-0.000009" ixz="0.000011" iyy="0.000283" iyz="0.000002" izz="0.000310"/>
     </inertial>
   </link>
   <joint name="J2" type="continuous">
     <parent link="link_front_left_hip"/>
     <child link="link_front_left_upperleg"/>
-    <origin rpy="0 0 0" xyz="0 0.05755 0"/>
+    <origin rpy="0 0 0" xyz="0 0.05925 0"/>
     <axis xyz="0 1 0"/>
   </joint>
   <transmission name="transmission_front_left_upperleg">
@@ -147,30 +148,34 @@
   </transmission>
   <gazebo reference="link_front_left_upperleg">
     <material>Gazebo/White</material>
+    <!-- selfCollide>true</selfCollide -->
+    <gravity>true</gravity>
   </gazebo>
   <link name="link_front_left_lowerleg">
     <visual>
-      <origin rpy="0 0 0" xyz="0.075 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.17833 0.02 0.03"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/left_tibia.dae"/>
       </geometry>
       <material name="blue"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0.075 0 0"/>
+      <origin rpy="0 0 0" xyz="0.055 0 0"/>
       <geometry>
-        <box size="0.17833 0.02 0.03"/>
+        <box size="0.15 0.048 0.028"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/left_tibia.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.20407"/>
-      <inertia ixx="0.00005" ixy="0.00008" ixz="0.0" iyy="0.00121" iyz="0.0" izz="0.00123"/>
+      <mass value="0.10059"/>
+      <origin xyz=" 0.025048 -0.002594 0.000523"/>
+      <inertia ixx="0.000017" ixy="0.000001" ixz="0.000004" iyy="0.000149" iyz="0.0" izz="0.000158"/>
     </inertial>
   </link>
   <joint name="J3" type="continuous">
     <parent link="link_front_left_upperleg"/>
     <child link="link_front_left_lowerleg"/>
-    <origin rpy="0 1.5708 0" xyz="-0.15 0 -0.0156"/>
+    <origin rpy="0 1.5708 0" xyz="-0.1396 0 -0.01886"/>
     <axis xyz="0 1 0"/>
   </joint>
   <transmission name="transmission_front_left_lowerleg">
@@ -185,13 +190,15 @@
   </transmission>
   <gazebo reference="link_front_left_lowerleg">
     <material>Gazebo/White</material>
+    <!-- selfCollide>true</selfCollide -->
+    <gravity>true</gravity>
   </gazebo>
   <!-- Paw -->
   <link name="link_front_left_paw">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <sphere radius="0.02"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/tpe_tip.dae"/>
       </geometry>
       <material name="green"/>
     </visual>
@@ -199,38 +206,43 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <sphere radius="0.02"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/tpe_tip.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.0"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      <mass value="0.003"/>
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001"/>
     </inertial>
   </link>
   <joint name="joint_front_left_paw" type="fixed">
     <parent link="link_front_left_lowerleg"/>
     <child link="link_front_left_paw"/>
-    <origin rpy="0 0 0" xyz="0.15 0 0"/>
+    <origin rpy="0 0.698 0" xyz="0.1296 0 0"/>
   </joint>
   <gazebo reference="link_front_left_paw">
     <material>Gazebo/Green</material>
+    <!-- selfCollide>true</selfCollide -->
+    <gravity>true</gravity>
   </gazebo>
   <link name="link_front_right_hip">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.060 0.035 0.078"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/right_hip.dae"/>
       </geometry>
       <material name="red"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0.014 -0.04125 0.0147"/>
       <geometry>
-        <box size="0.060 0.035 0.078"/>
+        <box size="0.064 0.103 0.0685"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/right_hip.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.332"/>
-      <inertia ixx="0.00109" ixy="0.0" ixz="-0.00004" iyy="0.00146" iyz="-0.00039" izz="0.00066"/>
+      <mass value="0.1191"/>
+      <origin xyz="0.004136 0.002457 0.01974"/>
+      <inertia ixx="0.000176" ixy="-0.000004" ixz="-0.000017" iyy="0.000131" iyz="-0.000021" izz="0.000108"/>
     </inertial>
   </link>
   <joint name="J4" type="continuous">
@@ -251,30 +263,34 @@
   </transmission>
   <gazebo reference="link_front_right_hip">
     <material>Gazebo/Red</material>
+    <!-- selfCollide>true</selfCollide -->
+    <gravity>true</gravity>
   </gazebo>
   <link name="link_front_right_upperleg">
     <visual>
-      <origin rpy="0 0 0" xyz="-0.07 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.17 0.0365 0.026"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/right_femur.dae"/>
       </geometry>
       <material name="blue"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="-0.07 0 0"/>
+      <origin rpy="0 0 0" xyz="-0.066 0 -0.008"/>
       <geometry>
-        <box size="0.17  0.0365 0.026"/>
+        <box size="0.172 0.073 0.046"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/right_femur.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.32114"/>
-      <inertia ixx="0.00014" ixy="0.00001" ixz="0.00002" iyy="0.00207" iyz="0.0" izz="0.00215"/>
+      <mass value="0.13118"/>
+      <origin xyz="-0.041697 -0.007043 -0.000214"/>
+      <inertia ixx="0.000042" ixy="-0.000009" ixz="0.000011" iyy="0.000283" iyz="0.000002" izz="0.000310"/>
     </inertial>
   </link>
   <joint name="J5" type="continuous">
     <parent link="link_front_right_hip"/>
     <child link="link_front_right_upperleg"/>
-    <origin rpy="0 0 0" xyz="0 -0.05755 0"/>
+    <origin rpy="0 0 0" xyz="0 -0.05925 0"/>
     <axis xyz="0 1 0"/>
   </joint>
   <transmission name="transmission_front_right_upperleg">
@@ -289,30 +305,34 @@
   </transmission>
   <gazebo reference="link_front_right_upperleg">
     <material>Gazebo/White</material>
+    <!-- selfCollide>true</selfCollide -->
+    <gravity>true</gravity>
   </gazebo>
   <link name="link_front_right_lowerleg">
     <visual>
-      <origin rpy="0 0 0" xyz="0.075 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.17833 0.02 0.03"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/right_tibia.dae"/>
       </geometry>
       <material name="blue"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0.075 0 0"/>
+      <origin rpy="0 0 0" xyz="0.055 0 0"/>
       <geometry>
-        <box size="0.17833 0.02 0.03"/>
+        <box size="0.15 0.048 0.028"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/right_tibia.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.20407"/>
-      <inertia ixx="0.00005" ixy="0.00008" ixz="0.0" iyy="0.00121" iyz="0.0" izz="0.00123"/>
+      <mass value="0.10059"/>
+      <origin xyz=" 0.025048 -0.002594 0.000523"/>
+      <inertia ixx="0.000017" ixy="0.000001" ixz="0.000004" iyy="0.000149" iyz="0.0" izz="0.000158"/>
     </inertial>
   </link>
   <joint name="J6" type="continuous">
     <parent link="link_front_right_upperleg"/>
     <child link="link_front_right_lowerleg"/>
-    <origin rpy="0 1.5708 0" xyz="-0.15 0 -0.0156"/>
+    <origin rpy="0 1.5708 0" xyz="-0.1396 0 -0.01886"/>
     <axis xyz="0 1 0"/>
   </joint>
   <transmission name="transmission_front_right_lowerleg">
@@ -327,13 +347,15 @@
   </transmission>
   <gazebo reference="link_front_right_lowerleg">
     <material>Gazebo/White</material>
+    <!-- selfCollide>true</selfCollide -->
+    <gravity>true</gravity>
   </gazebo>
   <!-- Paw -->
   <link name="link_front_right_paw">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <sphere radius="0.02"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/tpe_tip.dae"/>
       </geometry>
       <material name="green"/>
     </visual>
@@ -341,38 +363,43 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <sphere radius="0.02"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/tpe_tip.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.0"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      <mass value="0.003"/>
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001"/>
     </inertial>
   </link>
   <joint name="joint_front_right_paw" type="fixed">
     <parent link="link_front_right_lowerleg"/>
     <child link="link_front_right_paw"/>
-    <origin rpy="0 0 0" xyz="0.15 0 0"/>
+    <origin rpy="0 0.698 0" xyz="0.1296 0 0"/>
   </joint>
   <gazebo reference="link_front_right_paw">
     <material>Gazebo/Green</material>
+    <!-- selfCollide>true</selfCollide -->
+    <gravity>true</gravity>
   </gazebo>
   <link name="link_back_left_hip">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.060 0.035 0.078"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/left_hip.dae"/>
       </geometry>
       <material name="red"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0.014 0.04125 0.0147"/>
       <geometry>
-        <box size="0.060 0.035 0.078"/>
+        <box size="0.064 0.103 0.0685"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/left_hip.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.332"/>
-      <inertia ixx="0.00109" ixy="0.0" ixz="-0.00004" iyy="0.00146" iyz="-0.00039" izz="0.00066"/>
+      <mass value="0.1191"/>
+      <origin xyz="0.004136 0.002457 0.01974"/>
+      <inertia ixx="0.000176" ixy="-0.000004" ixz="-0.000017" iyy="0.000131" iyz="-0.000021" izz="0.000108"/>
     </inertial>
   </link>
   <joint name="J7" type="continuous">
@@ -393,30 +420,34 @@
   </transmission>
   <gazebo reference="link_back_left_hip">
     <material>Gazebo/Red</material>
+    <!-- selfCollide>true</selfCollide -->
+    <gravity>true</gravity>
   </gazebo>
   <link name="link_back_left_upperleg">
     <visual>
-      <origin rpy="0 0 0" xyz="-0.07 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.17 0.0365 0.026"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/left_femur.dae"/>
       </geometry>
       <material name="blue"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="-0.07 0 0"/>
+      <origin rpy="0 0 0" xyz="-0.066 0 -0.008"/>
       <geometry>
-        <box size="0.17  0.0365 0.026"/>
+        <box size="0.172 0.073 0.046"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/left_femur.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.32114"/>
-      <inertia ixx="0.00014" ixy="0.00001" ixz="0.00002" iyy="0.00207" iyz="0.0" izz="0.00215"/>
+      <mass value="0.13118"/>
+      <origin xyz="-0.041697 -0.007043 -0.000214"/>
+      <inertia ixx="0.000042" ixy="-0.000009" ixz="0.000011" iyy="0.000283" iyz="0.000002" izz="0.000310"/>
     </inertial>
   </link>
   <joint name="J8" type="continuous">
     <parent link="link_back_left_hip"/>
     <child link="link_back_left_upperleg"/>
-    <origin rpy="0 0 0" xyz="0 0.05755 0"/>
+    <origin rpy="0 0 0" xyz="0 0.05925 0"/>
     <axis xyz="0 1 0"/>
   </joint>
   <transmission name="transmission_back_left_upperleg">
@@ -431,30 +462,34 @@
   </transmission>
   <gazebo reference="link_back_left_upperleg">
     <material>Gazebo/White</material>
+    <!-- selfCollide>true</selfCollide -->
+    <gravity>true</gravity>
   </gazebo>
   <link name="link_back_left_lowerleg">
     <visual>
-      <origin rpy="0 0 0" xyz="0.075 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.17833 0.02 0.03"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/left_tibia.dae"/>
       </geometry>
       <material name="blue"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0.075 0 0"/>
+      <origin rpy="0 0 0" xyz="0.055 0 0"/>
       <geometry>
-        <box size="0.17833 0.02 0.03"/>
+        <box size="0.15 0.048 0.028"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/left_tibia.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.20407"/>
-      <inertia ixx="0.00005" ixy="0.00008" ixz="0.0" iyy="0.00121" iyz="0.0" izz="0.00123"/>
+      <mass value="0.10059"/>
+      <origin xyz=" 0.025048 -0.002594 0.000523"/>
+      <inertia ixx="0.000017" ixy="0.000001" ixz="0.000004" iyy="0.000149" iyz="0.0" izz="0.000158"/>
     </inertial>
   </link>
   <joint name="J9" type="continuous">
     <parent link="link_back_left_upperleg"/>
     <child link="link_back_left_lowerleg"/>
-    <origin rpy="0 1.5708 0" xyz="-0.15 0 -0.0156"/>
+    <origin rpy="0 1.5708 0" xyz="-0.1396 0 -0.01886"/>
     <axis xyz="0 1 0"/>
   </joint>
   <transmission name="transmission_back_left_lowerleg">
@@ -469,13 +504,15 @@
   </transmission>
   <gazebo reference="link_back_left_lowerleg">
     <material>Gazebo/White</material>
+    <!-- selfCollide>true</selfCollide -->
+    <gravity>true</gravity>
   </gazebo>
   <!-- Paw -->
   <link name="link_back_left_paw">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <sphere radius="0.02"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/tpe_tip.dae"/>
       </geometry>
       <material name="green"/>
     </visual>
@@ -483,38 +520,43 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <sphere radius="0.02"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/tpe_tip.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.0"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      <mass value="0.003"/>
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001"/>
     </inertial>
   </link>
   <joint name="joint_back_left_paw" type="fixed">
     <parent link="link_back_left_lowerleg"/>
     <child link="link_back_left_paw"/>
-    <origin rpy="0 0 0" xyz="0.15 0 0"/>
+    <origin rpy="0 0.698 0" xyz="0.1296 0 0"/>
   </joint>
   <gazebo reference="link_back_left_paw">
     <material>Gazebo/Green</material>
+    <!-- selfCollide>true</selfCollide -->
+    <gravity>true</gravity>
   </gazebo>
   <link name="link_back_right_hip">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.060 0.035 0.078"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/right_hip.dae"/>
       </geometry>
       <material name="red"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="0.014 -0.04125 0.0147"/>
       <geometry>
-        <box size="0.060 0.035 0.078"/>
+        <box size="0.064 0.103 0.0685"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/right_hip.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.332"/>
-      <inertia ixx="0.00109" ixy="0.0" ixz="-0.00004" iyy="0.00146" iyz="-0.00039" izz="0.00066"/>
+      <mass value="0.1191"/>
+      <origin xyz="0.004136 0.002457 0.01974"/>
+      <inertia ixx="0.000176" ixy="-0.000004" ixz="-0.000017" iyy="0.000131" iyz="-0.000021" izz="0.000108"/>
     </inertial>
   </link>
   <joint name="J10" type="continuous">
@@ -535,30 +577,34 @@
   </transmission>
   <gazebo reference="link_back_right_hip">
     <material>Gazebo/Red</material>
+    <!-- selfCollide>true</selfCollide -->
+    <gravity>true</gravity>
   </gazebo>
   <link name="link_back_right_upperleg">
     <visual>
-      <origin rpy="0 0 0" xyz="-0.07 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.17 0.0365 0.026"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/right_femur.dae"/>
       </geometry>
       <material name="blue"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="-0.07 0 0"/>
+      <origin rpy="0 0 0" xyz="-0.066 0 -0.008"/>
       <geometry>
-        <box size="0.17  0.0365 0.026"/>
+        <box size="0.172 0.073 0.046"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/right_femur.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.32114"/>
-      <inertia ixx="0.00014" ixy="0.00001" ixz="0.00002" iyy="0.00207" iyz="0.0" izz="0.00215"/>
+      <mass value="0.13118"/>
+      <origin xyz="-0.041697 -0.007043 -0.000214"/>
+      <inertia ixx="0.000042" ixy="-0.000009" ixz="0.000011" iyy="0.000283" iyz="0.000002" izz="0.000310"/>
     </inertial>
   </link>
   <joint name="J11" type="continuous">
     <parent link="link_back_right_hip"/>
     <child link="link_back_right_upperleg"/>
-    <origin rpy="0 0 0" xyz="0 -0.05755 0"/>
+    <origin rpy="0 0 0" xyz="0 -0.05925 0"/>
     <axis xyz="0 1 0"/>
   </joint>
   <transmission name="transmission_back_right_upperleg">
@@ -573,30 +619,34 @@
   </transmission>
   <gazebo reference="link_back_right_upperleg">
     <material>Gazebo/White</material>
+    <!-- selfCollide>true</selfCollide -->
+    <gravity>true</gravity>
   </gazebo>
   <link name="link_back_right_lowerleg">
     <visual>
-      <origin rpy="0 0 0" xyz="0.075 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.17833 0.02 0.03"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/right_tibia.dae"/>
       </geometry>
       <material name="blue"/>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0.075 0 0"/>
+      <origin rpy="0 0 0" xyz="0.055 0 0"/>
       <geometry>
-        <box size="0.17833 0.02 0.03"/>
+        <box size="0.15 0.048 0.028"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/right_tibia.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.20407"/>
-      <inertia ixx="0.00005" ixy="0.00008" ixz="0.0" iyy="0.00121" iyz="0.0" izz="0.00123"/>
+      <mass value="0.10059"/>
+      <origin xyz=" 0.025048 -0.002594 0.000523"/>
+      <inertia ixx="0.000017" ixy="0.000001" ixz="0.000004" iyy="0.000149" iyz="0.0" izz="0.000158"/>
     </inertial>
   </link>
   <joint name="J12" type="continuous">
     <parent link="link_back_right_upperleg"/>
     <child link="link_back_right_lowerleg"/>
-    <origin rpy="0 1.5708 0" xyz="-0.15 0 -0.0156"/>
+    <origin rpy="0 1.5708 0" xyz="-0.1396 0 -0.01886"/>
     <axis xyz="0 1 0"/>
   </joint>
   <transmission name="transmission_back_right_lowerleg">
@@ -611,13 +661,15 @@
   </transmission>
   <gazebo reference="link_back_right_lowerleg">
     <material>Gazebo/White</material>
+    <!-- selfCollide>true</selfCollide -->
+    <gravity>true</gravity>
   </gazebo>
   <!-- Paw -->
   <link name="link_back_right_paw">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <sphere radius="0.02"/>
+        <mesh filename="package://qd_simulation/robot_description/mesh/tpe_tip.dae"/>
       </geometry>
       <material name="green"/>
     </visual>
@@ -625,20 +677,23 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <sphere radius="0.02"/>
+        <!-- mesh filename="package://qd_simulation/robot_description/mesh/tpe_tip.dae"/-->
       </geometry>
     </collision>
     <inertial>
-      <mass value="0.0"/>
-      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      <mass value="0.003"/>
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001"/>
     </inertial>
   </link>
   <joint name="joint_back_right_paw" type="fixed">
     <parent link="link_back_right_lowerleg"/>
     <child link="link_back_right_paw"/>
-    <origin rpy="0 0 0" xyz="0.15 0 0"/>
+    <origin rpy="0 0.698 0" xyz="0.1296 0 0"/>
   </joint>
   <gazebo reference="link_back_right_paw">
     <material>Gazebo/Green</material>
+    <!-- selfCollide>true</selfCollide -->
+    <gravity>true</gravity>
   </gazebo>
 </robot>
 
