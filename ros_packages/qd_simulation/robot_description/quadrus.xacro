@@ -18,38 +18,44 @@
 	<!-- Import all Gazebo-customization elements, including Gazebo colors -->
 	<xacro:include filename="$(find qd_simulation)/robot_description/quadrus.gazebo" />
 
-	<!-- Used for fixing robot to Gazebo 'base_link' -->
-	<!-- link name="world"/>
+	<!-- Used for fixing robot to Gazebo's base link -->
+	<link name="base_link"/>
 
-	<joint name="fixed" type="fixed">
-		<parent link="world"/>
-		<child link="base_link"/>
-		<origin xyz="0 0 1"/>
-	</joint -->
+	<joint name="floating" type="fixed">
+		<parent link="base_link"/>
+		<child link="chassis"/>
+		<origin xyz="0 0 0"/>
+	</joint>
 
-	<link name="base_link">
-		<visual>
-			<origin xyz="0 0 0" rpy="0 0 0" />
-			<geometry>
-				<mesh filename="package://qd_simulation/robot_description/mesh/body.dae"/>
-			</geometry>
-			<material name="blue" />
-		</visual>
+	<!-- Chassis -->
+		<link name="chassis">
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<mesh filename="package://qd_simulation/robot_description/mesh/body.dae"/>
+				</geometry>
+				<material name="blue" />
+			</visual>
+			
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<box size="0.417 0.116 0.03"/>
+					<!-- mesh filename="package://qd_simulation/robot_description/mesh/body.dae"/-->
+				</geometry>
+			</collision>
 		
-		<collision>
-			<origin xyz="0 0 0" rpy="0 0 0" />
-			<geometry>
-				<box size="0.417 0.116 0.03"/>
-				<!-- mesh filename="package://qd_simulation/robot_description/mesh/body.dae"/-->
-			</geometry>
-		</collision>
-	
-		<inertial>
-			<mass value="0.800"/>
-			<inertia ixx="0.00228" ixy="0.0" ixz="0.0" iyy="0.01125" iyz="0.0" izz="0.01326"/>
-		</inertial>	
+			<inertial>
+				<mass value="0.800"/>
+				<inertia ixx="0.00228" ixy="0.0" ixz="0.0" iyy="0.01125" iyz="0.0" izz="0.01326"/>
+			</inertial>	
 
-	</link>
+		</link>
+			
+		<gazebo reference="chassis">
+			<material>Gazebo/Blue</material>
+			<gravity>true</gravity>
+		</gazebo>
 
 	<xacro:macro name="quadrus_leg" params="long lat id">
 		<!-- Hip -->
@@ -101,7 +107,7 @@
 			</link>
 
 			<joint name="${hip_joint_id}" type="continuous">
-				<parent link="base_link"/>
+				<parent link="chassis"/>
 				<child link="link_${long}_${lat}_hip"/>
 
 				<xacro:if value="${long == 'front' and lat == 'left'}">
