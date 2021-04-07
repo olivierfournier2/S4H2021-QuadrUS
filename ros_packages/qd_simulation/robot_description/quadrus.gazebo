@@ -9,10 +9,5 @@
 		</plugin>
 	</gazebo>
 
-	<gazebo reference="base_link">
-		<material>Gazebo/Blue</material>
-		<pose>0 0 0.23 0 0 0 </pose>
-	</gazebo>
-
 </robot>
 
