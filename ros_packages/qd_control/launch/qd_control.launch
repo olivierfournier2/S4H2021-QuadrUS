@@ -14,6 +14,11 @@
       <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
         output="screen" ns="/quadrus" args="joint_state_controller leg_controller"/>
 
+      <!-- Load the trajectory interface -->
+      <node name="trajectory_interface" pkg="qd_control" type="qd_trajectory_interface.py"/>
+
+      <include file="$(find qd_kinematics)/launch/spot_move.launch"/>
+
       <!-- Launch the simulation -->
       <group if="$(eval arg('sim_mode') == 'dyn')">
         <include file="$(find qd_simulation)/launch/qd_gazebo.launch"/>

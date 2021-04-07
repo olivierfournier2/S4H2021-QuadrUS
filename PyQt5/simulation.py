@@ -8,110 +8,126 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QProcess  ####################### AJOUT
 import os ####################### AJOUT  
-import rosgraph ####################### AJOUT  
-import subprocess
-import time
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(947, 744)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+class Ui_simulationWindow(object):
+    def setupUi(self, simulationWindow):
+        simulationWindow.setObjectName("simulationWindow")
+        simulationWindow.resize(947, 744)
+        simulationWindow.setStyleSheet("background-color: rgb(238, 238, 236);")
+        self.centralwidget = QtWidgets.QWidget(simulationWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.sim_rviz = QtWidgets.QPushButton(self.centralwidget)
-        self.sim_rviz.setGeometry(QtCore.QRect(150, 400, 241, 101))
-        self.sim_rviz.setObjectName("sim_rviz")
-        self.sim_gazebo = QtWidgets.QPushButton(self.centralwidget)
-        self.sim_gazebo.setGeometry(QtCore.QRect(450, 400, 241, 101))
-        self.sim_gazebo.setObjectName("sim_gazebo")
+        self.rvizButton = QtWidgets.QPushButton(self.centralwidget)
+        self.rvizButton.setGeometry(QtCore.QRect(350, 140, 241, 101))
+        self.rvizButton.setStyleSheet("background-color: rgb(252, 233, 79);\n"
+"font: 75 oblique 15pt \"Ubuntu Condensed\";")
+        self.rvizButton.setObjectName("rvizButton")
+        self.gazeboButton = QtWidgets.QPushButton(self.centralwidget)
+        self.gazeboButton.setGeometry(QtCore.QRect(350, 270, 241, 101))
+        self.gazeboButton.setStyleSheet("background-color: rgb(252, 233, 79);\n"
+"font: 75 oblique 15pt \"Ubuntu Condensed\";")
+        self.gazeboButton.setObjectName("gazeboButton")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(370, 90, 201, 111))
+        self.label.setGeometry(QtCore.QRect(10, 10, 201, 111))
         font = QtGui.QFont()
         font.setFamily("Ubuntu Condensed")
-        font.setPointSize(24)
+        font.setPointSize(30)
         font.setBold(True)
         font.setItalic(True)
         font.setWeight(75)
         self.label.setFont(font)
         self.label.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label.setAutoFillBackground(True)
+        self.label.setAutoFillBackground(False)
+        self.label.setStyleSheet("color: rgb(78, 154, 6);\n"
+"")
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setWordWrap(False)
         self.label.setObjectName("label")
-        self.roscore = QtWidgets.QPushButton(self.centralwidget)
-        self.roscore.setGeometry(QtCore.QRect(300, 260, 231, 101))
-        self.roscore.setObjectName("roscore")
-        self.killAll = QtWidgets.QPushButton(self.centralwidget)
-        self.killAll.setGeometry(QtCore.QRect(320, 560, 201, 71))
-        self.killAll.setObjectName("killAll")
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.backButton = QtWidgets.QPushButton(self.centralwidget)
+        self.backButton.setGeometry(QtCore.QRect(20, 600, 201, 71))
+        self.backButton.setStyleSheet("background-color: rgb(186, 189, 182);\n"
+"font: 75 oblique 15pt \"Ubuntu Condensed\";")
+        self.backButton.setObjectName("backButton")
+        self.stopButton = QtWidgets.QPushButton(self.centralwidget)
+        self.stopButton.setGeometry(QtCore.QRect(370, 440, 201, 81))
+        self.stopButton.setStyleSheet("background-color: rgb(252, 175, 62);\n"
+"font: 75 oblique 15pt \"Ubuntu Condensed\";")
+        self.stopButton.setObjectName("stopButton")
+        simulationWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(simulationWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 947, 22))
         self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        simulationWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(simulationWindow)
         self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
-        
-        self.sim_gazebo.clicked.connect( self.onClick_gazebo ) ####################### AJOUT    
-        self.sim_rviz.clicked.connect( self.onClick_rviz ) ####################### AJOUT
-        self.roscore.clicked.connect( self.onClick_roscore ) ####################### AJOUT
-        self.killAll.clicked.connect( self.onClick_killAll ) ####################### AJOUT
+        simulationWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.gazeboButton.clicked.connect( self.onClick_gazebo ) ####################### AJOUT    
+        self.rvizButton.clicked.connect( self.onClick_rviz ) ####################### AJOUT
+        self.backButton.clicked.connect( lambda:self.onClick_back(simulationWindow) ) ####################### AJOUT
+        self.stopButton.clicked.connect( self.onClick_stop) ####################### AJOUT
 
-    def retranslateUi(self, MainWindow):
+        self.isGazeboRunning = False
+        self.isRvizRunning = False
+
+        self.retranslateUi(simulationWindow)
+        QtCore.QMetaObject.connectSlotsByName(simulationWindow)
+
+    def retranslateUi(self, simulationWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.sim_rviz.setText(_translate("MainWindow", "Simulation rviz"))
-        self.sim_gazebo.setText(_translate("MainWindow", "Simulation gazebo"))
-        self.label.setText(_translate("MainWindow", "Quadrus"))
-        self.roscore.setText(_translate("MainWindow", "Démarrer roscore"))
-        self.killAll.setText(_translate("MainWindow", "Tout fermer"))
-        
+        simulationWindow.setWindowTitle(_translate("simulationWindow", "MainWindow"))
+        self.rvizButton.setText(_translate("simulationWindow", "Kinematic simulation"))
+        self.gazeboButton.setText(_translate("simulationWindow", "Dynamic simulation"))
+        self.label.setText(_translate("simulationWindow", "QuadrUS"))
+        self.backButton.setText(_translate("simulationWindow", "Back"))
+        self.stopButton.setText(_translate("simulationWindow", "Stop simulation"))
+
+
     def onClick_rviz(self):
         print("Launching rviz...")
 
-	#ROS_PROGRAM = QProcess()
-        #program = 'roslaunch qd_simulation qd_rviz.launch'
-        #ROS_PROGRAM.start(program)  
-        
-        os.system("roslaunch qd_simulation qd_rviz.launch") 
-        
-        #roscore = subprocess.Popen('roslaunch qd_simulation qd_rviz.launch')   
+        if self.isGazeboRunning:
+            self.onClick_stop()
+
+        if not self.isRvizRunning:
+            self.isRvizRunning = True
+            os.system("gnome-terminal -x roslaunch qd_master qd_master.launch mode:=sim sim_mode:=kin")
         
     def onClick_gazebo(self):
         print("Launching gazebo...")
 
-	#ROS_PROGRAM = QProcess()
-        #program = 'roslaunch qd_simulation qd_gazebo.launch'
-        #ROS_PROGRAM.start(program)  
-        
-        os.system("roslaunch qd_simulation qd_gazebo.launch")      
-        
-        #roscore = subprocess.Popen('roslaunch qd_simulation qd_gazebo.launch')   
-        
-        
-    def onClick_roscore(self):
-        if not rosgraph.is_master_online(): # Checks the master uri and results boolean (True or False)
-                roscore = subprocess.Popen('roscore')
+        if self.isRvizRunning:
+            self.onClick_stop()
 
-        print("ROS MASTER is Online")
+        if not self.isGazeboRunning:
+            self.isGazeboRunning = True
+            os.system("gnome-terminal -x roslaunch qd_master qd_master.launch mode:=sim sim_mode:=dyn")
         
-    def onClick_killAll(self):
+    def onClick_back(self, simulationWindow):
+        if self.isRvizRunning or self.isGazeboRunning:
+            self.onClick_stop()
+        simulationWindow.hide()
+
+        
+    def onClick_stop(self):
         print("kill all ...")
         
-        os.system("^C; killall -9 rosmaster; killall -9 roscore") 
+        if self.isRvizRunning:
+            os.system("killall roslaunch")
+            self.isRvizRunning = False
+
+        elif self.isGazeboRunning:
+            #os.system("killall roslaunch")
+            os.system("killall rosmaster")
+            self.isGazeboRunning = False
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    simulationWindow = QtWidgets.QMainWindow()
+    ui = Ui_simulationWindow()
+    ui.setupUi(simulationWindow)
+    simulationWindow.show()
     sys.exit(app.exec_())

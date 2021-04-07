@@ -8,6 +8,7 @@ void rosInit(){
   nh.initNode();
   nh.subscribe(cmd_sub);
   nh.advertise(feedback_pub);
+  nh.advertise(imu_pub);
   feedback_msg.data_length = 12;
   feedback_msg.data = (float *)malloc(sizeof(float) *12);
 }
@@ -175,4 +176,32 @@ void motorController(int pulseCommand[12]) {
     for (int i=0; i < 12; i++){
         driver.writeMicroseconds(i, pulseCommand[i]);
     }
+}
+
+
+/**
+ * Read the analog inputs on the Arduino and store them
+ * in acceleration(X,Y,Z); gyro(X,Y,Z); angles(X,Y,Z) in the imu_data to send back to ROS
+ *
+ * @param imu_data Current angular positionning of the robot to feedback to ROS
+ */
+void readIMU(std_msgs::Float64MultiArray imu_data){
+
+  double accX = 0;
+  double accY = 0;
+  double accZ = 0;
+  double gyroX = 0;
+  double gyroY = 0;
+  double gyroZ = 0;
+  double angX = 0;
+  double angY = 0;
+
+  imu.Acc_getValues(&accX, &accY, &accZ);
+  imu.Gyro_getValues(&gyroX, &gyroY, &gyroZ);
+  imu.getAngles(&angX, &angY, 2); 
+
+  imu_data.data[0][] = {accX, accY, accZ};
+  imu_data.data[1][] = {gyroX, gyroY, gyroZ};
+  imu_data.data[2][] = {angX, angY};
+
 }
