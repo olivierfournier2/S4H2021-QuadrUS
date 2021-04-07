@@ -9,9 +9,9 @@
 	<xacro:property name="upperleg_offset" value="0.01886" /> 
 	<xacro:property name="lowerleg_length" value="0.1296" />
 
-	<xacro:property name="rear_hip_long_offset" value="-0.148" /> 
-	<xacro:property name="hip_long_center_dist" value="0.268" />
-	<xacro:property name="hip_lat_center_dist" value="0.158" />
+	<xacro:property name="rear_hip_long_offset" value="-0.1486" /> 
+	<xacro:property name="hip_long_center_dist" value="0.2686" />
+	<xacro:property name="hip_lat_center_dist" value="0.178" />
 	
 	<!-- Import Rviz colors -->
 	<xacro:include filename="$(find qd_simulation)/robot_description/materials.xacro" />
@@ -40,14 +40,15 @@
 			<collision>
 				<origin xyz="0 0 0" rpy="0 0 0" />
 				<geometry>
-					<box size="0.417 0.116 0.03"/>
+					<box size="0.4172 0.136 0.03"/>
 					<!-- mesh filename="package://qd_simulation/robot_description/mesh/body.dae"/-->
 				</geometry>
 			</collision>
 		
 			<inertial>
-				<mass value="0.800"/>
-				<inertia ixx="0.00228" ixy="0.0" ixz="0.0" iyy="0.01125" iyz="0.0" izz="0.01326"/>
+				<mass value="0.97859"/>
+				<origin xyz="-0.01428 0.00536 -0.00018"/>
+				<inertia ixx="0.00307" ixy="-0.00006" ixz="0.00006" iyy="0.01728" iyz="0.00003" izz="0.02001"/>
 			</inertial>	
 
 		</link>
@@ -100,7 +101,7 @@
 
 				<inertial>
 					<mass value="0.1191"/>
-					<origin xyz="0.004136 0.002457 0.01974"/>
+					<origin xyz="0.00364 0.0025 0.01974"/>
 					<inertia ixx="0.000176" ixy="-0.000004" ixz="-0.000017" iyy="0.000131" iyz="-0.000021" izz="0.000108"/>
 				</inertial>	
 
