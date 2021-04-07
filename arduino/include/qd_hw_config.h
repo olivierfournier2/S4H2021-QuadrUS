@@ -8,6 +8,7 @@
 //Global variables
 const char cmd_topic[] = "hw_cmd";
 const char feedback_topic[] = "hw_feedback";
+const char imu_topic[] = "imu_feedback";
 const int pulsemin = 555;
 const int servo_freq = 60;
 const int loop_hz = 20;

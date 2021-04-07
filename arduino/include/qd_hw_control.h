@@ -8,6 +8,7 @@
 #include <std_msgs/MultiArrayDimension.h>
 #include <std_msgs/Float64MultiArray.h>
 #include <string.h>
+#include "../Capteur_MPU6050/Capteur_MPU6050.h"
 
 void computeLimits();
 int degToPulse(float ang, int motorIndex);
@@ -22,6 +23,8 @@ float analogToDeg(int analog_value);
 void rosInit();
 void servoInit();
 void readAngles(std_msgs::Float64MultiArray feedback_data);
+void readIMU(std_msgs::Float64MultiArray imu_data);
+
 
 //Config variables declaration
 extern const char cmd_topic[];
@@ -43,8 +46,11 @@ extern std_msgs::Float64MultiArray cmd_msg;
 extern std_msgs::Float64MultiArray feedback_msg;
 extern ros::Publisher feedback_pub;
 extern ros::Subscriber<std_msgs::Float64MultiArray> cmd_sub;
+extern ros::Publisher imu_pub;
 
 //Servo config declarations
 extern Adafruit_PWMServoDriver driver;
+//IMU config declarations
+extern Capteur_MPU6050 imu;
 
 #endif
