@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>simulationWindow</class>
- <widget class="QMainWindow" name="simulationWindow">
+ <class>quadrusWindow</class>
+ <widget class="QMainWindow" name="quadrusWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>947</width>
-    <height>744</height>
+    <height>743</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,53 +17,68 @@
    <string notr="true">background-color: rgb(238, 238, 236);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="rvizButton">
+   <widget class="QPushButton" name="simulationButton">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>140</y>
+      <x>340</x>
+      <y>260</y>
       <width>241</width>
       <height>101</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(252, 233, 79);
-font: 75 oblique 15pt &quot;Ubuntu Condensed&quot;;</string>
-    </property>
-    <property name="text">
-     <string>Kinematic simulation</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="gazeboButton">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>270</y>
-      <width>241</width>
-      <height>101</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(252, 233, 79);
-font: 75 oblique 15pt &quot;Ubuntu Condensed&quot;;</string>
-    </property>
-    <property name="text">
-     <string>Dynamic simulation</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>201</width>
-      <height>111</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Ubuntu Condensed</family>
-      <pointsize>30</pointsize>
+      <pointsize>15</pointsize>
+      <weight>9</weight>
+      <italic>true</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(252, 233, 79);
+font: 75 oblique 15pt &quot;Ubuntu Condensed&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Simulation</string>
+    </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="hardwareButton">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>410</y>
+      <width>241</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(252, 233, 79);
+font: 75 oblique 15pt &quot;Ubuntu Condensed&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Real time control</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>10</y>
+      <width>481</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu Condensed</family>
+      <pointsize>69</pointsize>
       <weight>75</weight>
       <italic>true</italic>
       <bold>true</bold>
@@ -89,13 +104,13 @@ font: 75 oblique 15pt &quot;Ubuntu Condensed&quot;;</string>
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="backButton">
+   <widget class="QPushButton" name="closeButton">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>600</y>
-      <width>201</width>
-      <height>71</height>
+      <y>590</y>
+      <width>191</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -103,24 +118,7 @@ font: 75 oblique 15pt &quot;Ubuntu Condensed&quot;;</string>
 font: 75 oblique 15pt &quot;Ubuntu Condensed&quot;;</string>
     </property>
     <property name="text">
-     <string>Back</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="stopButton">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>440</y>
-      <width>201</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(252, 175, 62);
-font: 75 oblique 15pt &quot;Ubuntu Condensed&quot;;</string>
-    </property>
-    <property name="text">
-     <string>Stop simulation</string>
+     <string>Close</string>
     </property>
    </widget>
   </widget>
