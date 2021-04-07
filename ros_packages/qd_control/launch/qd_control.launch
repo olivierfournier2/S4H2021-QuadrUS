@@ -23,6 +23,9 @@
         <include file="$(find qd_simulation)/launch/qd_rviz.launch"/>
       </group>
 
+      <!-- Load the trajectory controllers interface-->
+      <node name="TrajectoryInterface" pkg="qd_control" type="qd_trajectory_interface.py"/>
+
     </group>
 
 
