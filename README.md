@@ -42,10 +42,10 @@
 - Install all dependencies for Kinematics
 
     ```
-    sudo apt install python-is-python3
-    ```
-    ```
     sudo apt install python3-pip
+    ```
+    ```
+    sudo apt install python-is-python3
     ```
     ```
     pip3 install pybullet
