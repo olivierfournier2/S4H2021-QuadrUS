@@ -13,9 +13,9 @@ const int pulsemin = 555;
 const int servo_freq = 60;
 const int loop_hz = 20;
 
-float initPositions[12] = {0,90,0,
+float initPositions[12] = {0,-90,0,
                            0,90,0,
-                           0,90,0,
+                           0,-90,0,
                            0,90,0};
 
 float compensationArrayMec[12] = { 0.0,  0.0,  0.0,
@@ -23,8 +23,9 @@ float compensationArrayMec[12] = { 0.0,  0.0,  0.0,
                                    0.0,  0.0,  0.0,
                                    0.0,  0.0,  0.0};                      
 
+//Pour M4 c'est 90 deg pcq son range est de 90
 float compensationArrayROS[12] = { 135.0,  225.0,  135.0,
-                                   135.0,   45.0,  135.0,
+                                   90.0,   45.0,  135.0,
                                    135.0,  225.0,  135.0,
                                    135.0,   45.0,  135.0};
                                    
@@ -40,8 +41,9 @@ int analog_pins[12] = {0, 1, 2,
                        6, 7, 8,
                        9, 10, 11};
 
+// Le M4 est celui de 180 deg et M4 et M5 on été échan
 const int pulsemax[12] = {2395, 2400, 2410,
-                          2410, 2390, 2425,
+                          2350, 2410, 2425,
                           2417, 2405, 2415,
                           2415, 2410, 2425};
 

@@ -46,7 +46,12 @@ void computeLimits() {
  * @return Corresponding pulse
  */
 int degToPulse(float ang, int motorIndex) {
-  return ang*(pulsemax[motorIndex]-pulsemin)/270.0 + pulsemin;
+  if (motorIndex == 3)
+  {
+    return ang*(pulsemax[motorIndex]-pulsemin)/180.0 + pulsemin;
+  } else {
+    return ang*(pulsemax[motorIndex]-pulsemin)/270.0 + pulsemin;
+  }
 }
 
 
@@ -76,8 +81,15 @@ float degToRad(float angleDeg) {
  * @param analog_value Analog reading from Arduino
  * @return angle in degrees
  */
-float analogToDeg(int analog_value){
-  return (analog_value - 67.0)*(270.0/(646.0-67.0));
+float analogToDeg(int analog_value, int motorIndex){
+  if (motorIndex == 3)
+  {
+    return (analog_value - 153.0)*(180.0/(558.0-153.0));
+  }
+  else
+  {
+    return (analog_value - 67.0)*(270.0/(646.0-67.0));
+  }
 }
 
 
@@ -91,7 +103,7 @@ void readAngles(std_msgs::Float64MultiArray feedback_data){
   float feedbackAngle[12];
   float compensatedAngle[12];
   for(int i=0;i<12;i++){
-     feedbackAngle[i] = analogToDeg(analogRead(analog_pins[i]));
+     feedbackAngle[i] = analogToDeg(analogRead(analog_pins[i]), i);
      compensatedAngle[i] = compensateFeedback(feedbackAngle[i], i);
      feedback_data.data[i] = degToRad(compensatedAngle[i]);
   }

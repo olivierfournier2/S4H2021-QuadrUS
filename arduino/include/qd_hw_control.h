@@ -21,7 +21,7 @@ void moveMotor(float cmdAngle[12]);
 float compensateCommand(float rawCommand, int index);
 float compensateFeedback(float rawAngle, int index);
 void motorController(int pulseCommand[12]);
-float analogToDeg(int analog_value);
+float analogToDeg(int analog_value, int motorIndex);
 void rosInit();
 void servoInit();
 void readAngles(std_msgs::Float64MultiArray feedback_data);
