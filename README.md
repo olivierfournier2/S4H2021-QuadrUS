@@ -8,6 +8,9 @@
     * [Needed installation](#ROS-installation)
     * [To set up this ROS project](#to-set-up-this-ROS-project)
     * [Launching 2D and 3D simulations](#Launching-2D-and-3D-simulations)
+* [Using this repository](#Using-this-repository)
+    * [Creating and launching the GUI](#Creating-and-launching-the-GUI)
+    * [Launching 2D and 3D simulations without GUI](#Launching-2D-and-3D-simulations-without-GUI)
 * [Robot environment](#Robot-environment)
 
 ## Development environment 
@@ -46,6 +49,9 @@
     ```
     ```
     sudo apt install python-is-python3
+    ```
+    ```
+    sudo apt install ros-noetic-joy
     ```
     ```
     pip3 install pybullet
@@ -87,7 +93,27 @@
 
 At this point, the ROS environment should be set up and ready to work with.
 
-### Launching 2D and 3D simulations
+## Using this repository
+
+### Creating and launching the GUI
+- Start by launching a terminal
+
+- Access the GUI sub-folder:
+    ```
+    cd ~/quadrus_ws/src/S4H2021-QuadrUS/PyQt5
+    ```
+    
+- Create the executable :
+    ```
+    chmod +x quadrus.py
+    ```
+
+- In this folder launch the GUI with:
+    ```
+    ./quadrus.py
+    ```
+
+### Launching 2D and 3D simulations without GUI
 - Start by launching terminator and splitting into two terminals (T1 and T2)
 
 - Launch roscore, the main ros node in T1:
