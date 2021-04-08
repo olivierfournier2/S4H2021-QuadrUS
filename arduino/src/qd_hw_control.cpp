@@ -185,7 +185,7 @@ void motorController(int pulseCommand[12]) {
  *
  * @param imu_data Current angular positionning of the robot to feedback to ROS
  */
-void readIMU(std_msgs::Float64MultiArray imu_data){
+void readIMU(IMUdata imu_data){
 
   double accX = 0;
   double accY = 0;
@@ -193,15 +193,19 @@ void readIMU(std_msgs::Float64MultiArray imu_data){
   double gyroX = 0;
   double gyroY = 0;
   double gyroZ = 0;
-  double angX = 0;
-  double angY = 0;
+  double roll = 0;
+  double pitch = 0;
 
   imu.Acc_getValues(&accX, &accY, &accZ);
   imu.Gyro_getValues(&gyroX, &gyroY, &gyroZ);
-  imu.getAngles(&angX, &angY, 2); 
+  imu.getAngles(&roll, &pitch, 2); 
 
-  imu_data.data[0][] = {accX, accY, accZ};
-  imu_data.data[1][] = {gyroX, gyroY, gyroZ};
-  imu_data.data[2][] = {angX, angY};
-
+  imu_data.roll = roll;
+  imu_data.pitch = pitch;
+  imu_data.acc_x = accX;
+  imu_data.acc_y = accY;
+  imu_data.acc_z = accZ;
+  imu_data.gyro_x = gyroX;
+  imu_data.gyro_y = gyroY;
+  imu_data.gyro_z = gyroZ;
 }
