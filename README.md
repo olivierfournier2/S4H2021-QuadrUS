@@ -102,7 +102,7 @@ At this point, the ROS environment should be set up and ready to work with.
 
 - To start the dynamic simulation in Gazebo, execute the following command in T2:
     ```
-    rroslaunch qd_master qd_master.launch mode:=sim sim_mode:=dyn
+    roslaunch qd_master qd_master.launch mode:=sim sim_mode:=dyn
     ```
 
 ## Robot environment
