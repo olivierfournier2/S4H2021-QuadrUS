@@ -3,9 +3,9 @@
     <arg name="mode" default="sim" />
     <arg name="sim_mode" default="dyn" />
 
-    <!-- include file="$(find qd_joystick)/launch/qd_joystick.launch"/ -->
+    <include file="$(find qd_joystick)/launch/qd_joystick.launch"/>
 
-    <!-- include file="$(find qd_planning)/launch/qd_planning.launch"/ -->
+    <include file="$(find qd_kinematics)/launch/qd_kinematics.launch"/>
 
     <include file="$(find qd_control)/launch/qd_control.launch">
         <arg name="mode" value="$(arg mode)" />

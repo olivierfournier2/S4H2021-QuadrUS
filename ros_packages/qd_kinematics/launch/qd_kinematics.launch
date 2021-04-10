@@ -1,0 +1,5 @@
+<launch>
+
+    <include file="$(find qd_kinematics)/launch/spot_real.launch"/>
+
+</launch>

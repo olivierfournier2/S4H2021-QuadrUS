@@ -1,3 +1,5 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 .pyc
+
+# https://stackoverflow.com/questions/19663093/apply-gitignore-on-an-existing-repository-already-tracking-large-number-of-file

@@ -9,27 +9,6 @@
     <param name="frequency" value="200.0" type="double"/>
   </node>
 
- <!-- Joystick Node -->
-  <node respawn="true" pkg="joy"
-        type="joy_node" name="spot_joy" >
-    <param name="dev" type="string" value="/dev/input/js0" />
-    <param name="deadzone" value="0.05" />
-    <param name="autorepeat_rate" value="100"/>
-  </node>
-
- <!-- Teleop Node -->
- <node name="spot_teleop" pkg="qd_kinematics" type="teleop_node" output="screen">
-  <param name="frequency" value="200.0" type="double"/>
-  <param name="axis_linear_x" value="4" type="int"/>
-  <param name="axis_linear_y" value="3" type="int"/>
-  <param name="axis_linear_z" value="1" type="int"/>
-  <param name="axis_angular" value="0" type="int"/>
-  <param name="scale_linear" value="1.0" type="double"/>
-  <param name="scale_angular" value="1.0" type="double"/>
-  <param name="button_switch" value="0" type="int"/>
-  <param name="button_estop" value="1" type="int"/>
-</node>
-
 <!-- Policy Node -->
 <node name="spot_pybullet" pkg="qd_kinematics" type="spot_pybullet_interface" output="screen"/>
 
