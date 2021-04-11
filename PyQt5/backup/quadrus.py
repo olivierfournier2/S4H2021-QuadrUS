@@ -100,6 +100,7 @@ class Ui_quadrusWindow(object):
 
 
     def onClick_hardware(self):
+        os.system("gnome-terminal -x roslaunch qd_master qd_master.launch mode:=hw")
         self.hardwareWindow.show()
 
 

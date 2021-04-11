@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import os 
+import os ####################### AJOUT  
 
 
 class Ui_hardwareWindow(object):
@@ -19,7 +19,7 @@ class Ui_hardwareWindow(object):
         self.centralwidget = QtWidgets.QWidget(hardwareWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.EstopButton = QtWidgets.QPushButton(self.centralwidget)
-        self.EstopButton.setGeometry(QtCore.QRect(40, 370, 231, 101))
+        self.EstopButton.setGeometry(QtCore.QRect(90, 380, 231, 101))
         self.EstopButton.setStyleSheet("background-color: rgb(245, 121, 0);\n"
 "font: 75 oblique 15pt \"Ubuntu Condensed\";")
         self.EstopButton.setObjectName("EstopButton")
@@ -40,7 +40,7 @@ class Ui_hardwareWindow(object):
         self.label.setWordWrap(False)
         self.label.setObjectName("label")
         self.enableButton = QtWidgets.QPushButton(self.centralwidget)
-        self.enableButton.setGeometry(QtCore.QRect(40, 170, 231, 101))
+        self.enableButton.setGeometry(QtCore.QRect(90, 180, 231, 101))
         self.enableButton.setStyleSheet("background-color: rgb(252, 233, 79);\n"
 "font: 75 oblique 15pt \"Ubuntu Condensed\";")
         self.enableButton.setObjectName("enableButton")
@@ -49,183 +49,18 @@ class Ui_hardwareWindow(object):
         self.backButton.setStyleSheet("background-color: rgb(186, 189, 182);\n"
 "font: 75 oblique 15pt \"Ubuntu Condensed\";")
         self.backButton.setObjectName("backButton")
-        self.M1_command = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M1_command.setGeometry(QtCore.QRect(610, 80, 64, 23))
-        self.M1_command.setObjectName("M1_command")
-        self.M2_command = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M2_command.setGeometry(QtCore.QRect(610, 120, 64, 23))
-        self.M2_command.setObjectName("M2_command")
-        self.M3_command = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M3_command.setGeometry(QtCore.QRect(610, 160, 64, 23))
-        self.M3_command.setObjectName("M3_command")
-        self.M4_command = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M4_command.setGeometry(QtCore.QRect(610, 220, 64, 23))
-        self.M4_command.setObjectName("M4_command")
-        self.M5_command = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M5_command.setGeometry(QtCore.QRect(610, 260, 64, 23))
-        self.M5_command.setObjectName("M5_command")
-        self.M6_command = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M6_command.setGeometry(QtCore.QRect(610, 300, 64, 23))
-        self.M6_command.setObjectName("M6_command")
-        self.M7_command = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M7_command.setGeometry(QtCore.QRect(610, 360, 64, 23))
-        self.M7_command.setObjectName("M7_command")
-        self.M8_command = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M8_command.setGeometry(QtCore.QRect(610, 400, 64, 23))
-        self.M8_command.setObjectName("M8_command")
-        self.M9_command = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M9_command.setGeometry(QtCore.QRect(610, 440, 64, 23))
-        self.M9_command.setObjectName("M9_command")
-        self.M10_command = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M10_command.setGeometry(QtCore.QRect(610, 500, 64, 23))
-        self.M10_command.setObjectName("M10_command")
-        self.M12_command = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M12_command.setGeometry(QtCore.QRect(610, 580, 64, 23))
-        self.M12_command.setObjectName("M12_command")
-        self.M11_command = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M11_command.setGeometry(QtCore.QRect(610, 540, 64, 23))
-        self.M11_command.setObjectName("M11_command")
-        self.M5_position = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M5_position.setGeometry(QtCore.QRect(800, 260, 64, 23))
-        self.M5_position.setObjectName("M5_position")
-        self.M12_position = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M12_position.setGeometry(QtCore.QRect(800, 580, 64, 23))
-        self.M12_position.setObjectName("M12_position")
-        self.M11_position = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M11_position.setGeometry(QtCore.QRect(800, 540, 64, 23))
-        self.M11_position.setObjectName("M11_position")
-        self.M6_position = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M6_position.setGeometry(QtCore.QRect(800, 300, 64, 23))
-        self.M6_position.setObjectName("M6_position")
-        self.M8_position = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M8_position.setGeometry(QtCore.QRect(800, 400, 64, 23))
-        self.M8_position.setObjectName("M8_position")
-        self.M9_position = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M9_position.setGeometry(QtCore.QRect(800, 440, 64, 23))
-        self.M9_position.setObjectName("M9_position")
-        self.M1_position = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M1_position.setGeometry(QtCore.QRect(800, 80, 64, 23))
-        self.M1_position.setObjectName("M1_position")
-        self.M3_position = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M3_position.setGeometry(QtCore.QRect(800, 160, 64, 23))
-        self.M3_position.setObjectName("M3_position")
-        self.M7_position = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M7_position.setGeometry(QtCore.QRect(800, 360, 64, 23))
-        self.M7_position.setObjectName("M7_position")
-        self.M10_position = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M10_position.setGeometry(QtCore.QRect(800, 500, 64, 23))
-        self.M10_position.setObjectName("M10_position")
-        self.M4_position = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M4_position.setGeometry(QtCore.QRect(800, 220, 64, 23))
-        self.M4_position.setObjectName("M4_position")
-        self.M2_position = QtWidgets.QLCDNumber(self.centralwidget)
-        self.M2_position.setGeometry(QtCore.QRect(800, 120, 64, 23))
-        self.M2_position.setObjectName("M2_position")
-        self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(560, 30, 151, 20))
-        font = QtGui.QFont()
-        font.setPointSize(15)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_2.setFont(font)
-        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_2.setObjectName("label_2")
-        self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(730, 30, 191, 17))
-        font = QtGui.QFont()
-        font.setPointSize(15)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_3.setFont(font)
-        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_3.setObjectName("label_3")
-        self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(500, 80, 67, 17))
-        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_4.setObjectName("label_4")
-        self.label_5 = QtWidgets.QLabel(self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(500, 120, 67, 17))
-        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_5.setObjectName("label_5")
-        self.label_6 = QtWidgets.QLabel(self.centralwidget)
-        self.label_6.setGeometry(QtCore.QRect(500, 160, 67, 17))
-        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_6.setObjectName("label_6")
-        self.label_7 = QtWidgets.QLabel(self.centralwidget)
-        self.label_7.setGeometry(QtCore.QRect(500, 220, 67, 17))
-        self.label_7.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_7.setObjectName("label_7")
-        self.label_8 = QtWidgets.QLabel(self.centralwidget)
-        self.label_8.setGeometry(QtCore.QRect(500, 260, 67, 17))
-        self.label_8.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_8.setObjectName("label_8")
-        self.label_9 = QtWidgets.QLabel(self.centralwidget)
-        self.label_9.setGeometry(QtCore.QRect(500, 300, 67, 17))
-        self.label_9.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_9.setObjectName("label_9")
-        self.label_10 = QtWidgets.QLabel(self.centralwidget)
-        self.label_10.setGeometry(QtCore.QRect(500, 360, 67, 17))
-        self.label_10.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_10.setObjectName("label_10")
-        self.label_11 = QtWidgets.QLabel(self.centralwidget)
-        self.label_11.setGeometry(QtCore.QRect(500, 400, 67, 17))
-        self.label_11.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_11.setObjectName("label_11")
-        self.label_12 = QtWidgets.QLabel(self.centralwidget)
-        self.label_12.setGeometry(QtCore.QRect(500, 440, 67, 17))
-        self.label_12.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_12.setObjectName("label_12")
-        self.label_13 = QtWidgets.QLabel(self.centralwidget)
-        self.label_13.setGeometry(QtCore.QRect(500, 500, 67, 17))
-        self.label_13.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_13.setObjectName("label_13")
-        self.label_14 = QtWidgets.QLabel(self.centralwidget)
-        self.label_14.setGeometry(QtCore.QRect(500, 540, 67, 17))
-        self.label_14.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_14.setObjectName("label_14")
-        self.label_15 = QtWidgets.QLabel(self.centralwidget)
-        self.label_15.setGeometry(QtCore.QRect(500, 580, 67, 17))
-        self.label_15.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_15.setObjectName("label_15")
-        self.label_16 = QtWidgets.QLabel(self.centralwidget)
-        self.label_16.setGeometry(QtCore.QRect(390, 120, 91, 31))
-        font = QtGui.QFont()
-        font.setBold(False)
-        font.setItalic(True)
-        font.setWeight(50)
-        self.label_16.setFont(font)
-        self.label_16.setObjectName("label_16")
-        self.label_17 = QtWidgets.QLabel(self.centralwidget)
-        self.label_17.setGeometry(QtCore.QRect(390, 250, 101, 31))
-        font = QtGui.QFont()
-        font.setBold(False)
-        font.setItalic(True)
-        font.setWeight(50)
-        self.label_17.setFont(font)
-        self.label_17.setObjectName("label_17")
-        self.label_18 = QtWidgets.QLabel(self.centralwidget)
-        self.label_18.setGeometry(QtCore.QRect(390, 390, 91, 31))
-        font = QtGui.QFont()
-        font.setBold(False)
-        font.setItalic(True)
-        font.setWeight(50)
-        self.label_18.setFont(font)
-        self.label_18.setObjectName("label_18")
-        self.label_19 = QtWidgets.QLabel(self.centralwidget)
-        self.label_19.setGeometry(QtCore.QRect(390, 530, 91, 31))
-        font = QtGui.QFont()
-        font.setBold(False)
-        font.setItalic(True)
-        font.setWeight(50)
-        self.label_19.setFont(font)
-        self.label_19.setObjectName("label_19")
-        self.label_20 = QtWidgets.QLabel(self.centralwidget)
-        self.label_20.setGeometry(QtCore.QRect(740, 650, 121, 20))
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setItalic(True)
-        self.label_20.setFont(font)
-        self.label_20.setObjectName("label_20")
+        self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
+        self.textBrowser.setGeometry(QtCore.QRect(690, 20, 231, 391))
+        self.textBrowser.setObjectName("textBrowser")
+        self.textBrowser_2 = QtWidgets.QTextBrowser(self.centralwidget)
+        self.textBrowser_2.setGeometry(QtCore.QRect(440, 20, 231, 391))
+        self.textBrowser_2.setObjectName("textBrowser_2")
+        self.textBrowser_3 = QtWidgets.QTextBrowser(self.centralwidget)
+        self.textBrowser_3.setGeometry(QtCore.QRect(630, 470, 256, 192))
+        self.textBrowser_3.setObjectName("textBrowser_3")
+        self.graphicsView = QtWidgets.QGraphicsView(self.centralwidget)
+        self.graphicsView.setGeometry(QtCore.QRect(340, 470, 256, 192))
+        self.graphicsView.setObjectName("graphicsView")
         hardwareWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(hardwareWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 947, 22))
@@ -235,11 +70,10 @@ class Ui_hardwareWindow(object):
         self.statusbar.setObjectName("statusbar")
         hardwareWindow.setStatusBar(self.statusbar)
 
-        self.enableButton.clicked.connect( self.onClick_start ) 
-        self.EstopButton.clicked.connect( self.onClick_Estop ) 
-        self.backButton.clicked.connect( lambda:self.onClick_back(hardwareWindow) ) 
-        self.EstopClicked = False 
-        self.startClicked = False 
+        self.enableButton.clicked.connect( self.onClick_enable ) ####################### AJOUT    
+        self.EstopButton.clicked.connect( self.onClick_Estop ) ####################### AJOUT
+        self.backButton.clicked.connect( lambda:self.onClick_back(hardwareWindow) ) ####################### AJOUT
+        self.EstopClicked = False ####################### AJOUT
 
         self.retranslateUi(hardwareWindow)
         QtCore.QMetaObject.connectSlotsByName(hardwareWindow)
@@ -249,32 +83,23 @@ class Ui_hardwareWindow(object):
         hardwareWindow.setWindowTitle(_translate("hardwareWindow", "MainWindow"))
         self.EstopButton.setText(_translate("hardwareWindow", "EMERGENCY STOP"))
         self.label.setText(_translate("hardwareWindow", "QuadrUS"))
-        self.enableButton.setText(_translate("hardwareWindow", "Start"))
+        self.enableButton.setText(_translate("hardwareWindow", "Enable joystick "))
         self.backButton.setText(_translate("hardwareWindow", "Back"))
-        self.label_2.setText(_translate("hardwareWindow", "Command sent"))
-        self.label_3.setText(_translate("hardwareWindow", "Current position"))
-        self.label_4.setText(_translate("hardwareWindow", "Motor 1"))
-        self.label_5.setText(_translate("hardwareWindow", "Motor 2"))
-        self.label_6.setText(_translate("hardwareWindow", "Motor 3"))
-        self.label_7.setText(_translate("hardwareWindow", "Motor 4"))
-        self.label_8.setText(_translate("hardwareWindow", "Motor 5"))
-        self.label_9.setText(_translate("hardwareWindow", "Motor 6"))
-        self.label_10.setText(_translate("hardwareWindow", "Motor 7"))
-        self.label_11.setText(_translate("hardwareWindow", "Motor 8"))
-        self.label_12.setText(_translate("hardwareWindow", "Motor 9"))
-        self.label_13.setText(_translate("hardwareWindow", "Motor 10"))
-        self.label_14.setText(_translate("hardwareWindow", "Motor 11"))
-        self.label_15.setText(_translate("hardwareWindow", "Motor 12"))
-        self.label_16.setText(_translate("hardwareWindow", "FRONT-LEFT"))
-        self.label_17.setText(_translate("hardwareWindow", "FRONT-RIGHT"))
-        self.label_18.setText(_translate("hardwareWindow", "BACK-LEFT"))
-        self.label_19.setText(_translate("hardwareWindow", "RIGHT-LEFT"))
-        self.label_20.setText(_translate("hardwareWindow", "Values are in degrees"))
+        self.textBrowser.setHtml(_translate("hardwareWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">FEEDBACK</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.textBrowser_2.setHtml(_translate("hardwareWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">COMMAND</p></body></html>"))
 
-    def onClick_start(self):
-        print("Lauching ROS..")
-        os.system("gnome-terminal -x roslaunch qd_master qd_master.launch mode:=hw")
-        self.startClicked = True
+
+    def onClick_enable(self):
+        print("Enable joystick..")
 
         
     def onClick_back(self, hardwareWindow):
@@ -283,21 +108,27 @@ class Ui_hardwareWindow(object):
         
     def onClick_Estop(self):       
         _translate = QtCore.QCoreApplication.translate
-        if self.startClicked:
-            if self.EstopClicked:
-                print("RESET ESTOP")
-                self.EstopButton.setText(_translate("hardwareWindow", "EMERGENCY STOP"))
-                self.EstopButton.setStyleSheet("background-color: rgb(245, 121, 0);\n"
-    "font: 75 oblique 15pt \"Ubuntu Condensed\";")
-                os.system("gnome-terminal -x rostopic pub /estop std_msgs/Bool \"data:true\" ")
-                self.EstopClicked= False
 
-            elif not self.EstopClicked:
-                print("EMERGENCY STOP")
-                self.EstopButton.setText(_translate("hardwareWindow", "RESET ESTOP"))
-                self.EstopButton.setStyleSheet("background-color: rgb(252, 233, 79);\n"
-    "font: 75 oblique 15pt \"Ubuntu Condensed\";")
-                os.system("gnome-terminal -x rostopic pub /estop std_msgs/Bool \"data:true\" ")
-                self.EstopClicked= True
-        else:
-            print("Process must be started")
+        if self.EstopClicked:
+            print("RESET ESTOP")
+            self.EstopButton.setText(_translate("hardwareWindow", "EMERGENCY STOP"))
+            self.EstopButton.setStyleSheet("background-color: rgb(245, 121, 0);\n"
+"font: 75 oblique 15pt \"Ubuntu Condensed\";")
+            self.EstopClicked= False
+
+        elif not self.EstopClicked:
+            print("EMERGENCY STOP")
+            self.EstopButton.setText(_translate("hardwareWindow", "RESET ESTOP"))
+            self.EstopButton.setStyleSheet("background-color: rgb(252, 233, 79);\n"
+"font: 75 oblique 15pt \"Ubuntu Condensed\";")
+            self.EstopClicked= True
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    hardwareWindow = QtWidgets.QMainWindow()
+    ui = Ui_hardwareWindow()
+    ui.setupUi(hardwareWindow)
+    hardwareWindow.show()
+    sys.exit(app.exec_())
