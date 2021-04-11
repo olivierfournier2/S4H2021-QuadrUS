@@ -69,12 +69,12 @@
     pip3 install gym
     ```
 - Install all dependencies for control
-    '''
+    ```
     sudo apt install ros-noetic-ros-control
-    '''
-    '''
+    ```
+    ```
     sudo apt install ros-noetic-robot-state-publisher
-    '''
+    ```
     
 ### To set up this ROS project
 - Create and initialize a catkin workspace
