@@ -1,14 +1,6 @@
 
 <launch>
 
-    <machine
-        name="ubuntu"
-        address="192.168.4.1"
-        env-loader="/home/qdpi/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/qd_joystick/launch/qd_remote_env.sh"
-        default="true"
-        user="qdpi"
-    />
-
     <!-- Joystick Node -->
     <node respawn="true" pkg="joy"
             type="joy_node" name="spot_joy">

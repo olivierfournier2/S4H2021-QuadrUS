@@ -59,6 +59,14 @@
     ```
     pip3 install gym
     ```
+- Install all dependencies for control
+    '''
+    sudo apt install ros-noetic-ros-control
+    '''
+    '''
+    sudo apt install ros-noetic-robot-state-publisher
+    '''
+    
 ### To set up this ROS project
 - Create and initialize a catkin workspace
 
@@ -141,7 +149,7 @@ At this point, the ROS environment should be set up and ready to work with.
 - ROS Noetic Ninjemys:  [Installation documentation](http://wiki.ros.org/noetic/Installation/Ubuntu)
 
 ### Network setup
-- Set up raspberry pi as access point: [Procedure](https://gist.github.com/ExtremeGTX/ea1d1c12dde8261b263ab2fead983dc8), [dnsmasq configuration](https://computingforgeeks.com/install-and-configure-dnsmasq-on-ubuntu-18-04-lts/)
+- Set up raspberry pi as access point: [Procedure](https://gist.github.com/ExtremeGTX/ea1d1c12dde8261b263ab2fead983dc8)
 - To allow ssh over wired connection, you need to set up static ip adress for both devices: [Procedure](https://linuxize.com/post/how-to-configure-static-ip-address-on-ubuntu-20-04/)
 
 
