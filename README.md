@@ -54,6 +54,15 @@
     sudo apt install ros-noetic-joy
     ```
     ```
+    sudo apt install ros-noetic-rosserial
+    ```
+    ```
+    sudo apt install ros-noetic-rosserial-python
+    ```
+    ```
+    sudo apt install ros-noetic-rosserial-arduino
+    ```
+    ```
     pip3 install pybullet
     ```
     ```
