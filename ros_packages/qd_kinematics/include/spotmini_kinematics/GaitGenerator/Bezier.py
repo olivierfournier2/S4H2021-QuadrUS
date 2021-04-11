@@ -492,7 +492,8 @@ class BezierGait():
             Tstance = 1.3 * self.Tswing
 
         # Check contacts
-        if contacts[0] == 1 and Tstance > dt:
+        #if contacts[0] == 1 and Tstance > dt:
+        if Tstance > dt:
             self.TD = True
 
         self.Increment(dt, Tstance + self.Tswing)

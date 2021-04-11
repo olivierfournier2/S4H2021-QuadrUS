@@ -24,7 +24,7 @@ void loop() {
   //imu_pub.publish(&imu_msg);
   nh.spinOnce();
   delay(1000/loop_hz);
-   // Mouvement de push up
+  /* // Mouvement de push up
   // Standing
   float positionsStanding[12] = {0,60,-10,
                          0,-60,10,
@@ -75,6 +75,6 @@ void loop() {
   
   // Inter 1
   moveMotor(positionsInter1);
-  delay(1000);
+  delay(1000);*/
 
 }

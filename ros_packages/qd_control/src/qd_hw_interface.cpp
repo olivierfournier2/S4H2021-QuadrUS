@@ -10,10 +10,10 @@ Quadrus::Quadrus(ros::NodeHandle& nh): nh_(nh){ //Initialization list : set nh_ 
     qd_control_loop_ = nh_.createTimer(update_freq, &Quadrus::update, this);
 
     //Inform master that the node will be publishing to topic /joint_positions with queue size 1000
-    cmd_pub = nh_.advertise<std_msgs::Float64MultiArray>("hw_cmd", 1000);
+    cmd_pub = nh_.advertise<std_msgs::Float64MultiArray>("hw_cmd", 10);
 
     //Subscribe to /feedback_data topic with queue size 1000
-    feedback_sub = nh_.subscribe("hw_feedback", 1000, &Quadrus::feedbackCallback, this);
+    feedback_sub = nh_.subscribe("hw_feedback", 10, &Quadrus::feedbackCallback, this);
 }   
                                                    
 Quadrus::~Quadrus(){
@@ -55,7 +55,7 @@ void Quadrus::read(){
 
 void Quadrus::write(ros::Duration elapsed_time){
     
-    position_joint_sat_interface.enforceLimits(elapsed_time);
+    //position_joint_sat_interface.enforceLimits(elapsed_time);
     cmd_array.data.clear();
     for(int i=0;i<NB_JOINTS;i++){
         cmd_array.data.push_back(cmd[i]);

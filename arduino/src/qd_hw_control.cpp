@@ -181,7 +181,7 @@ float compensateFeedback(float rawAngle, int index) {
  *
  * @param pulseCommand Array of commands in pulse for the 12 motors
  */
-void motorControllerGoodOne(int pulseCommand[12]) {
+void motorController(int pulseCommand[12]) {
 
     for (int i = 0; i < 12; i++){
         if(pulseCommand[i] > jointLimitPulse[i][1]){
@@ -197,7 +197,7 @@ void motorControllerGoodOne(int pulseCommand[12]) {
     }
 }
 
-void motorController(int pulseCommand[12]) {
+void motorControllerBadOne(int pulseCommand[12]) {
     bool stop = false;
     int lastStep = 0;
     int pulseInterval = 5;

@@ -50,7 +50,7 @@ joint_offsets = [[0.0, -1.4792, 1.3127], [0.0, -1.4792, 1.3127], [0.0, -1.4792, 
 
 
 class SpotCommander():
-    def __init__(self, Agent=True, contacts=False):
+    def __init__(self, Agent=False, contacts=False):
 
         self.Agent = Agent
         self.agent_num = rospy.get_param("agent_num")
