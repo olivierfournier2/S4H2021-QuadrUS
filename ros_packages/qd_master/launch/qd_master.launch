@@ -2,14 +2,25 @@
     <!-- values passed by command line input -->
     <arg name="mode" default="sim" />
     <arg name="sim_mode" default="dyn" />
+    <arg name="hw_mode" default="local" />
 
     <include file="$(find qd_joystick)/launch/qd_joystick.launch"/>
 
     <include file="$(find qd_kinematics)/launch/qd_kinematics.launch"/>
 
+
+    <machine
+        name="qd"
+        address="192.168.4.1"
+        env-loader="/home/qdpi/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/qd_joystick/launch/qd_remote_env.sh"
+        default="true"
+        user="qdpi"
+    />
+
     <include file="$(find qd_control)/launch/qd_control.launch">
         <arg name="mode" value="$(arg mode)" />
         <arg name="sim_mode" value="$(arg sim_mode)" />
+        <!-- arg name="hw_mode" value="$(arg hw_mode)" /-->
     </include>
 
 </launch>
