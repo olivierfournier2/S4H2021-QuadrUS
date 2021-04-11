@@ -1,11 +1,13 @@
 <launch>
 
+  <arg name="target_machine" default="master" />
+
  <!-- Load the URDF into the ROS Parameter Server -->
  <param name="robot_description" 
     command="xacro --inorder '$(find qd_simulation)/robot_description/quadrus.xacro'" />
 
  <!-- Minitaur State Machine Node-->
-  <node name="spot_sm" pkg="qd_kinematics" type="spot_sm" output="screen">
+  <node name="spot_sm" pkg="qd_kinematics" type="spot_sm" output="screen" machine="$(arg target_machine)">
     <param name="frequency" value="200.0" type="double"/>
   </node>
 
@@ -23,7 +25,7 @@
 <rosparam command="load" file="$(find qd_kinematics)/config/joy_params.yaml" />
 
 <!-- the above is equivalent to $(eval agent_num) but I left it in to acknowledge that both options exist -->
-<node name="spot_real" pkg="qd_kinematics" type="spot_real_interface" output="screen"/>
+<node name="spot_real" pkg="qd_kinematics" type="spot_real_interface" output="screen" machine="$(arg target_machine)"/>
 
 
 <!-- NOTE:
