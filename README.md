@@ -75,6 +75,9 @@
     ```
     sudo apt install ros-noetic-robot-state-publisher
     ```
+    ```
+    sudo apt install ros-noetic-control-msgs
+    ```
     
 ### To set up this ROS project
 - Create and initialize a catkin workspace
