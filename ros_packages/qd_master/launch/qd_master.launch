@@ -7,8 +7,8 @@
 
     <machine
         name="master"
-        address="localhost"
-        env-loader="/home/qdpi/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/qd_master/launch/qd_local_env.sh"
+        address="192.168.4.17"
+        env-loader="/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/qd_master/launch/qd_local_env.sh"
         default="true"
         user="ubuntu-dev"
     />
@@ -17,14 +17,14 @@
         name="qd"
         address="192.168.4.1"
         env-loader="/home/qdpi/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/qd_master/launch/qd_remote_env.sh"
-        default="false"
+        default="true"
         user="qdpi"
     />
 
 
     <include file="$(find qd_joystick)/launch/qd_joystick.launch"/>
 
-
+<!--
     <group if="$(eval arg('hw_mode') == 'local')">
         <arg name="target_machine" value="master"/>
 
@@ -54,9 +54,7 @@
         </include>
 
     </group>
-
-
-
+-->
 
 </launch>
 
