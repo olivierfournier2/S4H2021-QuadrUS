@@ -8,7 +8,7 @@ void rosInit(){
   nh.initNode();
   nh.subscribe(cmd_sub);
   nh.advertise(feedback_pub);
-  nh.advertise(imu_pub);
+  //nh.advertise(imu_pub);
   feedback_msg.data_length = 12;
   feedback_msg.data = (float *)malloc(sizeof(float) *12);
 }
@@ -26,13 +26,20 @@ void servoInit(){
 
 
 /**
- * Compute the joint limits with the base angle of 135 degree
+ * Compute the joint limits in pulses with the base angle of 135 degree
  * and the mechanical compensations
  */
 void computeLimits() {
   for (int i = 0; i < 12; i++){
     for (int j = 0; j < 2; j++){
-      jointLimitPulse[i][j] =  degToPulse(135 + compensationArrayMec[i] + jointLimit[i][j], i);
+      if (i == 3)
+      {
+        jointLimitPulse[i][j] =  degToPulse(90 + compensationArrayMec[i] + jointLimit[i][j], i);
+      }
+      else
+      {
+        jointLimitPulse[i][j] =  degToPulse(135 + compensationArrayMec[i] + jointLimit[i][j], i);
+      }
     }
   }
 }
@@ -174,7 +181,7 @@ float compensateFeedback(float rawAngle, int index) {
  *
  * @param pulseCommand Array of commands in pulse for the 12 motors
  */
-void motorController(int pulseCommand[12]) {
+void motorControllerGoodOne(int pulseCommand[12]) {
 
     for (int i = 0; i < 12; i++){
         if(pulseCommand[i] > jointLimitPulse[i][1]){
@@ -190,6 +197,59 @@ void motorController(int pulseCommand[12]) {
     }
 }
 
+void motorController(int pulseCommand[12]) {
+    bool stop = false;
+    int lastStep = 0;
+    int pulseInterval = 5;
+
+    for (int i = 0; i < 12; i++){
+        if(pulseCommand[i] > jointLimitPulse[i][1]){
+            pulseCommand[i] = jointLimitPulse[i][1];
+          }
+        else if(pulseCommand[i] < jointLimitPulse[i][0]){
+            pulseCommand[i] = jointLimitPulse[i][0];
+          }
+      }
+    
+    while(stop == false) {
+        stop = true;
+
+        for (int i = 0; i < 12 ; i++){
+          if (pulseCommand[i] > currentPulse[i]){
+              lastStep = pulseCommand[i] - currentPulse[i];
+              
+              if ( lastStep < pulseInterval) {
+                currentPulse[i] += lastStep;
+              } 
+              else {
+                currentPulse[i] += pulseInterval;
+              }
+                
+              driver.writeMicroseconds(i,currentPulse[i]);
+            }
+          else if (pulseCommand[i] < currentPulse[i]){
+              lastStep = currentPulse[i] - pulseCommand[i];
+              
+              if ( lastStep < pulseInterval) {
+                currentPulse[i] -= lastStep;
+              } 
+              else {
+                currentPulse[i] -= pulseInterval;
+              }
+              
+              driver.writeMicroseconds(i,currentPulse[i]);
+            }
+          else {
+              delayMicroseconds(1000);
+            }
+
+          if (currentPulse[i] != pulseCommand[i]) {
+              stop = false;
+            }
+        }
+      } 
+  }
+
 
 /**
  * Read the analog inputs on the Arduino and store them
@@ -197,7 +257,7 @@ void motorController(int pulseCommand[12]) {
  *
  * @param imu_data Current angular positionning of the robot to feedback to ROS
  */
-void readIMU(IMUdata imu_data){
+/*void readIMU(IMUdata imu_data){
 
   double accX = 0;
   double accY = 0;
@@ -220,4 +280,4 @@ void readIMU(IMUdata imu_data){
   imu_data.gyro_x = gyroX;
   imu_data.gyro_y = gyroY;
   imu_data.gyro_z = gyroZ;
-}
+}*/
