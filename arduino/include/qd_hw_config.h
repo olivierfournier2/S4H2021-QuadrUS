@@ -13,6 +13,12 @@ const int pulsemin = 555;
 const int servo_freq = 60;
 const int loop_hz = 20;
 
+// Position initiale en pulse
+int currentPulse[12] = {1475,1475,1475,
+                        1475,1475,1475,
+                        1475,1475,1475,
+                        1475,1475,1475};
+
 float initPositions[12] = {0,-90,0,
                            0,90,0,
                            0,-90,0,
@@ -21,7 +27,7 @@ float initPositions[12] = {0,-90,0,
 float compensationArrayMec[12] = { 5.0,  -7.0,  -10.0,
                                    -2.0,  0.0,  5.0,
                                    7.0,  2.0,  -8.0,
-                                   4.0,  -2.0,  12.0};                      
+                                   2.0,  -2.0,  12.0};                      
 
 //Pour M4 c'est 90 deg pcq son range est de 90
 float compensationArrayROS[12] = { 135.0,  225.0,  135.0,
@@ -29,10 +35,10 @@ float compensationArrayROS[12] = { 135.0,  225.0,  135.0,
                                    135.0,  225.0,  135.0,
                                    135.0,   45.0,  135.0};
                                    
-int jointLimit[12][2] = { {-23, 45}, {-90, 90}, {-80, 100},
-                          {-45, 23}, {-90, 90}, {-100, 80},
-                          {-23, 45}, {-90, 90}, {-80, 100},
-                          {-45, 23}, {-90, 90}, {-100, 80} };
+int jointLimit[12][2] = { {-23, 45}, {-90, 110}, {-80, 100},
+                          {-45, 23}, {-110, 90}, {-100, 80},
+                          {-23, 45}, {-90, 110}, {-80, 100},
+                          {-45, 23}, {-110, 90}, {-100, 80} };
 
 int jointLimitPulse[12][2];
 

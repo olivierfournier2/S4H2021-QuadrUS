@@ -181,7 +181,7 @@ float compensateFeedback(float rawAngle, int index) {
  *
  * @param pulseCommand Array of commands in pulse for the 12 motors
  */
-void motorController(int pulseCommand[12]) {
+void motorControllerGoodOne(int pulseCommand[12]) {
 
     for (int i = 0; i < 12; i++){
         if(pulseCommand[i] > jointLimitPulse[i][1]){
@@ -196,6 +196,59 @@ void motorController(int pulseCommand[12]) {
         driver.writeMicroseconds(i, pulseCommand[i]);
     }
 }
+
+void motorController(int pulseCommand[12]) {
+    bool stop = false;
+    int lastStep = 0;
+    int pulseInterval = 5;
+
+    for (int i = 0; i < 12; i++){
+        if(pulseCommand[i] > jointLimitPulse[i][1]){
+            pulseCommand[i] = jointLimitPulse[i][1];
+          }
+        else if(pulseCommand[i] < jointLimitPulse[i][0]){
+            pulseCommand[i] = jointLimitPulse[i][0];
+          }
+      }
+    
+    while(stop == false) {
+        stop = true;
+
+        for (int i = 0; i < 12 ; i++){
+          if (pulseCommand[i] > currentPulse[i]){
+              lastStep = pulseCommand[i] - currentPulse[i];
+              
+              if ( lastStep < pulseInterval) {
+                currentPulse[i] += lastStep;
+              } 
+              else {
+                currentPulse[i] += pulseInterval;
+              }
+                
+              driver.writeMicroseconds(i,currentPulse[i]);
+            }
+          else if (pulseCommand[i] < currentPulse[i]){
+              lastStep = currentPulse[i] - pulseCommand[i];
+              
+              if ( lastStep < pulseInterval) {
+                currentPulse[i] -= lastStep;
+              } 
+              else {
+                currentPulse[i] -= pulseInterval;
+              }
+              
+              driver.writeMicroseconds(i,currentPulse[i]);
+            }
+          else {
+              delayMicroseconds(1000);
+            }
+
+          if (currentPulse[i] != pulseCommand[i]) {
+              stop = false;
+            }
+        }
+      } 
+  }
 
 
 /**

@@ -36,6 +36,7 @@ extern const int pulsemin;
 extern const int pulsemax[12];
 extern const int servo_freq;
 extern float initPositions[12];
+extern int currentPulse[12];
 extern float compensationArrayMec[12] ;
 extern float compensationArrayROS[12];
 extern int jointLimit[12][2];
