@@ -1,0 +1,41 @@
+<launch>
+
+  <arg name="target_machine" default="master" />
+
+ <!-- Load the URDF into the ROS Parameter Server -->
+ <param name="robot_description" 
+    command="xacro --inorder '$(find qd_simulation)/robot_description/quadrus.xacro'" />
+
+ <!-- Minitaur State Machine Node-->
+  <node name="spot_sm" pkg="qd_kinematics" type="spot_sm" output="screen" machine="$(arg target_machine)">
+    <param name="frequency" value="200.0" type="double"/>
+  </node>
+
+<!-- Policy Node -->
+<arg name="agent_num" default="0" doc="Agent Number for ARS (GMBC) Policy. Default (0) Loads no Agent. Policy numbers start at 9 and increase by 10. E.G: 9...19...29..."/> 
+<param name="agent_num" value="$(eval arg('agent_num'))" />
+
+<!-- Spot Params -->
+<rosparam command="load" file="$(find qd_kinematics)/config/spot_params.yaml" />
+
+<!-- Policy Params -->
+<rosparam command="load" file="$(find qd_kinematics)/config/policy_params.yaml" />
+
+<!-- Joystick Params -->
+<rosparam command="load" file="$(find qd_kinematics)/config/joy_params.yaml" />
+
+<!-- the above is equivalent to $(eval agent_num) but I left it in to acknowledge that both options exist -->
+<node name="spot_real" pkg="qd_kinematics" type="spot_real_interface" output="screen" machine="$(arg target_machine)"/>
+
+
+<!-- NOTE:
+        Setting Up Joystick:
+          - Get Number (you will see something like jsX): ls /dev/input/
+          - Make available to ROS: sudo chmod a+rw /dev/input/jsX
+          - Make sure <param name="dev" type="string" value="/dev/input/jsX" /> is correct in launch
+
+        You can ignore this msg: [ERROR] [1591631380.406690714]: Couldn't open joystick force feedback!
+        It just means your controller is missing some functionality, but this package doesn't use it. 
+-->
+
+</launch>

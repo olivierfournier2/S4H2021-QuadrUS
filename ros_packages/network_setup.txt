@@ -9,3 +9,6 @@ Wired IP:
 SSH
 User: Ubuntu
 Pass: Raspberry
+
+
+https://husarion.com/tutorials/ros-tutorials/5-running-ros-on-multiple-machines/

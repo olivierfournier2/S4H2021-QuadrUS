@@ -33,7 +33,7 @@ if __name__ == '__main__':
     jta.wait_for_server()
     rospy.loginfo('Found joint trajectory action')
     
-    rospy.Subscriber("joint_angles", Float64MultiArray, callback,jta)
+    rospy.Subscriber("joint_angles", Float64MultiArray, callback,jta, queue_size=10)
     rospy.spin()
     
 

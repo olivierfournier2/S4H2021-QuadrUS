@@ -1,0 +1,9 @@
+<launch>
+
+    <arg name="target_machine" default="master" />
+
+    <include file="$(find qd_kinematics)/launch/spot_real.launch">
+        <arg name="target_machine" value="$(arg target_machine)" />
+    </include>
+
+</launch>

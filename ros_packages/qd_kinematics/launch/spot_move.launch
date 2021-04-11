@@ -1,0 +1,26 @@
+<launch>
+
+ <!-- Load the URDF into the ROS Parameter Server -->
+ <param name="robot_description" 
+    command="xacro --inorder '$(find qd_simulation)/robot_description/quadrus.xacro'" />
+
+ <!-- Minitaur State Machine Node-->
+  <node name="spot_sm" pkg="qd_kinematics" type="spot_sm" output="screen">
+    <param name="frequency" value="200.0" type="double"/>
+  </node>
+
+<!-- Policy Node -->
+<node name="spot_pybullet" pkg="qd_kinematics" type="spot_pybullet_interface" output="screen"/>
+
+
+<!-- NOTE:
+        Setting Up Joystick:
+          - Get Number (you will see something like jsX): ls /dev/input/
+          - Make available to ROS: sudo chmod a+rw /dev/input/jsX
+          - Make sure <param name="dev" type="string" value="/dev/input/jsX" /> is correct in launch
+
+        You can ignore this msg: [ERROR] [1591631380.406690714]: Couldn't open joystick force feedback!
+        It just means your controller is missing some functionality, but this package doesn't use it. 
+-->
+
+</launch>

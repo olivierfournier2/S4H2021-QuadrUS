@@ -20,3 +20,36 @@ quadrus:
       - J10
       - J11
       - J12
+
+    constraints:
+      goal_time: 0.1
+      stopped_velocity_tolerance: 0.02
+      J1:
+        goal: 1.0
+      J2:
+        goal: 1.0                   
+      J3:
+        goal: 1.0
+      J4:
+        goal: 1.0
+      J5:
+        goal: 1.0                 
+      J6:
+        goal: 1.0 
+      J7:
+        goal: 1.0
+      J8:
+        goal: 1.0                   
+      J9:
+        goal: 1.0 
+      J10:
+        goal: 1.0
+      J11:
+        goal: 1.0                   
+      J12:
+        goal: 1.0 
+
+
+    state_publish_rate:  25            
+    action_monitor_rate: 20           
+    stop_trajectory_duration: 0

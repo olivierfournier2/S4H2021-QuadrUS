@@ -2,14 +2,67 @@
     <!-- values passed by command line input -->
     <arg name="mode" default="sim" />
     <arg name="sim_mode" default="dyn" />
+    <arg name="hw_mode" default="local" />
 
-    <!-- include file="$(find qd_joystick)/launch/qd_joystick.launch"/ -->
+    <machine
+        name="master"
+        address="192.168.4.17"
+        env-loader="/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/qd_master/launch/qd_local_env.sh"
+        default="true"
+        user="ubuntu-dev"
+    />
 
-    <!-- include file="$(find qd_planning)/launch/qd_planning.launch"/ -->
+    <machine
+        name="qd"
+        address="192.168.4.1"
+        env-loader="/home/qdpi/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/qd_master/launch/qd_remote_env.sh"
+        default="true"
+        user="qdpi"
+    />
 
-    <include file="$(find qd_control)/launch/qd_control.launch">
-        <arg name="mode" value="$(arg mode)" />
-        <arg name="sim_mode" value="$(arg sim_mode)" />
-    </include>
+
+    <include file="$(find qd_joystick)/launch/qd_joystick.launch"/>
+
+    <group if="$(eval arg('hw_mode') == 'local')">
+        <arg name="target_machine" value="master"/>
+
+        <include file="$(find qd_kinematics)/launch/qd_kinematics.launch">
+            <arg name="target_machine" value="$(arg target_machine)" />
+        </include>
+
+        <include file="$(find qd_control)/launch/qd_control.launch">
+            <arg name="mode" value="$(arg mode)" />
+            <arg name="sim_mode" value="$(arg sim_mode)" />
+            <arg name="target_machine" value="$(arg target_machine)" />
+        </include>
+
+    </group>
+
+    <group if="$(eval arg('hw_mode') == 'remote')">
+        <arg name="target_machine" value="qd"/>
+
+        <include file="$(find qd_kinematics)/launch/qd_kinematics.launch">
+            <arg name="target_machine" value="$(arg target_machine)" />
+        </include>
+
+        <include file="$(find qd_control)/launch/qd_control.launch">
+            <arg name="mode" value="$(arg mode)" />
+            <arg name="sim_mode" value="$(arg sim_mode)" />
+            <arg name="target_machine" value="$(arg target_machine)" />
+        </include>
+
+    </group>
 
 </launch>
+
+
+
+
+
+
+
+
+
+
+
+
