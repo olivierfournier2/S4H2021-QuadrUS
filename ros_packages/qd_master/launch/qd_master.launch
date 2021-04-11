@@ -4,7 +4,6 @@
     <arg name="sim_mode" default="dyn" />
     <arg name="hw_mode" default="local" />
 
-
     <machine
         name="master"
         address="192.168.4.17"
@@ -24,7 +23,6 @@
 
     <include file="$(find qd_joystick)/launch/qd_joystick.launch"/>
 
-<!--
     <group if="$(eval arg('hw_mode') == 'local')">
         <arg name="target_machine" value="master"/>
 
@@ -54,7 +52,6 @@
         </include>
 
     </group>
--->
 
 </launch>
 

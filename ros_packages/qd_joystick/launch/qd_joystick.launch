@@ -2,14 +2,14 @@
 <launch>
 
     <!-- Joystick Node -->
-    <node machine="qd" respawn="true" pkg="joy" type="joy_node" name="spot_joy">
+    <node machine="master" respawn="true" pkg="joy" type="joy_node" name="spot_joy">
         <param name="dev" type="string" value="/dev/input/js0" />
         <param name="deadzone" value="0.05" />
         <param name="autorepeat_rate" value="100"/>
     </node>
 
     <!-- Teleop Node -->
-    <node name="spot_teleop" pkg="qd_kinematics" type="teleop_node" output="screen" machine="qd">
+    <node name="spot_teleop" pkg="qd_kinematics" type="teleop_node" output="screen" machine="master">
     <param name="frequency" value="200.0" type="double"/>
     <param name="axis_linear_x" value="4" type="int"/>
     <param name="axis_linear_y" value="3" type="int"/>

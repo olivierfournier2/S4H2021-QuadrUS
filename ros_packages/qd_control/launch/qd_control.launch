@@ -10,13 +10,14 @@
 
       <!-- Load joint controller configurations from YAML file to parameter server -->
       <rosparam file="$(find qd_control)/config/qd_trajectory_sim.yaml" command="load"/>
-
+      <rosparam file="$(find qd_control)/config/qd_joint_limits.yaml" command="load"/>
+      
       <!-- Load the controllers -->
       <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
         output="screen" ns="/quadrus" args="joint_state_controller leg_controller" machine="$(arg target_machine)"/>
 
       <!-- Load the trajectory interface -->
-      <node name="trajectory_interface" pkg="qd_control" type="qd_trajectory_interface.py" machine="$(arg target_machine)"/>
+      <node name="TrajectoryInterface" pkg="qd_control" type="qd_trajectory_interface.py" machine="$(arg target_machine)"/>
 
       <!-- Launch the simulation -->
       <group if="$(eval arg('sim_mode') == 'dyn')">
@@ -26,9 +27,6 @@
       <group if="$(eval arg('sim_mode') == 'kin')">
         <include file="$(find qd_simulation)/launch/qd_rviz.launch"/>
       </group>
-
-      <!-- Load the trajectory controllers interface-->
-      <node name="TrajectoryInterface" pkg="qd_control" type="qd_trajectory_interface.py" machine="$(arg target_machine)"/>
 
     </group>
 
@@ -44,13 +42,16 @@
       <!-- Load joint controller configurations from YAML file to parameter server -->
       <rosparam file="$(find qd_control)/config/qd_trajectory_hw.yaml" command="load"/>
       <rosparam file="$(find qd_control)/config/qd_joint_limits.yaml" command="load"/>
-      
-      <!-- Launch the custom hardware interface node -->
-      <node name="QdHardwareInterface" pkg="qd_control" type="qd_hw_interface" output="screen" machine="$(arg target_machine)"/>
 
       <!-- Load the controllers -->
-        <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-          output="screen" args="/quadrus/joint_state_controller /quadrus/leg_controller" machine="$(arg target_machine)"/>
+      <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" args="/quadrus/joint_state_controller /quadrus/leg_controller" machine="$(arg target_machine)"/>
+
+      <!-- Load the trajectory interface -->
+      <node name="TrajectoryInterface" pkg="qd_control" type="qd_trajectory_interface.py" machine="$(arg target_machine)"/>
+
+      <!-- Launch the custom hardware interface node -->
+      <node name="QdHardwareInterface" pkg="qd_control" type="qd_hw_interface" output="screen" machine="$(arg target_machine)"/>
      
       <!-- Load the ROSSerial node on the OpenCR card-->
           <node pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen" machine="$(arg target_machine)" > 

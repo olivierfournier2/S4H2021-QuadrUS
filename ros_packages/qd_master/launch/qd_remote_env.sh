@@ -7,4 +7,4 @@ export ROSLAUNCH_SSH_UNKNOWN=1
 source /opt/ros/noetic/setup.bash
 source ~/quadrus_ws/devel/setup.bash
 
-exec "$@"-
+exec "$@"
