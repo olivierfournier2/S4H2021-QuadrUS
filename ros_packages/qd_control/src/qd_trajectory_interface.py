@@ -21,10 +21,12 @@ def move(jta, angles):
     
     point = JointTrajectoryPoint()
     point.positions = angles
-    point.time_from_start = rospy.Duration(0.1)
+    point.time_from_start = rospy.Duration(0.02)
     goal.trajectory.points.append(point)
     jta.send_goal_and_wait(goal)
-    
+    #jta.send_goal_and_wait(goal, rospy.Duration(0.02), rospy.Duration(0.01))
+
+
 if __name__ == '__main__':
     rospy.init_node('qd_trajectory_interface')
 

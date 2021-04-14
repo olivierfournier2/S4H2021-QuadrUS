@@ -22,7 +22,7 @@ quadrus:
       - J12
 
     constraints:
-      goal_time: 0.1
+      goal_time: 0.02
       stopped_velocity_tolerance: 0.02
       J1:
         goal: 1.0

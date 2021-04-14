@@ -13,7 +13,7 @@
 #include <string.h>
 
 #define NB_JOINTS 12 
-#define LOOP_REFRESH_RATE 10
+#define LOOP_REFRESH_RATE 50
 
 class Quadrus : public hardware_interface::RobotHW 
 {
