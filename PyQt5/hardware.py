@@ -342,7 +342,7 @@ class Ui_hardwareWindow(object):
 
     def onClick_start(self):
         print("Lauching ROS..")
-        os.system("gnome-terminal -x roslaunch qd_master qd_master.launch mode:=hw")
+        os.system("gnome-terminal -x roslaunch qd_master qd_master.launch mode:=hw hw_mode:=remote")
         time.sleep(1)
         os.system("gnome-terminal -x rosrun qd_interface interfaceNode.py")
         self.startClicked = True

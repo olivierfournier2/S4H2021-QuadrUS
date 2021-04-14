@@ -1,6 +1,6 @@
 # MEASURE
 # COM to Shoulder
-shoulder_length: 0.089
+shoulder_length: 0.089 #0.05925 (plan milieu femur - axe rot hanche)
 # Shoulder to Elbow
 elbow_length: 0.1408
 # Elbow to Wrist
@@ -12,28 +12,28 @@ hip_y: 0.178
 
 # ADJUSTABLE
 # Stance Length
-foot_x: 0.31
+foot_x: 0.268
 # Stance Width
-foot_y: 0.345
+foot_y: 0.34
 # Stance Height
-height: 0.22
+height: 0.2
 # Adjust for balanced walk
-com_offset: 0.0
+com_offset: -0.05
 
 # Time Step
 dt: 0.001
 
 # Swing Period (lower is faster)
-Tswing: 0.35
+Tswing: 0.4
 SwingPeriod_LIMITS: [0.1, 0.4]
 
 # Step Velocity (Using very low value as my main form of speed control is swing period)
 BaseStepVelocity: 0.001
 
 # Foot Clearance Height
-BaseClearanceHeight: 0.035
+BaseClearanceHeight: 0.015
 ClearanceHeight_LIMITS: [0.0, 0.04]
 
 # Foot Penetration Depth
-BasePenetrationDepth: 0.003
+BasePenetrationDepth: 0.002
 PenetrationDepth_LIMITS: [0.0, 0.02]

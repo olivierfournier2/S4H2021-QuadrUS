@@ -7,7 +7,7 @@
     <machine
         name="master"
         address="localhost"
-        env-loader="/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/qd_master/launch/qd_local_env.sh"
+        env-loader="/home/$(env USER)/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/qd_master/launch/qd_local_env.sh"
         default="true"
         user="$(env USER)"
     />
