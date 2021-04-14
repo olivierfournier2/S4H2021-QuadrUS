@@ -4,6 +4,8 @@
     <arg name="sim_mode" default="dyn" />
     <arg name="target_machine" default="master" />
 
+    <rosparam file="$(find qd_control)/config/control_settings.yaml" command="load"/>
+
     <!-- SIMULATION MODE-->
 
     <group if="$(eval arg('mode') == 'sim')">

@@ -1,7 +1,5 @@
 #! /usr/bin/env python3
 
-import roslib
-#roslib.load_manifest('joint_trajectory_test')
 import rospy
 import actionlib
 from std_msgs.msg import Float64MultiArray
@@ -9,23 +7,29 @@ import trajectory_msgs.msg
 import control_msgs.msg
 from trajectory_msgs.msg import JointTrajectoryPoint
 from control_msgs.msg import JointTrajectoryAction, JointTrajectoryGoal, FollowJointTrajectoryAction, FollowJointTrajectoryGoal
-import time
 
-def callback(data, jta):
+rate = 0
+qd_joint_names = ['J1', 'J2', 'J3', 
+                  'J4', 'J5', 'J6',
+                  'J7', 'J8', 'J9',
+                  'J10', 'J11', 'J12']
+
+def cmdCallback(data, jta):
     move(jta, data.data)
-    rospy.loginfo('Sent cmd to joint_angles')
 
 def move(jta, angles):
-    goal = FollowJointTrajectoryGoal()
-    goal.trajectory.joint_names = ['J1', 'J2', 'J3', 'J4', 'J5', 'J6', 'J7', 'J8', 'J9', 'J10', 'J11', 'J12']
     
-    point = JointTrajectoryPoint()
-    point.positions = angles
-    point.time_from_start = rospy.Duration(0.02)
-    goal.trajectory.points.append(point)
-    jta.send_goal_and_wait(goal)
-    #jta.send_goal_and_wait(goal, rospy.Duration(0.02), rospy.Duration(0.01))
+    # Create new trajectory point, set angles and execution time
+    tj_point = JointTrajectoryPoint()
+    tj_point.positions = angles
+    tj_point.time_from_start = rospy.Duration(1/rate)
 
+    # Create a trajectory goal, set joint names and add points
+    goal = FollowJointTrajectoryGoal()
+    goal.trajectory.joint_names = qd_joint_names
+    goal.trajectory.points.append(tj_point)
+
+    jta.send_goal(goal)
 
 if __name__ == '__main__':
     rospy.init_node('qd_trajectory_interface')
@@ -35,7 +39,7 @@ if __name__ == '__main__':
     jta.wait_for_server()
     rospy.loginfo('Found joint trajectory action')
     
-    rospy.Subscriber("joint_angles", Float64MultiArray, callback,jta, queue_size=10)
+    rospy.Subscriber("joint_angles", Float64MultiArray, cmdCallback, jta, queue_size=10)
+    rate = rospy.get_param("/quadrus/control_rate")
     rospy.spin()
-    
 

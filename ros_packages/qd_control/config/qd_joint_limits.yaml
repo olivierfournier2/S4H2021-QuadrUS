@@ -1,49 +1,49 @@
 joint_limits:
   J1:
     has_position_limits: true
-    min_position: -0.524
+    min_position: -0.401
     max_position: 0.785
   J2:
     has_position_limits: true
-    min_position: -1.920
-    max_position: 2.182
+    min_position: -1.571
+    max_position: 1.920
   J3:
     has_position_limits: true
-    min_position: -1.309
-    max_position: 2.356
+    min_position: -1.396
+    max_position: 1.745
   J4:
     has_position_limits: true
     min_position: -0.785
-    max_position: 0.524
+    max_position: 0.401
   J5:
     has_position_limits: true
-    min_position: -2.182
-    max_position: 1.920
+    min_position: -1.920
+    max_position: 1.571
   J6:
     has_position_limits: true
-    min_position: -2.356
-    max_position: 1.309
+    min_position: -1.745
+    max_position: 1.396
   J7:
     has_position_limits: true
-    min_position: -0.524
+    min_position: -0.401
     max_position: 0.785
   J8:
     has_position_limits: true
-    min_position: -1.920
-    max_position: 2.182
+    min_position: -1.571
+    max_position: 1.920
   J9:
     has_position_limits: true
-    min_position: -1.309
-    max_position: 2.356
+    min_position: -1.396
+    max_position: 1.745
   J10:
     has_position_limits: true
     min_position: -0.785
-    max_position: 0.524
+    max_position: 0.401
   J11:
     has_position_limits: true
-    min_position: -2.182
-    max_position: 1.920
+    min_position: -1.920
+    max_position: 1.571
   J12:
     has_position_limits: true
-    min_position: -2.356
-    max_position: 1.309
+    min_position: -1.745
+    max_position: 1.396

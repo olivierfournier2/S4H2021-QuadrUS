@@ -41,7 +41,7 @@ alpha = 0.7
 # Added this to avoid filtering residuals
 # -1 for all
 
-joint_offsets = [[0.0, -1.4792, 1.3127], [0.0, -1.4792, 1.3127], [0.0, -1.4792, 1.3127], [0.0,-1.4792, 1.3127]]
+joint_offsets = [[0.0, -1.5708, 1.5708], [0.0, -1.4792, 1.3127], [0.0, -1.4792, 1.3127], [0.0,-1.4792, 1.3127]]
 
 class SpotCommander():
     def __init__(self):
@@ -246,7 +246,7 @@ class SpotCommander():
 def main():
     """ The main() function. """
     mini_commander = SpotCommander()
-    rate = rospy.Rate(10)
+    rate = rospy.Rate(50)
     while not rospy.is_shutdown():
         # This is called continuously. Has timeout functionality too
         mini_commander.move()

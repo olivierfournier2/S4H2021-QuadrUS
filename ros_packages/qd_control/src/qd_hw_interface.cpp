@@ -55,7 +55,7 @@ void Quadrus::read(){
 
 void Quadrus::write(ros::Duration elapsed_time){
     
-    //position_joint_sat_interface.enforceLimits(elapsed_time);
+    position_joint_sat_interface.enforceLimits(elapsed_time);
     cmd_array.data.clear();
     for(int i=0;i<NB_JOINTS;i++){
         cmd_array.data.push_back(cmd[i]);

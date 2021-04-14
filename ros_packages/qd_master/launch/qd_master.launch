@@ -6,20 +6,11 @@
 
     <machine
         name="master"
-        address="192.168.4.17"
+        address="localhost"
         env-loader="/home/ubuntu-dev/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/qd_master/launch/qd_local_env.sh"
         default="true"
-        user="ubuntu-dev"
+        user="$(env USER)"
     />
-
-    <machine
-        name="qd"
-        address="192.168.4.1"
-        env-loader="/home/qdpi/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/qd_master/launch/qd_remote_env.sh"
-        default="true"
-        user="qdpi"
-    />
-
 
     <include file="$(find qd_joystick)/launch/qd_joystick.launch"/>
 
@@ -39,6 +30,15 @@
     </group>
 
     <group if="$(eval arg('hw_mode') == 'remote')">
+
+        <machine
+        name="qd"
+        address="192.168.4.1"
+        env-loader="/home/qdpi/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/qd_master/launch/qd_remote_env.sh"
+        default="true"
+        user="qdpi"
+        />
+
         <arg name="target_machine" value="qd"/>
 
         <include file="$(find qd_kinematics)/launch/qd_kinematics.launch">
