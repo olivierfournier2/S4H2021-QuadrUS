@@ -8,7 +8,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import os 
+import os
+import time
+import sys
+from random import randint
+import rospkg
+rospack = rospkg.RosPack()
 
 
 class Ui_hardwareWindow(object):
@@ -52,75 +57,99 @@ class Ui_hardwareWindow(object):
         self.M1_command = QtWidgets.QLCDNumber(self.centralwidget)
         self.M1_command.setGeometry(QtCore.QRect(610, 80, 64, 23))
         self.M1_command.setObjectName("M1_command")
+        self.M1_command.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M2_command = QtWidgets.QLCDNumber(self.centralwidget)
         self.M2_command.setGeometry(QtCore.QRect(610, 120, 64, 23))
         self.M2_command.setObjectName("M2_command")
+        self.M2_command.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M3_command = QtWidgets.QLCDNumber(self.centralwidget)
         self.M3_command.setGeometry(QtCore.QRect(610, 160, 64, 23))
         self.M3_command.setObjectName("M3_command")
+        self.M3_command.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M4_command = QtWidgets.QLCDNumber(self.centralwidget)
         self.M4_command.setGeometry(QtCore.QRect(610, 220, 64, 23))
         self.M4_command.setObjectName("M4_command")
+        self.M4_command.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M5_command = QtWidgets.QLCDNumber(self.centralwidget)
         self.M5_command.setGeometry(QtCore.QRect(610, 260, 64, 23))
         self.M5_command.setObjectName("M5_command")
+        self.M5_command.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M6_command = QtWidgets.QLCDNumber(self.centralwidget)
         self.M6_command.setGeometry(QtCore.QRect(610, 300, 64, 23))
         self.M6_command.setObjectName("M6_command")
+        self.M6_command.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M7_command = QtWidgets.QLCDNumber(self.centralwidget)
         self.M7_command.setGeometry(QtCore.QRect(610, 360, 64, 23))
         self.M7_command.setObjectName("M7_command")
+        self.M7_command.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M8_command = QtWidgets.QLCDNumber(self.centralwidget)
         self.M8_command.setGeometry(QtCore.QRect(610, 400, 64, 23))
         self.M8_command.setObjectName("M8_command")
+        self.M8_command.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M9_command = QtWidgets.QLCDNumber(self.centralwidget)
         self.M9_command.setGeometry(QtCore.QRect(610, 440, 64, 23))
         self.M9_command.setObjectName("M9_command")
+        self.M9_command.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M10_command = QtWidgets.QLCDNumber(self.centralwidget)
         self.M10_command.setGeometry(QtCore.QRect(610, 500, 64, 23))
         self.M10_command.setObjectName("M10_command")
+        self.M10_command.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M12_command = QtWidgets.QLCDNumber(self.centralwidget)
         self.M12_command.setGeometry(QtCore.QRect(610, 580, 64, 23))
         self.M12_command.setObjectName("M12_command")
+        self.M12_command.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M11_command = QtWidgets.QLCDNumber(self.centralwidget)
         self.M11_command.setGeometry(QtCore.QRect(610, 540, 64, 23))
         self.M11_command.setObjectName("M11_command")
+        self.M11_command.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M5_position = QtWidgets.QLCDNumber(self.centralwidget)
         self.M5_position.setGeometry(QtCore.QRect(800, 260, 64, 23))
         self.M5_position.setObjectName("M5_position")
+        self.M5_position.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M12_position = QtWidgets.QLCDNumber(self.centralwidget)
         self.M12_position.setGeometry(QtCore.QRect(800, 580, 64, 23))
         self.M12_position.setObjectName("M12_position")
+        self.M12_position.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M11_position = QtWidgets.QLCDNumber(self.centralwidget)
         self.M11_position.setGeometry(QtCore.QRect(800, 540, 64, 23))
         self.M11_position.setObjectName("M11_position")
+        self.M11_position.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M6_position = QtWidgets.QLCDNumber(self.centralwidget)
         self.M6_position.setGeometry(QtCore.QRect(800, 300, 64, 23))
         self.M6_position.setObjectName("M6_position")
+        self.M6_position.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M8_position = QtWidgets.QLCDNumber(self.centralwidget)
         self.M8_position.setGeometry(QtCore.QRect(800, 400, 64, 23))
         self.M8_position.setObjectName("M8_position")
+        self.M8_position.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M9_position = QtWidgets.QLCDNumber(self.centralwidget)
         self.M9_position.setGeometry(QtCore.QRect(800, 440, 64, 23))
         self.M9_position.setObjectName("M9_position")
+        self.M9_position.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M1_position = QtWidgets.QLCDNumber(self.centralwidget)
         self.M1_position.setGeometry(QtCore.QRect(800, 80, 64, 23))
         self.M1_position.setObjectName("M1_position")
+        self.M1_position.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M3_position = QtWidgets.QLCDNumber(self.centralwidget)
         self.M3_position.setGeometry(QtCore.QRect(800, 160, 64, 23))
         self.M3_position.setObjectName("M3_position")
+        self.M3_position.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M7_position = QtWidgets.QLCDNumber(self.centralwidget)
         self.M7_position.setGeometry(QtCore.QRect(800, 360, 64, 23))
         self.M7_position.setObjectName("M7_position")
+        self.M7_position.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M10_position = QtWidgets.QLCDNumber(self.centralwidget)
         self.M10_position.setGeometry(QtCore.QRect(800, 500, 64, 23))
         self.M10_position.setObjectName("M10_position")
+        self.M10_position.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M4_position = QtWidgets.QLCDNumber(self.centralwidget)
         self.M4_position.setGeometry(QtCore.QRect(800, 220, 64, 23))
         self.M4_position.setObjectName("M4_position")
+        self.M4_position.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.M2_position = QtWidgets.QLCDNumber(self.centralwidget)
         self.M2_position.setGeometry(QtCore.QRect(800, 120, 64, 23))
         self.M2_position.setObjectName("M2_position")
+        self.M2_position.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(560, 30, 151, 20))
         font = QtGui.QFont()
@@ -239,10 +268,50 @@ class Ui_hardwareWindow(object):
         self.EstopButton.clicked.connect( self.onClick_Estop ) 
         self.backButton.clicked.connect( lambda:self.onClick_back(hardwareWindow) ) 
         self.EstopClicked = False 
-        self.startClicked = False 
+        self.startClicked = False
+
+        # Update motors data at a rate of 10 Hz
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.displayMotorsData)
+        self.timer.start(100)
 
         self.retranslateUi(hardwareWindow)
         QtCore.QMetaObject.connectSlotsByName(hardwareWindow)
+
+    def displayMotorsData(self):
+        if self.startClicked == True:
+            f = open(rospack.get_path('qd_interface') + "/src/motorsCommands.txt", "r")
+            motorCommands = f.read().split()
+            f.close()
+            self.M1_command.display(motorCommands[0][:5])
+            self.M2_command.display(motorCommands[1][:5])
+            self.M3_command.display(motorCommands[2][:5])
+            self.M4_command.display(motorCommands[3][:5])
+            self.M5_command.display(motorCommands[4][:5])
+            self.M6_command.display(motorCommands[5][:5])
+            self.M7_command.display(motorCommands[6][:5])
+            self.M8_command.display(motorCommands[7][:5])
+            self.M9_command.display(motorCommands[8][:5])
+            self.M10_command.display(motorCommands[9][:5])
+            self.M11_command.display(motorCommands[10][:5])
+            self.M12_command.display(motorCommands[11][:5])
+
+            f = open(rospack.get_path('qd_interface') + "/src/motorsPositions.txt", "r")
+            motorPositions = f.read().split()
+            f.close()
+            self.M1_position.display(motorPositions[0][:5])
+            self.M2_position.display(motorPositions[1][:5])
+            self.M3_position.display(motorPositions[2][:5])
+            self.M4_position.display(motorPositions[3][:5])
+            self.M5_position.display(motorPositions[4][:5])
+            self.M6_position.display(motorPositions[5][:5])
+            self.M7_position.display(motorPositions[6][:5])
+            self.M8_position.display(motorPositions[7][:5])
+            self.M9_position.display(motorPositions[8][:5])
+            self.M10_position.display(motorPositions[9][:5])
+            self.M11_position.display(motorPositions[10][:5])
+            self.M12_position.display(motorPositions[11][:5])
+
 
     def retranslateUi(self, hardwareWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -274,11 +343,14 @@ class Ui_hardwareWindow(object):
     def onClick_start(self):
         print("Lauching ROS..")
         os.system("gnome-terminal -x roslaunch qd_master qd_master.launch mode:=hw")
+        time.sleep(1)
+        os.system("gnome-terminal -x rosrun qd_interface interfaceNode.py")
         self.startClicked = True
 
         
     def onClick_back(self, hardwareWindow):
         os.system("killall rosmaster")
+        os.system("killall interfaceNode.p")
         hardwareWindow.hide()
         
     def onClick_Estop(self):       
@@ -289,7 +361,6 @@ class Ui_hardwareWindow(object):
                 self.EstopButton.setText(_translate("hardwareWindow", "EMERGENCY STOP"))
                 self.EstopButton.setStyleSheet("background-color: rgb(245, 121, 0);\n"
     "font: 75 oblique 15pt \"Ubuntu Condensed\";")
-                os.system("gnome-terminal -x rostopic pub /estop std_msgs/Bool \"data:true\" ")
                 self.EstopClicked= False
 
             elif not self.EstopClicked:
@@ -297,7 +368,10 @@ class Ui_hardwareWindow(object):
                 self.EstopButton.setText(_translate("hardwareWindow", "RESET ESTOP"))
                 self.EstopButton.setStyleSheet("background-color: rgb(252, 233, 79);\n"
     "font: 75 oblique 15pt \"Ubuntu Condensed\";")
-                os.system("gnome-terminal -x rostopic pub /estop std_msgs/Bool \"data:true\" ")
                 self.EstopClicked= True
+
+            os.system("gnome-terminal -x rostopic pub /estop std_msgs/Bool \"data: true\" ")
+            time.sleep(0.8)
+            os.system("killall rostopic")
         else:
             print("Process must be started")
