@@ -12,7 +12,7 @@
 
       <!-- Load joint controller configurations from YAML file to parameter server -->
       <rosparam file="$(find qd_control)/config/qd_trajectory_sim.yaml" command="load"/>
-      <rosparam file="$(find qd_control)/config/qd_joint_limits.yaml" command="load"/>
+      <rosparam command="load" file="$(find qd_control)/config/qd_joint_limits.yaml" />
       
       <!-- Load the controllers -->
       <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"

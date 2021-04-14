@@ -107,27 +107,32 @@
 
 			</link>
 
-			<joint name="${hip_joint_id}" type="continuous">
+			<joint name="${hip_joint_id}" type="revolute">
 				<parent link="chassis"/>
 				<child link="link_${long}_${lat}_hip"/>
 
 				<xacro:if value="${long == 'front' and lat == 'left'}">
-					<origin xyz="${rear_hip_long_offset+hip_long_center_dist} ${hip_lat_center_dist/2.0} 0" rpy="0 0 0" /> 
+					<origin xyz="${rear_hip_long_offset+hip_long_center_dist} ${hip_lat_center_dist/2.0} 0" rpy="0 0 0" />
+					<limit effort="30" velocity="10" lower="-0.401" upper="0.785" />
 				</xacro:if>
 
 				<xacro:if value="${long == 'front' and lat == 'right'}">
 					<origin xyz="${rear_hip_long_offset+hip_long_center_dist} ${-hip_lat_center_dist/2.0} 0" rpy="0 0 0" /> 
+					<limit effort="30" velocity="10" lower="-0.785" upper="0.401" />
 				</xacro:if>
 
 				<xacro:if value="${long == 'back' and lat == 'left'}">
 					<origin xyz="${rear_hip_long_offset} ${hip_lat_center_dist/2.0} 0" rpy="0 0 0" /> 
+					<limit effort="30" velocity="10" lower="-0.401" upper="0.785" />
 				</xacro:if>
 
 				<xacro:if value="${long == 'back' and lat == 'right'}">
 					<origin xyz="${rear_hip_long_offset} ${-hip_lat_center_dist/2.0} 0" rpy="0 0 0" /> 
+					<limit effort="30" velocity="10" lower="-0.785" upper="0.401" />
 				</xacro:if>
 
 				<axis xyz="1 0 0" />
+				
 			</joint>
 
 			<transmission name="transmission_${long}_${lat}_hip">
@@ -162,12 +167,11 @@
 					<xacro:if value="${lat == 'right'}">
 						<origin xyz="0 0 0" rpy="0 0 0" />
 						<geometry>
-							<mesh filename="package://qd_simulation/robot_description/mesh/right_femur.dae"/>
+							<mesh filename="package://qd_simulation/robot_description/mesh/right_femur.dae" />
 						</geometry>
 					</xacro:if>
-					<material name="blue"/>
+					<material name="blue" />
 				</visual>
-				
 				<collision>
 					<xacro:if value="${lat == 'left'}">
 						<origin xyz="-0.066 0 -0.008" rpy="0 0 0" />
@@ -194,19 +198,22 @@
 
 			</link>
 
-			<joint name="${upperleg_joint_id}" type="continuous">
+			<joint name="${upperleg_joint_id}" type="revolute">
 				<parent link="link_${long}_${lat}_hip"/>
 				<child link="link_${long}_${lat}_upperleg"/>
 
 				<xacro:if value="${lat == 'left'}">
-					<origin xyz="0 ${hip_offset} 0" rpy="0 0 0" /> 
+					<origin xyz="0 ${hip_offset} 0" rpy="0 0 0" />
+					<limit effort="30" velocity="10" lower="-1.5" upper="0.7" />
 				</xacro:if>
 
 				<xacro:if value="${lat == 'right'}">
-					<origin xyz="0 ${-hip_offset} 0" rpy="0 0 0" /> 
+					<origin xyz="0 ${-hip_offset} 0" rpy="0 0 0" />
+					<limit effort="1" velocity="1.0" lower="-1.5" upper="0.7" />
 				</xacro:if>
 
 				<axis xyz="0 1 0" />
+
 			</joint>
 
 			<transmission name="transmission_${long}_${lat}_upperleg">
@@ -275,11 +282,20 @@
 
 			</link>
 
-			<joint name="${lowerleg_joint_id}" type="continuous">
+			<joint name="${lowerleg_joint_id}" type="revolute">
 				<parent link="link_${long}_${lat}_upperleg"/>
 				<child link="link_${long}_${lat}_lowerleg"/>
 				<origin xyz="${-upperleg_length} 0 ${-upperleg_offset}" rpy="0 1.5708 0" /> 
 				<axis xyz="0 1 0" />
+
+				<xacro:if value="${lat == 'right'}">
+					<limit effort="30" velocity="10" lower="-1.745" upper="1.396" />
+				</xacro:if>
+
+				<xacro:if value="${lat == 'left'}">
+					<limit effort="30" velocity="10" lower="-1.396" upper="1.745" />
+				</xacro:if>
+
 			</joint>
 
 			<transmission name="transmission_${long}_${lat}_lowerleg">
