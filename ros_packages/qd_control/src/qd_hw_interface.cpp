@@ -13,33 +13,35 @@ Quadrus::Quadrus(ros::NodeHandle& nh): nh_(nh){ //Initialization list : set nh_ 
     cmd_pub = nh_.advertise<std_msgs::Float64MultiArray>("hw_cmd", 10);
 
     //Subscribe to /feedback_data topic with queue size 1000
-    feedback_sub = nh_.subscribe("hw_feedback", 10, &Quadrus::feedbackCallback, this);
+    //feedback_sub = nh_.subscribe("hw_feedback", 10, &Quadrus::feedbackCallback, this);
 }   
                                                    
 Quadrus::~Quadrus(){
-    delete[] jsHandle;
-    delete[] jpHandle;
-    delete[] jlHandle;
+    //delete[] jsHandle;
+    //delete[] jpHandle;
+    //delete[] jlHandle;
 }   
 
 void Quadrus::init(){
     
     for(int i = 0;i<NB_JOINTS;i++){
     
-        jsHandle[i] = new hardware_interface::JointStateHandle(("J" + std::to_string(i+1)), &pos[i], &vel[i], &eff[i]);
-        joint_state_interface_.registerHandle(*jsHandle[i]);
+        jsHandle[i] = hardware_interface::JointStateHandle(("J" + std::to_string(i+1)), &pos[i], &vel[i], &eff[i]);
+        joint_state_interface_.registerHandle(jsHandle[i]);
 
-        jpHandle[i] = new hardware_interface::JointHandle(joint_state_interface_.getHandle(("J" + std::to_string(i+1))), &cmd[i]);
-        position_joint_interface_.registerHandle(*jpHandle[i]);
+        jpHandle[i] = hardware_interface::JointHandle(joint_state_interface_.getHandle(("J" + std::to_string(i+1))), &cmd[i]);
+        position_joint_interface_.registerHandle(jpHandle[i]);
 
+        /*
         getJointLimits(("J" + std::to_string(i+1)), nh_, jlimits[i]);
-        jlHandle[i] = new joint_limits_interface::PositionJointSaturationHandle(*jpHandle[i], jlimits[i]);
-        position_joint_sat_interface.registerHandle(*jlHandle[i]);
+        jlHandle[i] = joint_limits_interface::PositionJointSaturationHandle(jpHandle[i], jlimits[i]);
+        position_joint_sat_interface.registerHandle(jlHandle[i]);
+        */
     }
 
     registerInterface(&joint_state_interface_);
     registerInterface(&position_joint_interface_);
-    registerInterface(&position_joint_sat_interface);
+    //registerInterface(&position_joint_sat_interface);
 }
 
 void Quadrus::update(const ros::TimerEvent& e){
@@ -50,12 +52,14 @@ void Quadrus::update(const ros::TimerEvent& e){
 }  
 
 void Quadrus::read(){
-    //
+    for(int i=0; i<NB_JOINTS; i++){
+        pos[i] = 0;   
+    }
 }
 
 void Quadrus::write(ros::Duration elapsed_time){
     
-    position_joint_sat_interface.enforceLimits(elapsed_time);
+    //position_joint_sat_interface.enforceLimits(elapsed_time);
     cmd_array.data.clear();
     for(int i=0;i<NB_JOINTS;i++){
         cmd_array.data.push_back(cmd[i]);

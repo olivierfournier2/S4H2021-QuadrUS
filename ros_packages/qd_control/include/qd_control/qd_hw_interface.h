@@ -13,7 +13,7 @@
 #include <string.h>
 
 #define NB_JOINTS 12 
-#define LOOP_REFRESH_RATE 50
+#define LOOP_REFRESH_RATE 100
 
 class Quadrus : public hardware_interface::RobotHW 
 {
@@ -31,13 +31,13 @@ class Quadrus : public hardware_interface::RobotHW
         
         hardware_interface::JointStateInterface joint_state_interface_;
         hardware_interface::PositionJointInterface position_joint_interface_;
-        joint_limits_interface::PositionJointSaturationInterface position_joint_sat_interface;
+        //joint_limits_interface::PositionJointSaturationInterface position_joint_sat_interface;
 
         joint_limits_interface::JointLimits jlimits[NB_JOINTS];
 
-        hardware_interface::JointStateHandle *jsHandle[NB_JOINTS];
-        hardware_interface::JointHandle *jpHandle[NB_JOINTS];
-        joint_limits_interface::PositionJointSaturationHandle *jlHandle[NB_JOINTS];
+        hardware_interface::JointStateHandle jsHandle[NB_JOINTS];
+        hardware_interface::JointHandle jpHandle[NB_JOINTS];
+        //joint_limits_interface::PositionJointSaturationHandle jlHandle[NB_JOINTS];
 
         double pos[NB_JOINTS];
         double vel[NB_JOINTS];

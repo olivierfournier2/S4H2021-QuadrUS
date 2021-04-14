@@ -18,12 +18,12 @@ void setup() {
 }
 
 void loop() {
-  readAngles(feedback_msg);
-  feedback_pub.publish(&feedback_msg);
+  //readAngles(feedback_msg);
+  //feedback_pub.publish(&feedback_msg);
   //readIMU(imu_msg);
   //imu_pub.publish(&imu_msg);
   nh.spinOnce();
-  delay(1000/loop_hz);
+  delay(1.0/loop_hz);
   /* // Mouvement de push up
   // Standing
   float positionsStanding[12] = {0,60,-10,

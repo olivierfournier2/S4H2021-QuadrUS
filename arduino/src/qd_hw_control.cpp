@@ -106,7 +106,7 @@ float analogToDeg(int analog_value, int motorIndex){
  *
  * @param feedback_data Current angle of the servos to feedback to ROS
  */
-void readAngles(std_msgs::Float64MultiArray feedback_data){
+void readAngles(std_msgs::Float64MultiArray feedback_data){  
   float feedbackAngle[12];
   float compensatedAngle[12];
   for(int i=0;i<12;i++){
@@ -125,9 +125,13 @@ void readAngles(std_msgs::Float64MultiArray feedback_data){
 void subscriberCallback(const std_msgs::Float64MultiArray& cmd_msg) {
 
   float ros_motor_commands[12];
-  
+
   for (int i = 0; i < 12; i++){
     ros_motor_commands[i] = radToDeg(cmd_msg.data[i]);
+
+    if(i==4 || i==5 || i==10 || i==11){
+      ros_motor_commands[i] = -ros_motor_commands[i];
+    }
   }
   moveMotor(ros_motor_commands);
 }

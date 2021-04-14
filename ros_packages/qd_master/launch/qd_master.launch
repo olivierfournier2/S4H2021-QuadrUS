@@ -42,13 +42,15 @@
         <arg name="target_machine" value="qd"/>
 
         <include file="$(find qd_kinematics)/launch/qd_kinematics.launch">
-            <arg name="target_machine" value="$(arg target_machine)" />
+            <arg name="target_machine" value="master" />
+            <!-- arg name="target_machine" value="$(arg target_machine)" / -->
         </include>
 
         <include file="$(find qd_control)/launch/qd_control.launch">
             <arg name="mode" value="$(arg mode)" />
             <arg name="sim_mode" value="$(arg sim_mode)" />
-            <arg name="target_machine" value="$(arg target_machine)" />
+            <arg name="target_machine" value="master" />
+            <!-- arg name="target_machine" value="$(arg target_machine)" /-->
         </include>
 
     </group>
