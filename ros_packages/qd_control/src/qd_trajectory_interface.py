@@ -22,7 +22,7 @@ def move(jta, angles):
     # Create new trajectory point, set angles and execution time
     tj_point = JointTrajectoryPoint()
     tj_point.positions = angles
-    tj_point.time_from_start = rospy.Duration(1/rate)
+    tj_point.time_from_start = rospy.Duration(0.02)
 
     # Create a trajectory goal, set joint names and add points
     goal = FollowJointTrajectoryGoal()

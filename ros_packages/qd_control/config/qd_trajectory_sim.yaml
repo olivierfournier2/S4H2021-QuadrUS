@@ -25,29 +25,29 @@ quadrus:
       goal_time: 0.02
       stopped_velocity_tolerance: 0.02
       J1:
-        goal: 1.0
+        goal: 0.05
       J2:
-        goal: 1.0                   
+        goal: 0.05                  
       J3:
-        goal: 1.0
+        goal: 0.05
       J4:
-        goal: 1.0
+        goal: 0.05
       J5:
-        goal: 1.0                 
+        goal: 0.05                 
       J6:
-        goal: 1.0 
+        goal: 0.05
       J7:
-        goal: 1.0
+        goal: 0.05
       J8:
-        goal: 1.0                   
+        goal: 0.05                  
       J9:
-        goal: 1.0 
+        goal: 0.05
       J10:
-        goal: 1.0
+        goal: 0.05
       J11:
-        goal: 1.0                   
+        goal: 0.05                  
       J12:
-        goal: 1.0                     
+        goal: 0.05                    
 
     gains:
       J1: {p: 10.0,  d: 0.2, i: 0, i_clamp: 0}
@@ -63,6 +63,6 @@ quadrus:
       J11: {p: 10.0,  d: 0.2, i: 0, i_clamp: 0}
       J12: {p: 10.0,  d: 0.2, i: 0, i_clamp: 0}
 
-    state_publish_rate:  25            
+    state_publish_rate:  50            
     action_monitor_rate: 20           
     stop_trajectory_duration: 0
