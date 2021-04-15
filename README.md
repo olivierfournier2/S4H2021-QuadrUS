@@ -7,7 +7,6 @@
 * [Development environment](#Development-environment)
     * [Needed installation](#ROS-installation)
     * [To set up this ROS project](#to-set-up-this-ROS-project)
-    * [Launching 2D and 3D simulations](#Launching-2D-and-3D-simulations)
 * [Using this repository](#Using-this-repository)
     * [Creating and launching the GUI](#Creating-and-launching-the-GUI)
     * [Launching 2D and 3D simulations without GUI](#Launching-2D-and-3D-simulations-without-GUI)
