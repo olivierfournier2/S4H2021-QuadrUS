@@ -24,7 +24,7 @@ void motorController(int pulseCommand[12]);
 float analogToDeg(int analog_value, int motorIndex);
 void rosInit();
 void servoInit();
-void readAngles(std_msgs::Float64MultiArray feedback_data);
+void readAngles(std_msgs::Float64MultiArray * feedback_data);
 //void readIMU(IMUdata imu_data);
 
 

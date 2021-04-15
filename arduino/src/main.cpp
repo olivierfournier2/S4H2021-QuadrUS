@@ -16,7 +16,7 @@ void setup() {
 }
 
 void loop() {
-  //readAngles(feedback_msg);
+  //readAngles(&feedback_msg);
   //feedback_pub.publish(&feedback_msg);
   nh.spinOnce();
   delay(1.0/20);
