@@ -16,9 +16,6 @@ void setup() {
   computeLimits();
   moveMotor(initPositions);
   rosInit();
-  //feedback_msg.data_length = 12;
-  //feedback_msg.layout.dim_length = 1;
-  feedback_msg.data = (float*) malloc(sizeof(float)*12);
 }
 
 void loop() {
