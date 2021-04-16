@@ -4,7 +4,9 @@
 Adafruit_PWMServoDriver driver = Adafruit_PWMServoDriver();
 ros::NodeHandle nh;
 std_msgs::Float64MultiArray cmd_msg;
+std_msgs::Int16 test_int;
 std_msgs::Float64MultiArray feedback_msg;
+
 ros::Publisher feedback_pub(feedback_topic, &feedback_msg);
 ros::Subscriber<std_msgs::Float64MultiArray> cmd_sub(cmd_topic,
                                                      &subscriberCallback);
@@ -14,11 +16,18 @@ void setup() {
   computeLimits();
   moveMotor(initPositions);
   rosInit();
+  //feedback_msg.data_length = 12;
+  //feedback_msg.layout.dim_length = 1;
+  feedback_msg.data = (float*) malloc(sizeof(float)*12);
 }
 
 void loop() {
-  //readAngles(&feedback_msg);
-  //feedback_pub.publish(&feedback_msg);
+
+  if(feedback_state){ 
+    readAngles(&feedback_msg);
+    feedback_pub.publish(&feedback_msg);
+  }
+
   nh.spinOnce();
-  delay(0.05);
+  delay(1000.0/loop_hz);
 }

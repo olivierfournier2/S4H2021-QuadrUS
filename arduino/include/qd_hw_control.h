@@ -9,6 +9,7 @@
 #include <std_msgs/Float64MultiArray.h>
 #include <std_msgs/Float32MultiArray.h>
 #include <string.h>
+#include <std_msgs/Int16.h>
 
 void computeLimits();
 int degToPulse(float ang, int motorIndex);
@@ -22,12 +23,12 @@ void motorController(int pulseCommand[12]);
 float analogToDeg(int analog_value, int motorIndex);
 void rosInit();
 void servoInit();
-void readAngles(std_msgs::Float64MultiArray * feedback_data);
+void readAngles(std_msgs::Float64MultiArray *feedback_data);
 
 //Config variables declarations
 extern const char cmd_topic[];
 extern const char feedback_topic[];
-extern const int loop_hz;
+extern const double loop_hz;
 extern const int pulsemin;
 extern const int pulsemax[12];
 extern const int servo_freq;

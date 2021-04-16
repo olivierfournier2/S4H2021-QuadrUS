@@ -127,7 +127,7 @@ void readAngles(std_msgs::Float64MultiArray *feedback_data){
 
   float feedbackAngle[12];
   float compensatedAngle[12];
-  
+
   for(int i=0;i<12;i++){
      feedbackAngle[i] = analogToDeg(analogRead(analog_pins[i]), i);
      compensatedAngle[i] = compensateFeedback(feedbackAngle[i], i);

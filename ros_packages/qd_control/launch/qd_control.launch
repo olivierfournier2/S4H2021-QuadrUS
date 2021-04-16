@@ -56,7 +56,7 @@
       <node name="QdHardwareInterface" pkg="qd_control" type="qd_hw_interface" output="screen" machine="$(arg target_machine)"/>
      
       <!-- Load the ROSSerial node on the OpenCR card-->
-          <node pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen" machine="qd" >
+          <node pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen" machine="master" >
           <!-- node pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen" machine="$(arg target_machine)" --> 
             <param name="port" value="/dev/ttyACM0"/>
             <param name="baud" value="115200"/>
