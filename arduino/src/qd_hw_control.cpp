@@ -8,7 +8,6 @@ void rosInit(){
   nh.initNode();
   nh.subscribe(cmd_sub);
   nh.advertise(feedback_pub);
-  //nh.advertise(imu_pub);
   feedback_msg.data_length = 12;
   feedback_msg.data = (float *)malloc(sizeof(float) *12);
 }
@@ -72,6 +71,7 @@ float radToDeg(float angleRad) {
   return angleRad*180.0/PI;
 }
 
+
 /**
  * Convert an angle in degrees to radians
  *
@@ -81,6 +81,7 @@ float radToDeg(float angleRad) {
 float degToRad(float angleDeg) {
   return angleDeg*PI/180.0;
 }
+
 
 /**
  * Convert the analog output of a servo potentiometer to an angle in degrees
@@ -200,88 +201,3 @@ void motorController(int pulseCommand[12]) {
         driver.writeMicroseconds(i, pulseCommand[i]);
     }
 }
-
-void motorControllerBadOne(int pulseCommand[12]) {
-    bool stop = false;
-    int lastStep = 0;
-    int pulseInterval = 5;
-
-    for (int i = 0; i < 12; i++){
-        if(pulseCommand[i] > jointLimitPulse[i][1]){
-            pulseCommand[i] = jointLimitPulse[i][1];
-          }
-        else if(pulseCommand[i] < jointLimitPulse[i][0]){
-            pulseCommand[i] = jointLimitPulse[i][0];
-          }
-      }
-    
-    while(stop == false) {
-        stop = true;
-
-        for (int i = 0; i < 12 ; i++){
-          if (pulseCommand[i] > currentPulse[i]){
-              lastStep = pulseCommand[i] - currentPulse[i];
-              
-              if ( lastStep < pulseInterval) {
-                currentPulse[i] += lastStep;
-              } 
-              else {
-                currentPulse[i] += pulseInterval;
-              }
-                
-              driver.writeMicroseconds(i,currentPulse[i]);
-            }
-          else if (pulseCommand[i] < currentPulse[i]){
-              lastStep = currentPulse[i] - pulseCommand[i];
-              
-              if ( lastStep < pulseInterval) {
-                currentPulse[i] -= lastStep;
-              } 
-              else {
-                currentPulse[i] -= pulseInterval;
-              }
-              
-              driver.writeMicroseconds(i,currentPulse[i]);
-            }
-          else {
-              delayMicroseconds(1000);
-            }
-
-          if (currentPulse[i] != pulseCommand[i]) {
-              stop = false;
-            }
-        }
-      } 
-  }
-
-
-/**
- * Read the analog inputs on the Arduino and store them
- * in acceleration(X,Y,Z); gyro(X,Y,Z); angles(X,Y,Z) in the imu_data to send back to ROS
- *
- * @param imu_data Current angular positionning of the robot to feedback to ROS
- */
-/*void readIMU(IMUdata imu_data){
-
-  double accX = 0;
-  double accY = 0;
-  double accZ = 0;
-  double gyroX = 0;
-  double gyroY = 0;
-  double gyroZ = 0;
-  double roll = 0;
-  double pitch = 0;
-
-  imu.Acc_getValues(&accX, &accY, &accZ);
-  imu.Gyro_getValues(&gyroX, &gyroY, &gyroZ);
-  imu.getAngles(&roll, &pitch, 2); 
-
-  imu_data.roll = roll;
-  imu_data.pitch = pitch;
-  imu_data.acc_x = accX;
-  imu_data.acc_y = accY;
-  imu_data.acc_z = accZ;
-  imu_data.gyro_x = gyroX;
-  imu_data.gyro_y = gyroY;
-  imu_data.gyro_z = gyroZ;
-}*/

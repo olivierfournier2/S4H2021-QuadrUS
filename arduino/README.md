@@ -1,4 +1,7 @@
 pio platform install "native"
 
 ## To run tests
-pio test -e megaatmega2560
+Open a new PlatformIO terminal and type:
+    '''
+    pio test -e megaatmega2560
+    '''
