@@ -6,7 +6,8 @@ ros::NodeHandle nh;
 std_msgs::Float64MultiArray cmd_msg;
 std_msgs::Float64MultiArray feedback_msg;
 ros::Publisher feedback_pub(feedback_topic, &feedback_msg);
-ros::Subscriber<std_msgs::Float64MultiArray> cmd_sub(cmd_topic, &subscriberCallback);
+ros::Subscriber<std_msgs::Float64MultiArray> cmd_sub(cmd_topic,
+                                                     &subscriberCallback);
 
 void setup() {
   servoInit();
