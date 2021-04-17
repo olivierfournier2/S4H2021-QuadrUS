@@ -51,9 +51,6 @@
 - Install all dependencies for Kinematics
 
     ```
-https://user-images.githubusercontent.com/55956546/115096707-4adae380-9ef4-11eb-8fa2-93882ab282dd.mp4
-
-
     sudo apt install python3-pip
     ```
     ```
