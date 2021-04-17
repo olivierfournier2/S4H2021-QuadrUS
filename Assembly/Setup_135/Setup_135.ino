@@ -8,7 +8,6 @@
 */
 #include <Adafruit_PWMServoDriver.h>
 
-
 Adafruit_PWMServoDriver driver = Adafruit_PWMServoDriver();;
 
 int pos = 0;    // variable to store the servo position

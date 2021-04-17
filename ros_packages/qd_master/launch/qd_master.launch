@@ -32,23 +32,22 @@
     <group if="$(eval arg('hw_mode') == 'remote')">
 
         <machine
-        name="qd"
-        address="192.168.4.1"
-        env-loader="/home/qdpi/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/qd_master/launch/qd_remote_env.sh"
-        default="true"
-        user="qdpi"
+            name="qd"
+            address="192.168.4.1"
+            env-loader="/home/qdpi/quadrus_ws/src/S4H2021-QuadrUS/ros_packages/qd_master/launch/qd_remote_env.sh"
+            default="true"
+            user="qdpi"
         />
 
         <arg name="target_machine" value="qd"/>
 
         <include file="$(find qd_kinematics)/launch/qd_kinematics.launch">
-            <arg name="target_machine" value="master" />
-            <arg name="target_machine" value="$(arg target_machine)" / -->
+            <arg name="target_machine" value="master"/>
         </include>
 
         <include file="$(find qd_control)/launch/qd_control.launch">
-            <arg name="mode" value="$(arg mode)" />
-            <arg name="target_machine" value="master" />
+            <arg name="mode" value="$(arg mode)"/>
+            <arg name="target_machine" value="qd" />
         </include>
 
     </group>
