@@ -3,6 +3,10 @@
 ### Quadruped Robot | UdeS-GRO
 [![Build Status](https://www.travis-ci.com/olivierfournier2/S4H2021-QuadrUS.svg?branch=main)](https://www.travis-ci.com/olivierfournier2/S4H2021-QuadrUS) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://opensource.com/resources/what-open-source) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## Original contributors
+![original_contributors](https://user-images.githubusercontent.com/55956546/115096363-c471d200-9ef2-11eb-90e0-b41df1426315.jpg) <br>
+**From left to right :** Anthony Breton; Jonathan Oreste Maruca; Diego-Alonso Leblanc-Romero; Charles Vuong; Mathias Bourgault; Olivier Fournier
+
 ## Table of contents
 * [Development environment](#Development-environment)
     * [Needed installation](#ROS-installation)
