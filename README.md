@@ -7,6 +7,9 @@
 ![original_contributors](https://user-images.githubusercontent.com/55956546/115096363-c471d200-9ef2-11eb-90e0-b41df1426315.jpg) <br>
 **From left to right :** Anthony Breton; Jonathan Oreste Maruca; Diego-Alonso Leblanc-Romero; Charles Vuong; Mathias Bourgault; Olivier Fournier
 
+## Final Product
+![gif_robot](https://user-images.githubusercontent.com/55956546/115096802-af963e00-9ef4-11eb-9344-641e7795e30a.gif)
+
 ## Table of contents
 * [Development environment](#Development-environment)
     * [Needed installation](#ROS-installation)
@@ -48,6 +51,9 @@
 - Install all dependencies for Kinematics
 
     ```
+https://user-images.githubusercontent.com/55956546/115096707-4adae380-9ef4-11eb-8fa2-93882ab282dd.mp4
+
+
     sudo apt install python3-pip
     ```
     ```
